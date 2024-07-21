@@ -11,42 +11,57 @@ const meta = useMetaStore()
 const sheet = useSheetStore()
 </script>
 <template>
-  <div class="header">
-    <div class="title">AD&D 1e</div>
-    <button class="button" @click="appStore.loadExampleData">Reset</button>
-  </div>
-  <div class="sheet">
-    <div class="card">
-      <div class="avatar">
-        <img :src="meta.avatar" alt="Character Avatar" />
-      </div>
+  <div class="wrapper">
+    <div class="header">
       <label for="character_name">
-        <span class="label">Character Name</span>
+          <span class="label">Character Name</span>
+          <input id="character_name" v-model="meta.name" />
       </label>
-      <input id="character_name" v-model="meta.name" />
-      <label for="faction">
-        <span class="label">Faction</span>
-      </label>
-      <input id="faction" v-model="sheet.faction" />
+      <span class="logo" title="Ad&D 1e Logo"></span>
+      <span class="avatar">
+        <img :src="meta.avatar" alt="Character Avatar" />
+      </span>
     </div>
-    <div class="card">
-      <div class="subheader">
-        <div class="subtitle">Traits - {{ sheet.traitsCount }}</div>
-        <button class="button" @click="sheet.addTrait">Add</button>
+    <div class="sheet">
+      <div class="card">
+        <label for="faction">
+          <span class="label">Faction</span>
+        </label>
+        <input id="faction" v-model="sheet.faction" />
       </div>
-      <div class="traits">
-        <div class="trait-item" v-for="trait in sheet.traits" :key="trait._id">
-          <input v-model="trait.name" placeholder="Name" />
-          <input v-model="trait.description" placeholder="Description" />
-          <button class="button" @click="sheet.postTraitToChat(trait)">Chat</button>
-          <button class="button" @click="sheet.removeTrait(trait._id)">Remove</button>
+      <div class="card">
+        <div class="subheader">
+          <div class="subtitle">Traits - {{ sheet.traitsCount }}</div>
+          <button class="button" @click="sheet.addTrait">Add</button>
+        </div>
+        <div class="traits">
+          <div class="trait-item" v-for="trait in sheet.traits" :key="trait._id">
+            <input v-model="trait.name" placeholder="Name" />
+            <input v-model="trait.description" placeholder="Description" />
+            <button class="button" @click="sheet.postTraitToChat(trait)">Chat</button>
+            <button class="button" @click="sheet.removeTrait(trait._id)">Remove</button>
+          </div>
         </div>
       </div>
+    </div>
+    <div class="footer">
+      <button class="button" @click="appStore.loadExampleData">Reset</button>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
+/*
+
+*/
+.wrapper {
+  border-radius: 6px;
+  min-width: 680px;
+  overflow: hidden;
+  outline: 2px solid #000;
+  margin-right: 1rem;
+}
+
 /*
 The quickstart header. Replace this with a logo, your sheet title, or remove this.
 */
@@ -54,10 +69,18 @@ The quickstart header. Replace this with a logo, your sheet title, or remove thi
   display: grid;
   justify-content: center;
   align-items: center;
-  grid-template-columns: auto auto;
+  grid-template-columns: 1fr 2fr 1fr;
   gap: 0.5rem;
-  padding-top: 1rem;
+  padding: 1rem;
 }
+
+.footer {
+  align-items: center;
+  display: flex;
+  justify-content: right;
+  padding: 1rem;
+}
+
 .title {
   font-size: 2.5rem;
   line-height: 3rem;
@@ -71,7 +94,7 @@ Customize this layout by modifying the template columns and rows you will need f
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
-  padding-top: 2rem;
+  padding: 1rem;
 }
 .card {
   display: grid;
@@ -142,12 +165,24 @@ input {
   }
 }
 /*
+Sheet Logo positioning and default styles
+*/
+.logo {
+  justify-self: center;
+  background-image: url('/src/assets/logo.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  height: 100px;
+  width: 300px;
+}
+/*
 Avatar positioning and default styles
 */
 .avatar {
   justify-self: center;
   img {
-    height: 10rem;
+    height: 8rem;
     border-radius: 0.5rem;
   }
 }
