@@ -12,7 +12,7 @@ const sheet = useSheetStore()
 </script>
 <template>
   <div class="header">
-    <div class="title">Quickstart Sheet</div>
+    <div class="title">AD&D 1e</div>
     <button class="button" @click="appStore.loadExampleData">Reset</button>
   </div>
   <div class="sheet">
