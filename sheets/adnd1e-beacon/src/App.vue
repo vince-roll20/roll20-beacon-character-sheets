@@ -21,6 +21,25 @@ const sheet = useSheetStore()
       <span class="avatar">
         <img :src="meta.avatar" alt="Character Avatar" />
       </span>
+      <label for="class1">
+          <span class="label">Class</span>
+          <input id="class1" v-model="sheet.class1" />
+      </label>
+      <div class="hp-box">
+        <label for="hp">
+            <span class="label">HP</span>
+            <input id="hp" v-model="sheet.hp" />
+        </label>
+        <label for="hp_max">
+            <span class="label">/</span>
+            <input id="hp_max" v-model="sheet.hp_max" />
+        </label>
+        <label for="ac">
+            <span class="label">AC</span>
+            <input id="ac" v-model="sheet.ac" />
+        </label>
+      </div>
+      <div></div>
     </div>
     <div class="sheet">
       <div class="card">
@@ -51,156 +70,172 @@ const sheet = useSheetStore()
 </template>
 
 <style scoped lang="scss">
-/*
-
-*/
-.wrapper {
-  border-radius: 6px;
-  min-width: 680px;
-  overflow: hidden;
-  outline: 2px solid #000;
-  margin-right: 1rem;
-}
-
-/*
-The quickstart header. Replace this with a logo, your sheet title, or remove this.
-*/
-.header {
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  grid-template-columns: 1fr 2fr 1fr;
-  gap: 0.5rem;
-  padding: 1rem;
-}
-
-.footer {
-  align-items: center;
-  display: flex;
-  justify-content: right;
-  padding: 1rem;
-}
-
-.title {
-  font-size: 2.5rem;
-  line-height: 3rem;
-}
-
-/*
-This is a boilerplate layout that uses grid to help you get started on your sheet.
-Customize this layout by modifying the template columns and rows you will need for each section.
-*/
-.sheet {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  padding: 1rem;
-}
-.card {
-  display: grid;
-  gap: 0.5rem;
-  border-radius: 2rem;
-  padding: 1rem;
-  background: #1f1f1f;
-  &:hover {
-    background: rgba(14, 98, 107, 0.86);
+  .wrapper {
+    border-radius: 6px;
+    margin-right: 1rem;
+    min-width: 680px;
+    outline: 2px solid #000;
+    overflow: hidden;
   }
-}
 
-/*
-Header for each card in your grid layout
-*/
-.subheader {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-.subtitle {
-  padding-top: 1.25rem;
-  font-size: 1.75rem;
-  line-height: 2rem;
-}
+  /*
+  The quickstart header. Replace this with a logo, your sheet title, or remove this.
+  */
+  .header {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
 
-/*
-Styling for buttons
-*/
-.button {
-  cursor: pointer;
-  width: auto;
-  height: fit-content;
-  background: #b719be;
-  color: #ffffff;
-  border-radius: 0.25rem;
-  font-size: 0.75rem;
-  padding: 0.25rem;
-  border: none;
-  font-weight: 500;
-  &:hover {
-    background: rgb(200, 68, 206);
+  .footer {
+    align-items: center;
+    display: flex;
+    justify-content: right;
+    padding: 1rem;
   }
-}
 
-/*
-Styling for form labels
-*/
-.label {
-  font-weight: 600;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-}
-/*
-Styling for form inputs, currently this quickstart is only using default inputs that handle text.
-*/
-input {
-  font-size: 1rem;
-  color: #ffffff;
-  background-color: #000000;
-  border-radius: 0.25rem;
-  border: none;
-  height: 2rem;
-  padding: 0.25rem;
-  &:focus {
-    outline-color: #ffffff;
-    outline-style: groove;
+  .title {
+    font-size: 2.5rem;
+    line-height: 3rem;
   }
-}
-/*
-Sheet Logo positioning and default styles
-*/
-.logo {
-  justify-self: center;
-  background-image: url('/src/assets/logo.png');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  height: 100px;
-  width: 300px;
-}
-/*
-Avatar positioning and default styles
-*/
-.avatar {
-  justify-self: center;
-  img {
-    height: 8rem;
-    border-radius: 0.5rem;
+
+  /*
+  This is a boilerplate layout that uses grid to help you get started on your sheet.
+  Customize this layout by modifying the template columns and rows you will need for each section.
+  */
+  .sheet {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding: 1rem;
   }
-}
-/*
-Styling for the scrollable traits list.
-*/
-.traits {
-  overflow-y: scroll;
-  height: 15rem;
-  padding: 0.25rem;
-}
-/*
-Styling for each trait row, that uses a grid.
-*/
-.trait-item {
-  display: grid;
-  grid-template-columns: 8rem 1fr auto auto 1rem;
-  column-gap: 0.25rem;
-  padding-bottom: 0.25rem;
-}
+  .card {
+    display: grid;
+    gap: 0.5rem;
+    border-radius: 2rem;
+    padding: 1rem;
+    background: #1f1f1f;
+    &:hover {
+      background: rgba(14, 98, 107, 0.86);
+    }
+  }
+
+  /*
+  Header for each card in your grid layout
+  */
+  .subheader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .subtitle {
+    padding-top: 1.25rem;
+    font-size: 1.75rem;
+    line-height: 2rem;
+  }
+
+  /*
+  Styling for buttons
+  */
+  .button {
+    cursor: pointer;
+    width: auto;
+    height: fit-content;
+    background: #b719be;
+    color: #ffffff;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    padding: 0.25rem;
+    border: none;
+    font-weight: 500;
+    &:hover {
+      background: rgb(200, 68, 206);
+    }
+  }
+
+  /*
+  Styling for form labels
+  */
+  .label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-inline: 2px;
+    text-transform: uppercase;
+  }
+  /*
+  Styling for form inputs, currently this quickstart is only using default inputs that handle text.
+  */
+  input {
+    font-size: 1rem;
+    background-color: #e8e8e8;
+    border-radius: 0.25rem;
+    border: none;
+    height: 1.5rem;
+    padding: 0.25rem;
+    &:focus {
+      outline-offset: 1px;
+      outline-color: #666;
+      outline-style: groove;
+    }
+  }
+
+  .hp-box {
+    align-self: flex-end;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  #hp,
+  #hp_max,
+  #ac {
+    text-align: center;
+    width: 3em;
+  }
+
+  label:has(#hp) {
+    justify-self: end;
+  }
+
+  /*
+  Sheet Logo positioning and default styles
+  */
+  .logo {
+    justify-self: center;
+    background-image: url('/src/assets/logo.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 100px;
+    width: 300px;
+  }
+  /*
+  Avatar positioning and default styles
+  */
+  .avatar {
+    justify-self: center;
+    img {
+      height: 8rem;
+      border-radius: 0.5rem;
+    }
+  }
+  /*
+  Styling for the scrollable traits list.
+  */
+  .traits {
+    overflow-y: scroll;
+    height: 15rem;
+    padding: 0.25rem;
+  }
+  /*
+  Styling for each trait row, that uses a grid.
+  */
+  .trait-item {
+    display: grid;
+    grid-template-columns: 8rem 1fr auto auto 1rem;
+    column-gap: 0.25rem;
+    padding-bottom: 0.25rem;
+  }
 </style>

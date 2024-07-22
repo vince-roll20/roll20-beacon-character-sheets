@@ -15,8 +15,7 @@ Also, you can leverage character data already provided for you through the meta 
 
 The ability to read and write changes to your data is already configured with the beacon relay and you don't have to do any work to set that up.
 
-This quickstart also features an example of how to render a roll template with the new beacon sheets. The roll templates still leverage handlebars with custom css,
-and you can find that example being used in App.vue by sending a trait to the chat.
+This quickstart also features an example of how to render a roll template with the new beacon sheets. The roll templates still leverage handlebars with custom css, and you can find that example being used in App.vue by sending a trait to the chat.
  */
 
 // Determines if the offline mode dev relay should be used
