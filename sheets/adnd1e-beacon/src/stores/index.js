@@ -6,9 +6,12 @@ import { useSheetStore } from '@/stores/sheetStore.js'
 
 // Here you can set all default values for your sheet.
 // This is your blank slate, new character setup.
-export const DEFAULT_CHARACTER_NAME = 'My Hero'
+// the 'Reset' button is currently setup to restore these Defaults
+export const DEFAULT_CHARACTER_NAME = 'Red Shirt'
 export const DEFAULT_AVATAR_URL =
-  'https://s3.amazonaws.com/files.d20.io/images/388362206/5R6pOnpvGrIRL2L0ImU-uA/original.png'
+  // 'https://s3.amazonaws.com/files.d20.io/images/388362206/5R6pOnpvGrIRL2L0ImU-uA/original.png'
+  // lets use roll20's new default image
+  'https://app.roll20.net/images/character.png'
 export const DEFAULT_FACTION = 'The Guild of Awesome'
 
 /*
@@ -86,7 +89,7 @@ export const useAppStore = defineStore('app', () => {
 
   /*
   DEV METHOD used to fill the sheet with a lot of data without affecting how the stores are initialized.
-  * Can invoke it from a button in the Settings tab.
+  * Can invoke it from a button in the Settings tab. see the ie 'Reset' button
   * */
   const loadExampleData = () => {
     stores.meta.name = DEFAULT_CHARACTER_NAME

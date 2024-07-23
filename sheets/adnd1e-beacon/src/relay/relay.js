@@ -10,9 +10,10 @@ import {
   onDragOver
 } from './handlers/handlers'
 import { reactive, ref, watch, nextTick, shallowRef } from 'vue'
-import { v4 as uuidv4 } from 'uuid'
+import {v4 as uuidv4} from 'uuid'
+import { hp } from '@/relay/handlers/computed'
 
-/* 
+/*
 This is the configuration for the relay. It defines the handlers and actions that the sheet will use.
 The handlers are functions that are called by the relay when certain events occur.
 The actions are custom functions that can be called by the sheet to perform specific actions.
@@ -31,7 +32,6 @@ const relayConfig = {
   actions: {},
   computed: {}
 }
-
 // Almost everything below here is Boilerplate and you probably want to keep it intact.
 export const initValues = reactive({
   id: '',
@@ -71,7 +71,7 @@ const doUpdate = (dispatch, update, logMode = false) => {
 // This is a debounced version of the update function that will only be called after 800ms of inactivity.
 const debounceUpdate = debounce(doUpdate, 800)
 
-/* 
+/*
 Dev relay is used to run the sheet in a web browser
 It will log the updates to the console instead of sending them to the VTT or Roll20/Characters
 This is useful for testing the sheet without having to connect to the server.
