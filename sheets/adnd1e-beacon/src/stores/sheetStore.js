@@ -10,8 +10,8 @@ This function will leverage the beacon SDK to render a roll template to the chat
 You can customize your roll templates, from what data you want to display, to how they look.
 This project features a single roll template in handlebars.
  */
-const sendToChat = ({ trait }) => {
-  const rollTemplate = createRollTemplate({ trait })
+const sendAbilityToChat = ({ ability }) => {
+  const rollTemplate = createRollTemplate({ ability })
   return dispatchRef.value.post({
     characterId: initValues.character.id,
     content: rollTemplate,
@@ -20,32 +20,32 @@ const sendToChat = ({ trait }) => {
 }
 
 /*
-Adds a trait to the list of traits
+Adds a ability to the list of abilities
  */
-const addTrait = (traits) => {
-  const trait = {
+const addAbility = (abilities) => {
+  const ability = {
     _id: uuidv4(),
-    name: `Trait ${traits.value?.length + 1}`,
+    name: `Ability ${abilities.value?.length + 1}`,
     description: ''
   }
-  traits.value.push(trait)
+  abilities.value.push(ability)
 }
 
 /*
-Removes a trait from the list of traits
+Removes a ability from the list of abilities
  */
-const removeTrait = (traits, traitId) => {
-  const indexToRemove = traits.value.findIndex((trait) => trait._id === traitId)
-  if (indexToRemove >= 0) traits.value.splice(indexToRemove, 1)
+const removeAbility = (abilities, abilityId) => {
+  const indexToRemove = abilities.value.findIndex((ability) => ability._id === abilityId)
+  if (indexToRemove >= 0) abilities.value.splice(indexToRemove, 1)
 }
 
 /*
-Calls the sendToChat function to post the trait to the chat log.
+Calls the sendAbilityToChat function to post the ability to the chat log.
 NOTE: The roll template in handlebars checks to see if the passed in data to the chat
-is a trait object, and if so, will render the traits name and description with custom CSS.
+is a ability object, and if so, will render the ability's name and description with custom CSS.
  */
-const postTraitToChat = (trait) => {
-  sendToChat({ trait })
+const postAbilityToChat = (ability) => {
+  sendAbilityToChat({ ability })
 }
 
 /*
@@ -63,8 +63,8 @@ const sheetStore = () => {
   const ac = ref(10)
   const class1 = ref('')
   const faction = ref('')
-  const traits = ref([])
-  const traitsCount = computed(() => traits.value?.length)
+  const abilities = ref([])
+  const abilitiesCount = computed(() => abilities.value?.length)
 
   // Handles retrieving these values from the store
   const dehydrate = () => {
@@ -74,7 +74,7 @@ const sheetStore = () => {
       ac: ac.value,
       class1: class1.value,
       faction: faction.value,
-      traits: arrayToObject(traits.value)
+      abilities: arrayToObject(abilities.value)
     }
   }
   // Handles updating these values in the store.
@@ -84,7 +84,7 @@ const sheetStore = () => {
     ac.value = hydrateStore.ac ?? ac.value
     class1.value = hydrateStore.class1 ?? class1.value
     faction.value = hydrateStore.faction ?? faction.value
-    traits.value = objectToArray(hydrateStore.traits) || traits.value
+    abilities.value = objectToArray(hydrateStore.abilities) || abilities.value
   }
 
   return {
@@ -93,11 +93,11 @@ const sheetStore = () => {
     ac,
     class1,
     faction,
-    traits,
-    traitsCount,
-    addTrait: () => addTrait(traits),
-    removeTrait: (traitId) => removeTrait(traits, traitId),
-    postTraitToChat,
+    abilities,
+    abilitiesCount,
+    addAbility: () => addAbility(abilities),
+    removeAbility: (abilityId) => removeAbility(abilities, abilityId),
+    postAbilityToChat,
     dehydrate,
     hydrate
   }

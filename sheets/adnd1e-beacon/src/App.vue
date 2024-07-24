@@ -50,15 +50,15 @@ const sheet = useSheetStore()
       </div>
       <div class="card">
         <div class="subheader">
-          <div class="subtitle">Traits - {{ sheet.traitsCount }}</div>
-          <button class="button" @click="sheet.addTrait">Add</button>
+          <div class="subtitle">Special Abilities - {{ sheet.abilitiesCount }}</div>
+          <button class="button" @click="sheet.addAbility">Add</button>
         </div>
-        <div class="traits">
-          <div class="trait-item" v-for="trait in sheet.traits" :key="trait._id">
-            <input v-model="trait.name" placeholder="Name" />
-            <input v-model="trait.description" placeholder="Description" />
-            <button class="button" @click="sheet.postTraitToChat(trait)">Chat</button>
-            <button class="button" @click="sheet.removeTrait(trait._id)">Remove</button>
+        <div class="abilities">
+          <div class="ability-item" v-for="ability in sheet.abilities" :key="ability._id">
+            <input v-model="ability.name" placeholder="Name" />
+            <input v-model="ability.description" placeholder="Description" />
+            <button class="button" @click="sheet.postAbilityToChat(ability)">Chat</button>
+            <button class="button" @click="sheet.removeAbility(ability._id)">Remove</button>
           </div>
         </div>
       </div>
@@ -215,11 +215,15 @@ const sheet = useSheetStore()
   Avatar positioning and default styles
   */
   .avatar {
-    background-color: #1f1f1f;
-    border-radius: 18px;
-    justify-self: center;
-    padding: 10px;
-
+    display: grid;
+    gap: 0.5rem;
+    border-radius: 2rem;
+    padding: 1rem;
+    background: #1f1f1f;
+    width: min-content;
+    &:hover {
+      background: rgba(14, 98, 107, 0.86);
+    }
     img {
       border-radius: 10px;
       display: block;
@@ -229,20 +233,21 @@ const sheet = useSheetStore()
     }
   }
   /*
-  Styling for the scrollable traits list.
+  Styling for the scrollable abilities list.
   */
-  .traits {
+  .abilities {
     overflow-y: scroll;
     height: 15rem;
     padding: 0.25rem;
   }
   /*
-  Styling for each trait row, that uses a grid.
+  Styling for each ability row, that uses a grid.
   */
-  .trait-item {
-    display: grid;
-    grid-template-columns: 8rem 1fr auto auto 1rem;
+  .ability-item {
+    align-items: center;
     column-gap: 0.25rem;
+    display: grid;
+    grid-template-columns: 7em auto 3em 4em 1em;
     padding-bottom: 0.25rem;
   }
 </style>
