@@ -51,14 +51,14 @@ const sheet = useSheetStore()
       <div class="card">
         <div class="subheader">
           <div class="subtitle">Special Abilities - {{ sheet.abilitiesCount }}</div>
-          <button class="button" @click="sheet.addAbility">Add</button>
+          <button class="button" @click="sheet.addAbility" title="Add Ability">+</button>
         </div>
         <div class="abilities">
           <div class="ability-item" v-for="ability in sheet.abilities" :key="ability._id">
             <input v-model="ability.name" placeholder="Name" />
             <input v-model="ability.description" placeholder="Description" />
-            <button class="button" @click="sheet.postAbilityToChat(ability)">Chat</button>
-            <button class="button" @click="sheet.removeAbility(ability._id)">Remove</button>
+            <button class="button" @click="sheet.postAbilityToChat(ability)" title="Send to chat">Post</button>
+            <button class="button" @click="sheet.removeAbility(ability._id)" title="Remove Ability">-</button>
           </div>
         </div>
       </div>
@@ -236,7 +236,6 @@ const sheet = useSheetStore()
   Styling for the scrollable abilities list.
   */
   .abilities {
-    overflow-y: scroll;
     height: 15rem;
     padding: 0.25rem;
   }
@@ -247,7 +246,7 @@ const sheet = useSheetStore()
     align-items: center;
     column-gap: 0.25rem;
     display: grid;
-    grid-template-columns: 7em auto 3em 4em 1em;
+    grid-template-columns: 9em auto 2em 1em;
     padding-bottom: 0.25rem;
   }
 </style>
