@@ -215,10 +215,17 @@ const sheet = useSheetStore()
   Avatar positioning and default styles
   */
   .avatar {
+    background-color: #1f1f1f;
+    border-radius: 18px;
     justify-self: center;
+    padding: 10px;
+
     img {
+      border-radius: 10px;
+      display: block;
       height: 8rem;
-      border-radius: 0.5rem;
+      margin: auto;
+      position: relative;
     }
   }
   /*
