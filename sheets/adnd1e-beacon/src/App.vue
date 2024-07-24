@@ -28,11 +28,11 @@ const sheet = useSheetStore()
       <div class="hp-box">
         <label for="hp">
             <span class="label">HP</span>
-            <input id="hp" v-model="sheet.hp" />
+            <input id="hp" v-model="sheet.hp.current" />
         </label>
         <label for="hp_max">
             <span class="label">/</span>
-            <input id="hp_max" v-model="sheet.hp_max" />
+            <input id="hp_max" v-model="sheet.hp.max" />
         </label>
         <label for="ac">
             <span class="label">AC</span>

@@ -58,8 +58,10 @@ trait objects, that feature a name and description.
 This is a great starting place to customize what data you need for your sheet.
  */
 const sheetStore = () => {
-  const hp = ref(0)
-  const hp_max = ref(0)
+  const hp = {
+    current: ref(0),
+    max: ref(0)
+  }
   const ac = ref(10)
   const class1 = ref('')
   const faction = ref('')
@@ -70,7 +72,6 @@ const sheetStore = () => {
   const dehydrate = () => {
     return {
       hp: hp.value,
-      hp_max: hp_max.value,
       ac: ac.value,
       class1: class1.value,
       faction: faction.value,
@@ -80,7 +81,6 @@ const sheetStore = () => {
   // Handles updating these values in the store.
   const hydrate = (hydrateStore) => {
     hp.value = hydrateStore.hp ?? hp.value
-    hp_max.value = hydrateStore.hp_max ?? hp_max.value
     ac.value = hydrateStore.ac ?? ac.value
     class1.value = hydrateStore.class1 ?? class1.value
     faction.value = hydrateStore.faction ?? faction.value
@@ -89,7 +89,6 @@ const sheetStore = () => {
 
   return {
     hp,
-    hp_max,
     ac,
     class1,
     faction,
