@@ -33,7 +33,7 @@ export const useSheetStore = defineStore('sheet',() => {
   const intelligence = ref(10);
   const wisdom = ref(10);
   const charisma = ref(10);
-  
+
   const strengthMod = computed(() => Math.floor((strength.value - 10) / 2));
   const dexterityMod = computed(() => Math.floor((dexterity.value - 10) / 2));
   const constitutionMod = computed(() => Math.floor((constitution.value - 10) / 2));
@@ -100,7 +100,7 @@ export const useSheetStore = defineStore('sheet',() => {
       name:skillName,
       proficiency: prof,
       ability,
-      value: computed(() => 
+      value: computed(() =>
         abilityScores[ability.value].mod.value + (prof.value ? proficiency.value : 0))
     };
     return m;
@@ -133,7 +133,7 @@ export const useSheetStore = defineStore('sheet',() => {
     return Math.max(0,...eclipse.value) >= 3 ?
       'heartless knight' :
       'soul eclipse chart'});
-  
+
   const crystal = {
     facet1: ref(false),
     facet2: ref(false),
@@ -170,7 +170,7 @@ export const useSheetStore = defineStore('sheet',() => {
     name: ref('')
   }
   // magi-knight stats
-  
+
   const knight_damage = ref(0);
   const knight_armor = ref(0);
   const knight_move = ref(0);
@@ -264,37 +264,37 @@ export const useSheetStore = defineStore('sheet',() => {
       template: {
         name: '',
         range: '',
-        
+
         tier_I_name: '',
         tier_I_description: '',
         tier_I_special: '',
         tier_I_action: '',
         tier_I_dice: '',
-        
+
         tier_II_name: '',
         tier_II_description: '',
         tier_II_special: '',
         tier_II_action: '',
         tier_II_dice: '',
-        
+
         tier_III_name: '',
         tier_III_description: '',
         tier_III_special: '',
         tier_III_action: '',
         tier_III_dice: '',
-        
+
         tier_IV_name: '',
         tier_IV_description: '',
         tier_IV_special: '',
         tier_IV_action: '',
         tier_IV_dice: '',
-        
+
         tier_V_name: '',
         tier_V_description: '',
         tier_V_special: '',
         tier_V_action: '',
         tier_V_dice: '',
-        
+
         tier_VI_name: '',
         tier_VI_description: '',
         tier_VI_special: '',
@@ -406,7 +406,7 @@ export const useSheetStore = defineStore('sheet',() => {
       // faction: faction.value,
       // traits: arrayToObject(traits.value)
     };
-    
+
     Object.entries(sections).forEach(([name,val]) => {
       obj[name] = arrayToObject(val.rows.value);
     });
@@ -605,7 +605,7 @@ export const useSheetStore = defineStore('sheet',() => {
     skills,
 
     initiative,
-    
+
     eclipse,
     eclipse_phase,
     studied,

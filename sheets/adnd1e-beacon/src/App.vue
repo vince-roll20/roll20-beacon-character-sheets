@@ -43,6 +43,7 @@ const sheet = useSheetStore()
     </div>
     <div class="sheet">
       <div class="card">
+        <div class="subtitle">Abilities</div>
         <label for="faction">
           <span class="label">Faction</span>
         </label>
@@ -116,7 +117,7 @@ const sheet = useSheetStore()
     display: grid;
     gap: 0.5rem;
     border-radius: 2rem;
-    padding: 1rem;
+    padding: .5rem;
     background: #1f1f1f;
     &:hover {
       background: rgba(14, 98, 107, 0.86);
@@ -127,30 +128,33 @@ const sheet = useSheetStore()
   Header for each card in your grid layout
   */
   .subheader {
+    align-items: flex-start;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    margin-inline: .35rem;
   }
   .subtitle {
-    padding-top: 1.25rem;
     font-size: 1.75rem;
     line-height: 2rem;
+    padding-top: .5rem;
   }
 
   /*
   Styling for buttons
   */
   .button {
-    cursor: pointer;
-    width: auto;
-    height: fit-content;
     background: #b719be;
-    color: #ffffff;
-    border-radius: 0.25rem;
-    font-size: 0.75rem;
-    padding: 0.25rem;
     border: none;
+    border-radius: 0.25rem;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 0.75rem;
     font-weight: 500;
+    height: fit-content;
+    margin-block: auto;
+    padding: 0.25rem;
+    width: auto;
+
     &:hover {
       background: rgb(200, 68, 206);
     }

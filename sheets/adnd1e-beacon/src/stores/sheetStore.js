@@ -20,7 +20,7 @@ const sendAbilityToChat = ({ ability }) => {
 }
 
 /*
-Adds a ability to the list of abilities
+Adds a new row
  */
 const addAbility = (abilities) => {
   const ability = {
@@ -32,7 +32,7 @@ const addAbility = (abilities) => {
 }
 
 /*
-Removes a ability from the list of abilities
+Removes a row
  */
 const removeAbility = (abilities, abilityId) => {
   const indexToRemove = abilities.value.findIndex((ability) => ability._id === abilityId)
@@ -42,7 +42,7 @@ const removeAbility = (abilities, abilityId) => {
 /*
 Calls the sendAbilityToChat function to post the ability to the chat log.
 NOTE: The roll template in handlebars checks to see if the passed in data to the chat
-is a ability object, and if so, will render the ability's name and description with custom CSS.
+is an ability object, and if so, will render the ability's name and description with custom CSS.
  */
 const postAbilityToChat = (ability) => {
   sendAbilityToChat({ ability })
@@ -53,7 +53,7 @@ This is a custom data store, that will house everything you need for data specif
 Here you can define all attributes, as well as sheet functions.
 
 In the example we have provided, there is a custom faction text field, as well as a list of
-trait objects, that feature a name and description.
+ability objects, that feature a name and description.
 
 This is a great starting place to customize what data you need for your sheet.
  */
