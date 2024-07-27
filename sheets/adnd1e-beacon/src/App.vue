@@ -114,9 +114,9 @@
     gap: 0.5rem;
     border-radius: 2rem;
     padding: .5rem;
-    background: #1f1f1f;
+    background: #757575;
     &:hover {
-      background: rgba(14, 98, 107, 0.86);
+      background: rgba(180, 218, 222, 0.86);
     }
   }
 
@@ -215,14 +215,13 @@
   Avatar positioning and default styles
   */
   .avatar {
-    display: grid;
-    gap: 0.5rem;
+    display: flex;
     border-radius: 2rem;
     padding: 1rem;
-    background: #1f1f1f;
-    width: min-content;
+    background: #757575;
+    justify-self: center;
     &:hover {
-      background: rgba(14, 98, 107, 0.86);
+      background: rgba(180, 218, 222, 0.86);
     }
     img {
       border-radius: 10px;
