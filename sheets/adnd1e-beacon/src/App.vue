@@ -1,15 +1,17 @@
 <script setup>
-import { useAppStore } from '@/stores/index.js'
-import { useMetaStore } from '@/stores/metaStore.js'
-import { useSheetStore } from '@/stores/sheetStore.js'
+  import { useAppStore } from '@/stores/index.js'
+  import { useMetaStore } from '@/stores/metaStore.js'
+  import { useSheetStore } from '@/stores/sheetStore.js'
+  import abilitiesSection from './components/abilitiesSection.vue';
 
-// These stores should drive how to access the data in your sheet, and how to trigger actionable events.
-const appStore = useAppStore()
-// The meta store has generic character info for every sheet.
-const meta = useMetaStore()
-// The sheet store is where you want to be to customize what data / fields are on your sheet.
-const sheet = useSheetStore()
+  // These stores should drive how to access the data in your sheet, and how to trigger actionable events.
+  const appStore = useAppStore()
+  // The meta store has generic character info for every sheet.
+  const meta = useMetaStore()
+  // The sheet store is where you want to be to customize what data / fields are on your sheet.
+  const sheet = useSheetStore()
 </script>
+
 <template>
   <div class="wrapper">
     <div class="header">
@@ -42,20 +44,14 @@ const sheet = useSheetStore()
       <div></div>
     </div>
     <div class="sheet">
-      <div class="card">
-        <div class="subtitle">Abilities</div>
-        <label for="faction">
-          <span class="label">Faction</span>
-        </label>
-        <input id="faction" v-model="sheet.faction" />
-      </div>
+      <abilitiesSection />
       <div class="card">
         <div class="subheader">
           <div class="subtitle">Special Abilities - {{ sheet.abilitiesCount }}</div>
           <button class="button" @click="sheet.addAbility" title="Add Ability">+</button>
         </div>
-        <div class="abilities">
-          <div class="ability-item" v-for="ability in sheet.abilities" :key="ability._id">
+        <div class="special-abilities">
+          <div class="special-ability-item" v-for="ability in sheet.abilities" :key="ability._id">
             <input v-model="ability.name" placeholder="Name" />
             <input v-model="ability.description" placeholder="Description" />
             <button class="button" @click="sheet.postAbilityToChat(ability)" title="Send to chat">Post</button>
@@ -70,7 +66,7 @@ const sheet = useSheetStore()
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
   .wrapper {
     border-radius: 6px;
     margin-right: 1rem;
@@ -239,14 +235,14 @@ const sheet = useSheetStore()
   /*
   Styling for the scrollable abilities list.
   */
-  .abilities {
+  .special-abilities {
     height: 15rem;
     padding: 0.25rem;
   }
   /*
   Styling for each ability row, that uses a grid.
   */
-  .ability-item {
+  .special-ability-item {
     align-items: center;
     column-gap: 0.25rem;
     display: grid;
