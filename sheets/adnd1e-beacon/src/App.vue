@@ -14,18 +14,15 @@
 
 <template>
   <div class="wrapper">
+    <div class="top-header">
+    <span></span>
+    <span class="logo" title="Ad&D 1e Logo"></span>
+    <span></span>
+    </div>
     <div class="header">
       <label for="character_name">
           <span class="label">Character Name</span>
           <input id="character_name" v-model="meta.name" />
-      </label>
-      <span class="logo" title="Ad&D 1e Logo"></span>
-      <span class="avatar">
-        <img :src="meta.avatar" alt="Character Avatar" />
-      </span>
-      <label for="class1">
-          <span class="label">Class</span>
-          <input id="class1" v-model="sheet.class1" />
       </label>
       <div class="hp-box">
         <label for="hp">
@@ -41,6 +38,14 @@
             <input id="ac" v-model="sheet.ac" />
         </label>
       </div>
+      <span class="avatar">
+        <img :src="meta.avatar" alt="Character Avatar" />
+      </span>
+      <label for="class1">
+          <span class="label">Class</span>
+          <input id="class1" v-model="sheet.class1" />
+      </label>
+      <span></span>
       <div></div>
     </div>
     <div class="sheet">
@@ -68,11 +73,53 @@
 
 <style lang="scss">
   .wrapper {
-    border-radius: 6px;
-    margin-right: 1rem;
-    min-width: 680px;
-    outline: 2px solid #000;
-    overflow: hidden;
+    width: 890px;
+    border-style: solid;
+    border-width: 60px 5px 60px 5px;
+    border-image: url("/src/assets/border1.jpg") round round 75 8 60 22;
+    margin: auto;
+  }
+  .top-header {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 0.5rem;
+    margin-top: -7em;
+  }
+    /*
+  Avatar positioning and default styles
+  */
+  .avatar {
+    display: flex;
+    border-radius: 2rem;
+    padding: 1rem;
+    background: #757575;
+    justify-self: center;
+    &:hover {
+      background: rgba(180, 218, 222, 0.86);
+    }
+    img {
+      border-radius: 10px;
+      display: block;
+      height: 8rem;
+      margin: auto;
+      position: relative;
+    }
+  }
+  /*
+  Sheet Logo positioning and default styles
+  */
+  .logo {
+    justify-self: center;
+    background-image: url("/src/assets/logo.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 100px;
+    width: 300px;
+    position: relative;
+    bottom: -4em;
   }
 
   /*
@@ -183,7 +230,7 @@
   }
 
   .hp-box {
-    align-self: flex-end;
+    align-self: center;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
   }
@@ -199,38 +246,6 @@
     justify-self: end;
   }
 
-  /*
-  Sheet Logo positioning and default styles
-  */
-  .logo {
-    justify-self: center;
-    background-image: url('/src/assets/logo.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    height: 100px;
-    width: 300px;
-  }
-  /*
-  Avatar positioning and default styles
-  */
-  .avatar {
-    display: flex;
-    border-radius: 2rem;
-    padding: 1rem;
-    background: #757575;
-    justify-self: center;
-    &:hover {
-      background: rgba(180, 218, 222, 0.86);
-    }
-    img {
-      border-radius: 10px;
-      display: block;
-      height: 8rem;
-      margin: auto;
-      position: relative;
-    }
-  }
   /*
   Styling for the scrollable abilities list.
   */
