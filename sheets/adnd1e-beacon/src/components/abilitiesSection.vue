@@ -16,43 +16,43 @@
       <label>
         <span>STR</span>
       </label>
-        <input id="strength" v-model="sheet.strength" />
-      <input id="strengthMod" v-model="sheet.strengthMod" />
+        <input id="strength" v-model="sheet.strength" class="input-small" />
+        <input id="strengthMod" v-model="sheet.strengthMod" class="input-small" />
     </div>
     <div class="ability-row">
       <label>
         <span>INT</span>
       </label>
-        <input id="intelligence" v-model="sheet.intelligence" />
-      <input id="intelligenceMod" v-model="sheet.intelligenceMod" />
+        <input id="intelligence" v-model="sheet.intelligence" class="input-small" />
+        <input id="intelligenceMod" v-model="sheet.intelligenceMod" class="input-small" />
     </div>
     <div class="ability-row">
       <label>
         <span>WIS</span>
       </label>
-        <input id="wisdom" v-model="sheet.wisdom" />
-      <input id="wisdomMod" v-model="sheet.wisdomMod" />
+        <input id="wisdom" v-model="sheet.wisdom" class="input-small" />
+        <input id="wisdomMod" v-model="sheet.wisdomMod" class="input-small" />
     </div>
     <div class="ability-row">
       <label>
         <span>DEX</span>
       </label>
-        <input id="dexterity" v-model="sheet.dexterity" />
-      <input id="dexterityMod" v-model="sheet.dexterityMod" />
+        <input id="dexterity" v-model="sheet.dexterity" class="input-small" />
+        <input id="dexterityMod" v-model="sheet.dexterityMod" class="input-small" />
     </div>
     <div class="ability-row">
       <label>
         <span>CON</span>
       </label>
-        <input id="constitution" v-model="sheet.constitution" />
-      <input id="constitutionMod" v-model="sheet.constitutionMod" />
+        <input id="constitution" v-model="sheet.constitution" class="input-small" />
+        <input id="constitutionMod" v-model="sheet.constitutionMod" class="input-small" />
     </div>
     <div class="ability-row">
       <label>
         <span>CHA</span>
       </label>
-        <input id="charisma" v-model="sheet.charisma" />
-      <input id="charismaMod" v-model="sheet.charismaMod" />
+        <input id="charisma" v-model="sheet.charisma" class="input-small" />
+        <input id="charismaMod" v-model="sheet.charismaMod" class="input-small" />
     </div>
 
     <label for="faction">

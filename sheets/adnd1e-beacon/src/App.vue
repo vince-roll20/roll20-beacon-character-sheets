@@ -73,11 +73,11 @@
 
 <style lang="scss">
   .wrapper {
-    width: 890px;
+    border-image: url("/src/assets/border1.jpg") round round 75 8 60 22;
     border-style: solid;
     border-width: 60px 5px 60px 5px;
-    border-image: url("/src/assets/border1.jpg") round round 75 8 60 22;
-    margin: auto;
+    margin: 0;
+    width: 860px;
   }
   .top-header {
     display: grid;
@@ -227,6 +227,12 @@
       outline-color: #666;
       outline-style: groove;
     }
+  }
+
+  .input-small {
+    min-width: 2.5em;
+    text-align: center;
+    width: auto;
   }
 
   .hp-box {

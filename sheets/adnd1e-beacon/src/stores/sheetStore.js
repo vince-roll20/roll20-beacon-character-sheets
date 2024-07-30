@@ -62,6 +62,18 @@ const sheetStore = () => {
   const hp_max = ref(0)
   const ac = ref(10)
   const class1 = ref('')
+  const strength = ref(8)
+  const intelligence = ref(8)
+  const wisdom = ref(8)
+  const dexterity = ref(8)
+  const constitution = ref(8)
+  const charisma = ref(8)
+  const strengthMod = ref(0)
+  const intelligenceMod = ref(0)
+  const wisdomMod = ref(0)
+  const dexterityMod = ref(0)
+  const constitutionMod = ref(0)
+  const charismaMod = ref(0)
   const faction = ref('')
   const abilities = ref([])
   const abilitiesCount = computed(() => abilities.value?.length)
@@ -73,6 +85,18 @@ const sheetStore = () => {
       hp_max: hp_max.value,
       ac: ac.value,
       class1: class1.value,
+      strength: strength.value,
+      intelligence: intelligence.value,
+      wisdom: wisdom.value,
+      dexterity: dexterity.value,
+      constitution: constitution.value,
+      charisma: charisma.value,
+      strengthMod: strengthMod.value,
+      intelligenceMod: intelligenceMod.value,
+      wisdomMod: wisdomMod.value,
+      dexterityMod: dexterityMod.value,
+      constitutionMod: constitutionMod.value,
+      charismaMod: charismaMod.value,
       faction: faction.value,
       abilities: arrayToObject(abilities.value)
     }
@@ -83,6 +107,18 @@ const sheetStore = () => {
     hp_max.value = hydrateStore.hp_max ?? hp_max.value
     ac.value = hydrateStore.ac ?? ac.value
     class1.value = hydrateStore.class1 ?? class1.value
+    strength.value = hydrateStore.strength ?? strength.value
+    intelligence.value = hydrateStore.intelligence ?? intelligence.value
+    wisdom.value = hydrateStore.wisdom ?? wisdom.value
+    dexterity.value = hydrateStore.dexterity ?? dexterity.value
+    constitution.value = hydrateStore.constitution ?? constitution.value
+    charisma.value = hydrateStore.charisma ?? charisma.value
+    strengthMod.value = hydrateStore.strengthMod ?? strengthMod.value
+    intelligenceMod.value = hydrateStore.intelligenceMod ?? intelligenceMod.value
+    wisdomMod.value = hydrateStore.wisdomMod ?? wisdomMod.value
+    dexterityMod.value = hydrateStore.dexterityMod ?? dexterityMod.value
+    constitutionMod.value = hydrateStore.constitutionMod ?? constitutionMod.value
+    charismaMod.value = hydrateStore.charismaMod ?? charismaMod.value
     faction.value = hydrateStore.faction ?? faction.value
     abilities.value = objectToArray(hydrateStore.abilities) || abilities.value
   }
@@ -92,6 +128,18 @@ const sheetStore = () => {
     hp_max,
     ac,
     class1,
+    strength,
+    intelligence,
+    wisdom,
+    dexterity,
+    constitution,
+    charisma,
+    strengthMod,
+    intelligenceMod,
+    wisdomMod,
+    dexterityMod,
+    constitutionMod,
+    charismaMod,
     faction,
     abilities,
     abilitiesCount,
