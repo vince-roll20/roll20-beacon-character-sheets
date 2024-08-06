@@ -11,7 +11,6 @@ export const DEFAULT_CHARACTER_NAME = 'Red Shirt'
 export const DEFAULT_AVATAR_URL =
   // lets use roll20's new default image
   'https://app.roll20.net/images/character.png'
-export const DEFAULT_FACTION = 'The Guild of Awesome'
 
 /*
  * This is the master store for the entire character sheet.
@@ -93,7 +92,6 @@ export const useAppStore = defineStore('app', () => {
   const loadExampleData = () => {
     stores.meta.name = DEFAULT_CHARACTER_NAME
     stores.meta.avatar = DEFAULT_AVATAR_URL
-    stores.sheet.faction = DEFAULT_FACTION
     stores.sheet.abilities = []
   }
 

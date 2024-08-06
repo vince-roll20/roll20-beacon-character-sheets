@@ -68,13 +68,14 @@ const sheetStore = () => {
   const dexterity = ref(8)
   const constitution = ref(8)
   const charisma = ref(8)
-  const strengthMod = ref(0)
-  const intelligenceMod = ref(0)
-  const wisdomMod = ref(0)
-  const dexterityMod = ref(0)
-  const constitutionMod = ref(0)
-  const charismaMod = ref(0)
-  const faction = ref('')
+
+  const strengthMod = computed(() => Math.floor((strength.value-14)/2))
+  const intelligenceMod = computed(() => Math.floor((intelligence.value-10)/2))
+  const wisdomMod = computed(() => Math.floor((wisdom.value-10)/2))
+  const dexterityMod = computed(() => Math.floor((dexterity.value - 10) / 2))
+  const constitutionMod = computed(() => Math.floor((constitution.value-10)/2))
+  const charismaMod = computed(() => Math.floor((charisma.value-10)/2))
+
   const abilities = ref([])
   const abilitiesCount = computed(() => abilities.value?.length)
 
@@ -97,7 +98,6 @@ const sheetStore = () => {
       dexterityMod: dexterityMod.value,
       constitutionMod: constitutionMod.value,
       charismaMod: charismaMod.value,
-      faction: faction.value,
       abilities: arrayToObject(abilities.value)
     }
   }
@@ -113,13 +113,14 @@ const sheetStore = () => {
     dexterity.value = hydrateStore.dexterity ?? dexterity.value
     constitution.value = hydrateStore.constitution ?? constitution.value
     charisma.value = hydrateStore.charisma ?? charisma.value
+
     strengthMod.value = hydrateStore.strengthMod ?? strengthMod.value
     intelligenceMod.value = hydrateStore.intelligenceMod ?? intelligenceMod.value
     wisdomMod.value = hydrateStore.wisdomMod ?? wisdomMod.value
     dexterityMod.value = hydrateStore.dexterityMod ?? dexterityMod.value
     constitutionMod.value = hydrateStore.constitutionMod ?? constitutionMod.value
     charismaMod.value = hydrateStore.charismaMod ?? charismaMod.value
-    faction.value = hydrateStore.faction ?? faction.value
+
     abilities.value = objectToArray(hydrateStore.abilities) || abilities.value
   }
 
@@ -140,7 +141,6 @@ const sheetStore = () => {
     dexterityMod,
     constitutionMod,
     charismaMod,
-    faction,
     abilities,
     abilitiesCount,
     addAbility: () => addAbility(abilities),

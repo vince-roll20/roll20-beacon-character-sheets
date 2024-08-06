@@ -54,11 +54,6 @@
         <input id="charisma" v-model="sheet.charisma" class="input-small" />
         <input id="charismaMod" v-model="sheet.charismaMod" class="input-small" />
     </div>
-
-    <label for="faction">
-    <span class="label">Faction</span>
-    </label>
-    <input id="faction" v-model="sheet.faction" />
   </div>
 </template>
 
