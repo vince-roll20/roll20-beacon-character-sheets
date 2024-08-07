@@ -68,13 +68,39 @@ const sheetStore = () => {
   const dexterity = ref(8)
   const constitution = ref(8)
   const charisma = ref(8)
+  // Map strength base to PHB table
+  // array [str_attack, str_damage, str_minor, str_major, str_weight_adjustment]
+  const strToValues = {
+    3: [-3, -1, 15, 0, -350],
+    4: [-2, -1, 15, 0, -250],
+    5: [-2, -1, 15, 0, -250],
+    6: [-1, 0, 15, 0, -150],
+    7: [-1, 0, 15, 0, -150],
+    8: [0, 0, 30, 1, 0],
+    9: [0, 0, 15, 1, 0],
+    10: [0, 0, 30, 2, 0],
+    11: [0, 0, 30, 2, 0],
+    12: [0, 0, 30, 4, 100],
+    13: [0, 0, 30, 4, 100],
+    14: [0, 0, 30, 7, 200],
+    15: [0, 1, 50, 10, 200],
+    16: [1, 1, 50, 13, 350],
+    17: [1, 1, 50, 13, 500],
+    18: [1, 2, 50, 16, 750]
+  }
+  // Get the corresponding array based on strength
+  const strValues = computed(() => strToValues[strength.value])
+  const str_attack = computed(() => (strValues.value ? strValues.value[0] : 0))
+  const str_damage = computed(() => (strValues.value ? strValues.value[1] : 0))
+  const str_minor = computed(() => (strValues.value ? strValues.value[2] : 0))
+  const str_major = computed(() => (strValues.value ? strValues.value[3] : 0))
+  const str_weight_adjustment = computed(() => (strValues.value ? strValues.value[3] : 0))
 
-  const strengthMod = computed(() => Math.floor((strength.value-14)/2))
-  const intelligenceMod = computed(() => Math.floor((intelligence.value-10)/2))
-  const wisdomMod = computed(() => Math.floor((wisdom.value-10)/2))
-  const dexterityMod = computed(() => Math.floor((dexterity.value - 10) / 2))
-  const constitutionMod = computed(() => Math.floor((constitution.value-10)/2))
-  const charismaMod = computed(() => Math.floor((charisma.value-10)/2))
+  const intelligenceMod = ref(0)
+  const wisdomMod = ref(0)
+  const dexterityMod = ref(0)
+  const constitutionMod = ref(0)
+  const charismaMod = ref(0)
 
   const abilities = ref([])
   const abilitiesCount = computed(() => abilities.value?.length)
@@ -92,7 +118,11 @@ const sheetStore = () => {
       dexterity: dexterity.value,
       constitution: constitution.value,
       charisma: charisma.value,
-      strengthMod: strengthMod.value,
+      str_attack: str_attack.value,
+      str_damage: str_damage.value,
+      str_minor: str_minor.value,
+      str_major: str_major.value,
+      str_weight_adjustment: str_weight_adjustment.value,
       intelligenceMod: intelligenceMod.value,
       wisdomMod: wisdomMod.value,
       dexterityMod: dexterityMod.value,
@@ -114,7 +144,12 @@ const sheetStore = () => {
     constitution.value = hydrateStore.constitution ?? constitution.value
     charisma.value = hydrateStore.charisma ?? charisma.value
 
-    strengthMod.value = hydrateStore.strengthMod ?? strengthMod.value
+    str_attack.value = hydrateStore.str_attack ?? str_attack.value
+    str_damage.value = hydrateStore.str_damage ?? str_damage.value
+    str_minor.value = hydrateStore.str_minor ?? str_minor.value
+    str_major.value = hydrateStore.str_major ?? str_major.value
+    str_weight_adjustment.value = hydrateStore.str_weight_adjustment ?? str_weight_adjustment.value
+
     intelligenceMod.value = hydrateStore.intelligenceMod ?? intelligenceMod.value
     wisdomMod.value = hydrateStore.wisdomMod ?? wisdomMod.value
     dexterityMod.value = hydrateStore.dexterityMod ?? dexterityMod.value
@@ -135,7 +170,11 @@ const sheetStore = () => {
     dexterity,
     constitution,
     charisma,
-    strengthMod,
+    str_attack,
+    str_damage,
+    str_minor,
+    str_major,
+    str_weight_adjustment,
     intelligenceMod,
     wisdomMod,
     dexterityMod,

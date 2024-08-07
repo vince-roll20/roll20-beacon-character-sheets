@@ -1,23 +1,37 @@
 <script setup>
   import { useSheetStore } from '@/stores/sheetStore.js'
   // The sheet store is where you want to be to customize what data / fields are on your sheet.
-  const sheet = useSheetStore()
+const sheet = useSheetStore()
 </script>
 
 <template>
   <div class="card">
     <div class="subtitle">Abilities</div>
     <div class="ability-row">
-      <span></span>
-      <span></span>
-      <span>Mod</span>
-    </div>
-    <div class="ability-row">
       <label>
         <span>STR</span>
       </label>
-        <input id="strength" v-model="sheet.strength" class="input-small" />
-        <input id="strengthMod" v-model="sheet.strengthMod" class="input-small" />
+      <input id="strength" v-model="sheet.strength" class="input-small" />
+      <label>
+        <span>ATK</span>
+        <input id="str_attack" v-model="sheet.str_attack" class="input-small" title="str_attack"/>
+      </label>
+      <label>
+        <span>DMG</span>
+        <input id="str_damage" v-model="sheet.str_damage" class="input-small" title="str_damage"/>
+      </label>
+      <label>
+        <span>MIN</span>
+        <input id="str_minor" v-model="sheet.str_minor" class="input-small" title="str_minor"/>
+      </label>
+      <label>
+        <span>MAJ</span>
+        <input id="str_major" v-model="sheet.str_major" class="input-small" title="str_major"/>
+      </label>
+      <label>
+        <span>WT</span>
+        <input id="str_weight_adjustment" v-model="sheet.str_weight_adjustment" class="input-small" title="str_weight_adjustment"/>
+      </label>
     </div>
     <div class="ability-row">
       <label>
@@ -62,12 +76,13 @@
   align-items: center;
   display: grid;
   gap: 5px;
-  grid-template-columns: 3em 3em 3em;
+  grid-template-columns: 3em 1fr 1fr 1fr 1fr 1fr 1fr;
   text-align: center;
 
 label {
     align-items: center;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
 
 span {
