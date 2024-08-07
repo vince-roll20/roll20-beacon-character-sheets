@@ -94,7 +94,7 @@ const sheetStore = () => {
   const str_damage = computed(() => (strValues.value ? strValues.value[1] : 0))
   const str_minor = computed(() => (strValues.value ? strValues.value[2] : 0))
   const str_major = computed(() => (strValues.value ? strValues.value[3] : 0))
-  const str_weight_adjustment = computed(() => (strValues.value ? strValues.value[3] : 0))
+  const str_weight_adjustment = computed(() => (strValues.value ? strValues.value[4] : 0))
 
   const intelligenceMod = ref(0)
   const wisdomMod = ref(0)

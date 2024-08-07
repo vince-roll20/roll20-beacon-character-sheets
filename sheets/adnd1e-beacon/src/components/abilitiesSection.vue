@@ -11,25 +11,28 @@ const sheet = useSheetStore()
       <label>
         <span>STR</span>
       </label>
-      <input id="strength" v-model="sheet.strength" class="input-small" />
       <label>
-        <span>ATK</span>
+        <span class="label">&nbsp;</span>
+        <input id="strength" v-model="sheet.strength" class="input-small" />
+      </label>
+      <label>
+        <span class="label">ATK</span>
         <input id="str_attack" v-model="sheet.str_attack" class="input-small" title="str_attack"/>
       </label>
       <label>
-        <span>DMG</span>
+        <span class="label">DMG</span>
         <input id="str_damage" v-model="sheet.str_damage" class="input-small" title="str_damage"/>
       </label>
       <label>
-        <span>MIN</span>
+        <span class="label">MIN</span>
         <input id="str_minor" v-model="sheet.str_minor" class="input-small" title="str_minor"/>
       </label>
       <label>
-        <span>MAJ</span>
+        <span class="label">MAJ</span>
         <input id="str_major" v-model="sheet.str_major" class="input-small" title="str_major"/>
       </label>
       <label>
-        <span>WT</span>
+        <span class="label">WT</span>
         <input id="str_weight_adjustment" v-model="sheet.str_weight_adjustment" class="input-small" title="str_weight_adjustment"/>
       </label>
     </div>
@@ -93,5 +96,9 @@ span {
       width: 2em;
     }
   }
+}
+.ability-row > label:first-child {
+  margin-top: 1rem;
+  font-size: 1.2rem;
 }
 </style>
