@@ -6,7 +6,9 @@ const sheet = useSheetStore()
 
 <template>
   <div class="card">
-    <div class="subtitle">Abilities</div>
+    <div class="subheader">
+      <span class="subtitle">Abilities</span>
+    </div>
     <div class="ability-row">
       <label>
         <span>STR</span>

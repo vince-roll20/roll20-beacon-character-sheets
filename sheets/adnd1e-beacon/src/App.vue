@@ -15,44 +15,61 @@
 <template>
   <div class="wrapper">
     <div class="top-header">
-    <span></span>
-    <span class="logo" title="Ad&D 1e Logo"></span>
-    <span></span>
+      <span></span>
+      <span class="logo" title="Ad&D 1e Logo"></span>
+      <span></span>
     </div>
     <div class="header">
-      <label for="character_name">
-          <span class="label">Character Name</span>
-          <input id="character_name" v-model="meta.name" />
-      </label>
-      <div class="hp-box">
+      <div class="class-grid">
+        <label for="character_name" class="span-all">
+            <span class="label">Name</span>
+            <input id="character_name" v-model="meta.name" title="character_name" />
+        </label>
+        <label for="race" class="span-all">
+            <span class="label">Race</span>
+            <input id="race" v-model="sheet.race" title="race" />
+        </label>
+        <label for="alignment" class="span-all">
+            <span class="label">Alignment</span>
+            <input id="alignment" v-model="sheet.alignment" title="alignment" />
+        </label>
+        <span class="span-all grid-2">
+          <label class="label center">Class</label>
+          <label class="label center">Lvl</label>
+          <input id="class1" v-model="sheet.class1" placeholder="class" title="class1" />
+          <input id="class1_level" v-model="sheet.class1_level" class="input-small" placeholder="-" title="class1_level" />
+          <input id="class2" v-model="sheet.class2" placeholder="class" title="class2" />
+          <input id="class2_level" v-model="sheet.class2_level" class="input-small" placeholder="-" title="class2_level" />
+          <input id="class3" v-model="sheet.class3" placeholder="class" title="class3" />
+          <input id="class3_level" v-model="sheet.class3_level" class="input-small" placeholder="-" title="class3_level" />
+        </span>
+      </div>
+      <div class="hp-grid">
         <label for="hp">
             <span class="label">HP</span>
-            <input id="hp" v-model="sheet.hp" />
+            <input id="hp" v-model="sheet.hp" title="hp" />
         </label>
         <label for="hp_max">
             <span class="label">/</span>
-            <input id="hp_max" v-model="sheet.hp_max" />
+            <input id="hp_max" v-model="sheet.hp_max" title="hp_max" />
         </label>
         <label for="ac">
             <span class="label">AC</span>
-            <input id="ac" v-model="sheet.ac" />
+            <input id="ac" v-model="sheet.ac" title="ac" />
         </label>
       </div>
       <span class="avatar">
         <img :src="meta.avatar" alt="Character Avatar" />
       </span>
-      <label for="class1">
-          <span class="label">Class</span>
-          <input id="class1" v-model="sheet.class1" />
-      </label>
       <span></span>
-      <div></div>
+      <span></span>
+      <span></span>
     </div>
     <div class="sheet">
       <abilitiesSection />
       <div class="card">
         <div class="subheader">
-          <div class="subtitle">Special Abilities - {{ sheet.abilitiesCount }}</div>
+          <span class="subtitle">Special Abilities - {{ sheet.abilitiesCount }}</span>
           <button class="button" @click="sheet.addAbility" title="Add Ability">+</button>
         </div>
         <div class="special-abilities">
@@ -76,8 +93,9 @@
     border-image: url("/src/assets/border1.jpg") round round 75 8 60 22;
     border-style: solid;
     border-width: 60px 5px 60px 5px;
-    margin: 0;
-    width: 860px;
+    margin: 0 7px 0 7px;
+    max-width: 910px;
+    min-width: 660px;
   }
   .top-header {
     display: grid;
@@ -92,19 +110,14 @@
   */
   .avatar {
     display: flex;
-    border-radius: 2rem;
-    padding: 1rem;
-    background: #757575;
+    padding: .5rem;
     justify-self: center;
-    &:hover {
-      background: rgba(180, 218, 222, 0.86);
-    }
     img {
-      border-radius: 10px;
       display: block;
-      height: 8rem;
       margin: auto;
       position: relative;
+      height: 23vw;
+      min-height: 162px;
     }
   }
   /*
@@ -129,9 +142,9 @@
     display: grid;
     justify-content: center;
     align-items: center;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 0.5rem;
-    padding: 1rem;
+    padding: .5rem;
   }
 
   .footer {
@@ -157,11 +170,11 @@
     padding: 1rem;
   }
   .card {
-    display: grid;
-    gap: 0.5rem;
-    border-radius: 2rem;
-    padding: .5rem;
     background: #757575;
+    border-radius: 2rem;
+    display: grid;
+    padding: 0.5rem 0.5rem 1rem 0.5rem;
+
     &:hover {
       background: rgba(180, 218, 222, 0.86);
     }
@@ -177,9 +190,13 @@
     margin-inline: .35rem;
   }
   .subtitle {
-    font-size: 1.75rem;
-    line-height: 2rem;
-    padding-top: .5rem;
+    display: flex;
+    font-size: 1.25rem;
+    justify-content: center;
+    line-height: 1.25rem;
+    margin: auto;
+    padding: 0.125rem;
+    position: relative;
   }
 
   /*
@@ -208,20 +225,23 @@
   */
   .label {
     font-size: 0.75rem;
-    font-weight: 600;
     margin-inline: 2px;
     text-transform: uppercase;
+  }
+  label:has(span) {
+    display: flex;
+    align-items: center;
   }
   /*
   Styling for form inputs, currently this quickstart is only using default inputs that handle text.
   */
   input {
-    font-size: 1rem;
     background-color: #e8e8e8;
     border-radius: 0.25rem;
     border: none;
-    height: 1.5rem;
     padding: 0.25rem;
+    width: -webkit-fill-available;
+    min-width: 2.5em;
     &:focus {
       outline-offset: 1px;
       outline-color: #666;
@@ -230,12 +250,11 @@
   }
 
   .input-small {
-    min-width: 2.5em;
     text-align: center;
-    width: auto;
+    width: 2.5em;
   }
 
-  .hp-box {
+  .hp-grid {
     align-self: center;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -268,5 +287,24 @@
     display: grid;
     grid-template-columns: 9em auto 2em 1em;
     padding-bottom: 0.25rem;
+  }
+  .span-all {
+    grid-column: 1/-1;
+    display: flex;
+  }
+  .class-grid {
+    display: grid;
+    grid-template-columns: 1fr 3em;
+    grid-gap: 2px;
+  }
+  .center {
+    text-align: center;
+    margin: auto;
+  }
+  .grid-2 {
+    gap: 4px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    justify-items: center;
   }
 </style>
