@@ -89,13 +89,24 @@
 </template>
 
 <style lang="scss">
+  #app {
+    font-family: 'Montserrat', 'Verdana', sans-serif;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    min-width: 680px;
+  }
+
   .wrapper {
     border-image: url("/src/assets/border1.jpg") round round 75 8 60 22;
     border-style: solid;
     border-width: 60px 5px 60px 5px;
+    display: grid;
+    justify-content: space-around;
     margin: 0 7px 0 7px;
     max-width: 910px;
     min-width: 660px;
+    position: relative;
   }
   .top-header {
     display: grid;
@@ -176,7 +187,7 @@
     padding: 0.5rem 0.5rem 1rem 0.5rem;
 
     &:hover {
-      background: rgba(180, 218, 222, 0.86);
+      background: rgb(191 191 191);
     }
   }
 
