@@ -196,11 +196,11 @@
       </label>
       <label>
         <span class="label">&nbsp;</span>
-        <input id="strength" v-model="sheet.strength" class="input-small" />
+        <input id="strength" v-model="sheet.strength" class="input-small" title="strength"/>
       </label>
       <label>
         <span class="label">EXC</span>
-        <input id="str_exceptional" v-model="sheet.str_exceptional" class="input-small" />
+        <input id="str_exceptional" v-model="sheet.str_exceptional" class="input-small" title="str_exceptional"/>
       </label>
       <label>
         <span class="label">ATK</span>
@@ -266,30 +266,30 @@
 </template>
 
 <style scope lang="scss">
-.ability-row {
-  align-items: center;
-  display: grid;
-  gap: 5px;
-  grid-template-columns: 3em 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  text-align: center;
-
-label {
+  .ability-row {
     align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    display: grid;
+    gap: 5px;
+    grid-template-columns: 3em 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    text-align: center;
 
-span {
-      margin-inline: auto;
-    }
-    input {
-      margin-inline: auto;
-      width: 2em;
+  label {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+  span {
+        margin-inline: auto;
+      }
+      input {
+        margin-inline: auto;
+        width: 2em;
+      }
     }
   }
-}
-.ability-row > label:first-child {
-  margin-top: 1rem;
-  font-size: 1.2rem;
-}
+  .ability-row > label:first-child {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+  }
 </style>

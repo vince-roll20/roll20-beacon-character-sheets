@@ -4,7 +4,6 @@ import { v4 as uuidv4 } from 'uuid'
 import { arrayToObject, objectToArray } from '@/utility/objectify'
 import { dispatchRef, initValues } from '@/relay/relay.js'
 import { createRollTemplate } from '@/rollTemplates/index.js'
-import abilitiesSection from './components/abilitiesSection.vue'
 
 /*
 This function will leverage the beacon SDK to render a roll template to the chat log.
@@ -53,9 +52,6 @@ const postAbilityToChat = (ability) => {
 This is a custom data store, that will house everything you need for data specific to your sheet.
 Here you can define all attributes, as well as sheet functions.
 
-In the example we have provided, there is a custom faction text field, as well as a list of
-ability objects, that feature a name and description.
-
 This is a great starting place to customize what data you need for your sheet.
  */
 const sheetStore = () => {
@@ -70,14 +66,47 @@ const sheetStore = () => {
   const dexterity = ref(8)
   const constitution = ref(8)
   const charisma = ref(8)
+
   // Map strength to PHB table
-  const strToValues = abilitiesSection.strToValues
+  // str array [str_attack, str_damage, str_weight_adj, str_minor, str_minor_locked, str_major]
+  const strToValues = {
+    3: [-3, -1, -350, 15, 0, 0],
+    4: [-2, -1, -250, 15, 0, 0],
+    5: [-2, -1, -250, 15, 0, 0],
+    6: [-1, 0, -150, 15, 0, 0],
+    7: [-1, 0, -150, 15, 0, 0],
+    8: [0, 0, 0, 30, 0, 1],
+    9: [0, 0, 0, 30, 0, 1],
+    10: [0, 0, 0, 30, 0, 2],
+    11: [0, 0, 0, 30, 0, 2],
+    12: [0, 0, 100, 30, 0, 4],
+    13: [0, 0, 100, 30, 0, 4],
+    14: [0, 0, 200, 30, 0, 7],
+    15: [0, 0, 200, 30, 0, 7],
+    16: [0, 1, 350, 50, 0, 10],
+    17: [1, 1, 500, 50, 0, 13],
+    18: [1, 2, 750, 50, 0, 16],
+    19: [3, 7, 4500, 90, 50, 50],
+    20: [3, 8, 5000, 90, 50, 60],
+    21: [4, 9, 6000, 90, 70, 70],
+    22: [4, 10, 7500, 90, 70, 80],
+    23: [5, 11, 9000, 90, 85, 90],
+    24: [6, 12, 12000, 95, 87, 100],
+    25: [7, 14, 15000, 95, 90, 100]
+  }
+
+  const strToValuesExceptional = {
+    '01-50': [1, 3, 1000, 50, 0, 20],
+    '51-75': [2, 3, 1250, 70, 0, 25],
+    '76-90': [2, 4, 1500, 70, 0, 30],
+    '91-99': [2, 5, 2000, 70, 15, 35],
+    '00': [3, 6, 3000, 85, 30, 40]
+  }
+
   // Get the corresponding array based on strength
   // str array [str_attack, str_damage, str_weight_adj, str_minor, str_minor_locked, str_major]
   let strValues = computed(() => strToValues[strength.value])
-  // if (str_exceptional.value !== 0) {
-  //   console.log(`EXCEPTIONAL STR DETECTED`);
-  // }
+
   const str_attack = computed(() => (strValues.value ? strValues.value[0] : 0))
   const str_damage = computed(() => (strValues.value ? strValues.value[1] : 0))
   const str_weight_adj = computed(() => (strValues.value ? strValues.value[2] : 0))
@@ -122,6 +151,7 @@ const sheetStore = () => {
       abilities: arrayToObject(abilities.value)
     }
   }
+
   // Handles updating these values in the store.
   const hydrate = (hydrateStore) => {
     hp.value = hydrateStore.hp ?? hp.value
