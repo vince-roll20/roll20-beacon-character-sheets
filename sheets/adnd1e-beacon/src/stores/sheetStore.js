@@ -64,6 +64,7 @@ const sheetStore = () => {
   const ac = ref(10)
   const class1 = ref('')
   const strength = ref(8)
+  const str_exceptional = ref(0)
   const intelligence = ref(8)
   const wisdom = ref(8)
   const dexterity = ref(8)
@@ -72,11 +73,14 @@ const sheetStore = () => {
   // Map strength to PHB table
   const strToValues = abilitiesSection.strToValues
   // Get the corresponding array based on strength
-  // str array [str_attack, str_damage, str_weight_adjustment, str_minor, str_minor_locked, str_major]
-  const strValues = computed(() => strToValues[strength.value])
+  // str array [str_attack, str_damage, str_weight_adj, str_minor, str_minor_locked, str_major]
+  let strValues = computed(() => strToValues[strength.value])
+  // if (str_exceptional.value !== 0) {
+  //   console.log(`EXCEPTIONAL STR DETECTED`);
+  // }
   const str_attack = computed(() => (strValues.value ? strValues.value[0] : 0))
   const str_damage = computed(() => (strValues.value ? strValues.value[1] : 0))
-  const str_weight_adjustment = computed(() => (strValues.value ? strValues.value[2] : 0))
+  const str_weight_adj = computed(() => (strValues.value ? strValues.value[2] : 0))
   const str_minor = computed(() => (strValues.value ? strValues.value[3] : 0))
   const str_minor_locked = computed(() => (strValues.value ? strValues.value[4] : 0))
   const str_major = computed(() => (strValues.value ? strValues.value[5] : 0))
@@ -98,6 +102,7 @@ const sheetStore = () => {
       ac: ac.value,
       class1: class1.value,
       strength: strength.value,
+      str_exceptional: str_exceptional.value,
       intelligence: intelligence.value,
       wisdom: wisdom.value,
       dexterity: dexterity.value,
@@ -105,9 +110,10 @@ const sheetStore = () => {
       charisma: charisma.value,
       str_attack: str_attack.value,
       str_damage: str_damage.value,
+      str_weight_adj: str_weight_adj.value,
       str_minor: str_minor.value,
+      str_minor_locked: str_minor_locked.value,
       str_major: str_major.value,
-      str_weight_adjustment: str_weight_adjustment.value,
       intelligenceMod: intelligenceMod.value,
       wisdomMod: wisdomMod.value,
       dexterityMod: dexterityMod.value,
@@ -123,6 +129,7 @@ const sheetStore = () => {
     ac.value = hydrateStore.ac ?? ac.value
     class1.value = hydrateStore.class1 ?? class1.value
     strength.value = hydrateStore.strength ?? strength.value
+    str_exceptional.value = hydrateStore.str_exceptional ?? str_exceptional.value
     intelligence.value = hydrateStore.intelligence ?? intelligence.value
     wisdom.value = hydrateStore.wisdom ?? wisdom.value
     dexterity.value = hydrateStore.dexterity ?? dexterity.value
@@ -131,9 +138,10 @@ const sheetStore = () => {
 
     str_attack.value = hydrateStore.str_attack ?? str_attack.value
     str_damage.value = hydrateStore.str_damage ?? str_damage.value
+    str_weight_adj.value = hydrateStore.str_weight_adj ?? str_weight_adj.value
     str_minor.value = hydrateStore.str_minor ?? str_minor.value
+    str_minor_locked.value = hydrateStore.str_minor_locked ?? str_minor_locked.value
     str_major.value = hydrateStore.str_major ?? str_major.value
-    str_weight_adjustment.value = hydrateStore.str_weight_adjustment ?? str_weight_adjustment.value
 
     intelligenceMod.value = hydrateStore.intelligenceMod ?? intelligenceMod.value
     wisdomMod.value = hydrateStore.wisdomMod ?? wisdomMod.value
@@ -150,6 +158,7 @@ const sheetStore = () => {
     ac,
     class1,
     strength,
+    str_exceptional,
     intelligence,
     wisdom,
     dexterity,
@@ -157,9 +166,10 @@ const sheetStore = () => {
     charisma,
     str_attack,
     str_damage,
+    str_weight_adj,
     str_minor,
+    str_minor_locked,
     str_major,
-    str_weight_adjustment,
     intelligenceMod,
     wisdomMod,
     dexterityMod,
