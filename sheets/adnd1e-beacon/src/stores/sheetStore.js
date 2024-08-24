@@ -155,7 +155,11 @@ const sheetStore = () => {
   const wis_spell_bonus = ref(0)
   const wis_spell_failure = ref(0)
 
-  const dexterityMod = ref(0)
+  const dex_reaction = ref(0)
+  const dex_ranged = ref(0)
+  const dex_armor = ref(0)
+  const dex_surprise = ref(0)
+
   const constitutionMod = ref(0)
   const charismaMod = ref(0)
   const comelinessMod = ref(0)
@@ -201,7 +205,11 @@ const sheetStore = () => {
       wis_spell_bonus: wis_spell_bonus.value,
       wis_spell_failure: wis_spell_failure.value,
 
-      dexterityMod: dexterityMod.value,
+      dex_reaction: dex_reaction.value,
+      dex_ranged: dex_ranged.value,
+      dex_armor: dex_armor.value,
+      dex_surprise: dex_surprise.value,
+
       constitutionMod: constitutionMod.value,
       charismaMod: charismaMod.value,
       comelinessMod: comelinessMod.value,
@@ -247,7 +255,11 @@ const sheetStore = () => {
     wis_spell_bonus.value = hydrateStore.wis_spell_bonus ?? wis_spell_bonus.value
     wis_spell_failure.value = hydrateStore.wis_spell_failure ?? wis_spell_failure.value
 
-    dexterityMod.value = hydrateStore.dexterityMod ?? dexterityMod.value
+    dex_reaction.value = hydrateStore.dex_reaction ?? dex_reaction.value
+    dex_ranged.value = hydrateStore.dex_ranged ?? dex_ranged.value
+    dex_armor.value = hydrateStore.dex_armor ?? dex_armor.value
+    dex_surprise.value = hydrateStore.dex_surprised ?? dex_surprise.value
+
     constitutionMod.value = hydrateStore.constitutionMod ?? constitutionMod.value
     charismaMod.value = hydrateStore.charismaMod ?? charismaMod.value
     comelinessMod.value = hydrateStore.comelinessMod ?? comelinessMod.value
@@ -292,7 +304,11 @@ const sheetStore = () => {
     wis_spell_bonus,
     wis_spell_failure,
 
-    dexterityMod,
+    dex_reaction,
+    dex_ranged,
+    dex_armor,
+    dex_surprise,
+
     constitutionMod,
     charismaMod,
     comelinessMod,

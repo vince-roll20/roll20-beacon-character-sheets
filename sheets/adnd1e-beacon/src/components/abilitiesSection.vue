@@ -273,7 +273,22 @@
         <span class="label">EXC</span>
         <input id="dex_exceptional" v-model.number.lazy="sheet.dex_exceptional" class="input-small" title="dex_exceptional"/>
       </label>
-        <input id="dexterityMod" v-model.number="sheet.dexterityMod" class="input-small" />
+      <label>
+        <span class="label">REAC</span>
+        <input id="dex_reaction" v-model.number="sheet.dex_reaction" class="input-small" title="dex_reaction" />
+      </label>
+      <label>
+        <span class="label">RANGE</span>
+        <input id="dex_ranged" v-model.number="sheet.dex_ranged" class="input-small" title="dex_ranged" />
+      </label>
+      <label>
+        <span class="label">ARMOR</span>
+        <input id="dex_armor" v-model.number="sheet.dex_armor" class="input-small" title="dex_armor" />
+      </label>
+      <label>
+        <span class="label">SURP</span>
+        <input id="dex_surprise" v-model.number="sheet.dex_surprise" class="input-small" title="dex_surprise" />
+      </label>
     </div>
     <div class="ability-row">
       <label>
