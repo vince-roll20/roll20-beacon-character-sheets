@@ -304,15 +304,15 @@
       </label>
       <label>
         <span class="label">HP</span>
-        <input id="con_hp" v-model.number="sheet.con_hp" class="input-small" />
+        <input id="con_hp" v-model.number="sheet.con_hp" class="input-small" title="con_hp" />
       </label>
       <label>
         <span class="label">SHOCK</span>
-        <input id="con_shock" v-model.number="sheet.con_shock" class="input-small" />
+        <input id="con_shock" v-model.number="sheet.con_shock" class="input-small" title="con_shock" />
       </label>
       <label>
         <span class="label">RES</span>
-        <input id="con_res" v-model.number="sheet.con_res" class="input-small" />
+        <input id="con_res" v-model.number="sheet.con_res" class="input-small" title="con_res" />
       </label>
     </div>
     <div class="ability-row">
@@ -327,7 +327,22 @@
         <span class="label">EXC</span>
         <input id="cha_exceptional" v-model.number.lazy="sheet.cha_exceptional" class="input-small" title="cha_exceptional"/>
       </label>
-        <input id="charismaMod" v-model.number="sheet.charismaMod" class="input-small" />
+      <label>
+        <span class="label">MAX</span>
+        <input id="cha_max_henchmen" v-model.number="sheet.cha_max_henchmen" class="input-small" title="cha_max_henchmen" />
+      </label>
+      <label>
+        <span class="label">LOYAL</span>
+        <input id="cha_loyalty" v-model.number="sheet.cha_loyalty" class="input-small" title="cha_loyalty" />
+      </label>
+      <label>
+        <span class="label">REAC</span>
+        <input id="cha_reaction" v-model.number="sheet.cha_reaction" class="input-small" title="cha_reaction" />
+      </label>
+      <label>
+        <span class="label">MORALE</span>
+        <input id="cha_morale" v-model.number="sheet.cha_morale" class="input-small" title="cha_morale" />
+      </label>
     </div>
     <div class="ability-row">
       <label>

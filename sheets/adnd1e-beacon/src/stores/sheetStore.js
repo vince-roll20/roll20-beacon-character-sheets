@@ -164,7 +164,11 @@ const sheetStore = () => {
   const con_shock = ref(0)
   const con_res = ref(0)
 
-  const charismaMod = ref(0)
+  const cha_max_henchmen = ref(0)
+  const cha_loyalty = ref(0)
+  const cha_reaction = ref(0)
+  const cha_morale = ref(0)
+
   const comelinessMod = ref(0)
 
   const abilities = ref([])
@@ -217,7 +221,11 @@ const sheetStore = () => {
       con_shock: con_shock.value,
       con_res: con_res.value,
 
-      charismaMod: charismaMod.value,
+      cha_max_henchmen: cha_max_henchmen.value,
+      cha_loyal: cha_loyalty.value,
+      cha_reaction: cha_reaction.value,
+      cha_morale: cha_morale.value,
+
       comelinessMod: comelinessMod.value,
       abilities: arrayToObject(abilities.value)
     }
@@ -270,7 +278,11 @@ const sheetStore = () => {
     con_shock.value = hydrateStore.con_shock ?? con_shock.value
     con_res.value = hydrateStore.con_res ?? con_res.value
 
-    charismaMod.value = hydrateStore.charismaMod ?? charismaMod.value
+    cha_max_henchmen.value = hydrateStore.cha_max_henchmen ?? cha_max_henchmen.value
+    cha_loyalty.value = hydrateStore.cha_loyalty ?? cha_loyalty.value
+    cha_reaction.value = hydrateStore.cha_reaction ?? cha_reaction.value
+    cha_morale.value = hydrateStore.cha_morale ?? cha_morale.value
+
     comelinessMod.value = hydrateStore.comelinessMod ?? comelinessMod.value
 
     abilities.value = objectToArray(hydrateStore.abilities) || abilities.value
@@ -322,7 +334,11 @@ const sheetStore = () => {
     con_shock,
     con_res,
 
-    charismaMod,
+    cha_max_henchmen,
+    cha_loyalty,
+    cha_reaction,
+    cha_morale,
+
     comelinessMod,
 
     abilities,
