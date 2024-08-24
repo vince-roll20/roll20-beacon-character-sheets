@@ -169,7 +169,10 @@ const sheetStore = () => {
   const cha_reaction = ref(0)
   const cha_morale = ref(0)
 
-  const comelinessMod = ref(0)
+  const con_base = ref(0)
+  const con_cha_adj = ref(0)
+  const con_racial_adj = ref(0)
+
 
   const abilities = ref([])
   const abilitiesCount = computed(() => abilities.value?.length)
@@ -226,7 +229,10 @@ const sheetStore = () => {
       cha_reaction: cha_reaction.value,
       cha_morale: cha_morale.value,
 
-      comelinessMod: comelinessMod.value,
+      con_base: con_base.value,
+      con_cha_adj: con_cha_adj.value,
+      con_racial_adj: con_racial_adj.value,
+
       abilities: arrayToObject(abilities.value)
     }
   }
@@ -283,7 +289,9 @@ const sheetStore = () => {
     cha_reaction.value = hydrateStore.cha_reaction ?? cha_reaction.value
     cha_morale.value = hydrateStore.cha_morale ?? cha_morale.value
 
-    comelinessMod.value = hydrateStore.comelinessMod ?? comelinessMod.value
+    con_base.value = hydrateStore.con_base ?? con_base.value
+    con_cha_adj.value = hydrateStore.con_cha_adj ?? con_cha_adj.value
+    con_racial_adj.value = hydrateStore.con_racial_adj ?? con_racial_adj.value
 
     abilities.value = objectToArray(hydrateStore.abilities) || abilities.value
   }
@@ -339,7 +347,9 @@ const sheetStore = () => {
     cha_reaction,
     cha_morale,
 
-    comelinessMod,
+    con_base,
+    con_cha_adj,
+    con_racial_adj,
 
     abilities,
     abilitiesCount,

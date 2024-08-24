@@ -356,7 +356,24 @@
         <span class="label">EXC</span>
         <input id="com_exceptional" v-model.number.lazy="sheet.com_exceptional" class="input-small" title="com_exceptional"/>
       </label>
-        <input id="comelinessMod" v-model.number="sheet.comelinessMod" class="input-small" />
+      <label>
+        <span class="label">BASE</span>
+        <input id="com_base" v-model.number="sheet.com_base" class="input-small" title="com_base" />
+      </label>
+      <label>
+        <span class="label">CHA</span>
+        <input id="com_cha_adj" v-model.number="sheet.com_cha_adj" class="input-small" title="com_cha_adj" />
+      </label>
+      <label>
+        <span class="label">RACE</span>
+        <select id="com_racial_adj" v-model.number="sheet.com_racial_adj" title="com_racial_adj | Bonus/Penalty adjustment as perceived by other races.">
+          <option value="-3">Half-Orcs</option>
+          <option value="-1">Dwarves, Gnomes</option>
+          <option value="0" selected>Halflings, Humans</option>
+          <option value="1">Half-Elves, Sylvan Elves</option>
+          <option value="2">Gray Elves, High Elves</option>
+        </select>
+      </label>
     </div>
   </div>
 </template>
