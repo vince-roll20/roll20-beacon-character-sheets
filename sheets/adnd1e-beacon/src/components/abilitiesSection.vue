@@ -184,63 +184,63 @@
       </label>
       <label>
         <span class="label">ATK</span>
-        <input id="str_attack" v-model="sheet.str_attack" class="input-small" title="str_attack" readonly/>
+        <input id="str_attack" v-model.number="sheet.str_attack" class="input-small" title="str_attack" readonly/>
       </label>
       <label>
         <span class="label">DMG</span>
-        <input id="str_damage" v-model="sheet.str_damage" class="input-small" title="str_damage"/>
+        <input id="str_damage" v-model.number="sheet.str_damage" class="input-small" title="str_damage" readonly/>
       </label>
       <label>
         <span class="label">WT</span>
-        <input id="str_weight_adj" v-model="sheet.str_weight_adj" class="input-small" title="str_weight_adj"/>
+        <input id="str_weight_adj" v-model.number="sheet.str_weight_adj" class="input-small" title="str_weight_adj" readonly/>
       </label>
       <label>
         <span class="label">MIN</span>
-        <input id="str_minor" v-model="sheet.str_minor" class="input-small" title="str_minor"/>
+        <input id="str_minor" v-model.number="sheet.str_minor" class="input-small" title="str_minor" readonly/>
       </label>
       <label>
         <span class="label">LOCK</span>
-        <input id="str_minor_locked" v-model="sheet.str_minor_locked" class="input-small" title="str_minor_locked"/>
+        <input id="str_minor_locked" v-model.number="sheet.str_minor_locked" class="input-small" title="str_minor_locked" readonly/>
       </label>
       <label>
         <span class="label">MAJ</span>
-        <input id="str_major" v-model="sheet.str_major" class="input-small" title="str_major"/>
+        <input id="str_major" v-model.number="sheet.str_major" class="input-small" title="str_major" readonly/>
       </label>
     </div>
     <div class="ability-row">
       <label>
         <span>INT</span>
       </label>
-        <input id="intelligence" v-model="sheet.intelligence" class="input-small" />
-        <input id="intelligenceMod" v-model="sheet.intelligenceMod" class="input-small" />
+        <input id="intelligence" v-model.number.lazy="sheet.intelligence" class="input-small" />
+        <input id="intelligenceMod" v-model.number="sheet.intelligenceMod" class="input-small" />
     </div>
     <div class="ability-row">
       <label>
         <span>WIS</span>
       </label>
-        <input id="wisdom" v-model="sheet.wisdom" class="input-small" />
-        <input id="wisdomMod" v-model="sheet.wisdomMod" class="input-small" />
+        <input id="wisdom" v-model.number.lazy="sheet.wisdom" class="input-small" />
+        <input id="wisdomMod" v-model.number="sheet.wisdomMod" class="input-small" />
     </div>
     <div class="ability-row">
       <label>
         <span>DEX</span>
       </label>
-        <input id="dexterity" v-model="sheet.dexterity" class="input-small" />
-        <input id="dexterityMod" v-model="sheet.dexterityMod" class="input-small" />
+        <input id="dexterity" v-model.number.lazy="sheet.dexterity" class="input-small" />
+        <input id="dexterityMod" v-model.number="sheet.dexterityMod" class="input-small" />
     </div>
     <div class="ability-row">
       <label>
         <span>CON</span>
       </label>
-        <input id="constitution" v-model="sheet.constitution" class="input-small" />
-        <input id="constitutionMod" v-model="sheet.constitutionMod" class="input-small" />
+        <input id="constitution" v-model.number.lazy="sheet.constitution" class="input-small" />
+        <input id="constitutionMod" v-model.number="sheet.constitutionMod" class="input-small" />
     </div>
     <div class="ability-row">
       <label>
         <span>CHA</span>
       </label>
-        <input id="charisma" v-model="sheet.charisma" class="input-small" />
-        <input id="charismaMod" v-model="sheet.charismaMod" class="input-small" />
+        <input id="charisma" v-model.number.lazy="sheet.charisma" class="input-small" />
+        <input id="charismaMod" v-model.number="sheet.charismaMod" class="input-small" />
     </div>
   </div>
 </template>

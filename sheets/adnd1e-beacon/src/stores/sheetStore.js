@@ -103,29 +103,32 @@ const sheetStore = () => {
     100: [3, 6, 3000, 85, 30, 40]
   }
 
-  let strValues = ref(strToValues[strength.value]) // Initial value
+  let strValues = ref(strToValues[strength.value])
 
   // Watch for changes to the strength and str_exceptional values
-  watch(
-    [strength, str_exceptional],
-    ([newStrength, newExceptional]) => {
-      console.log(
-        `Watcher triggered: strength=${newStrength} (${typeof newStrength}), exceptional=${newExceptional} (${typeof newExceptional})`
-      )
-      // Check if conditions are met
-      if (newStrength === 18 && newExceptional > 0) {
-        console.log('Condition met: calling exceptionalStr()')
-        exceptionalStr(newExceptional) // Call to update exceptional strValues
-      } else {
-        console.log('Condition not met: updating strValues from strToValues table')
-        if (Object.prototype.hasOwnProperty.call(strToValues, newStrength)) {
-          strValues.value = strToValues[newStrength]
-        } else {
-          console.warn(`Invalid strength value: ${newStrength}`)
-        }
-      }
+  // watch(
+  //   [strength, str_exceptional],
+  //   ([newStrength, newExceptional]) => {
+  //     if (newStrength === 18 && newExceptional > 0) {
+  //       exceptionalStr(newExceptional) // Call to update exceptional strValues
+  //     } else {
+  //       if (Object.prototype.hasOwnProperty.call(strToValues, newStrength)) {
+  //         strValues.value = strToValues[newStrength]
+  //       } else {
+  //         console.warn(`Invalid strength value: ${newStrength}`)
+  //       }
+  //     }
+  //   }
+  // )
+  
+  // Watch for changes to the strength and str_exceptional values
+  watch([strength, str_exceptional], ([newStrength, newExceptional]) => {
+    if (newStrength === 18 && newExceptional > 0) {
+      exceptionalStr(newExceptional) // Call to update exceptional strValues
+    } else {
+      strValues.value = strToValues[newStrength] // Update directly
     }
-  )
+  })
 
   // Function to handle exceptional strength
   function exceptionalStr(exceptionalValue) {
