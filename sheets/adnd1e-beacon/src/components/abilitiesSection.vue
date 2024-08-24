@@ -302,7 +302,18 @@
         <span class="label">EXC</span>
         <input id="con_exceptional" v-model.number.lazy="sheet.con_exceptional" class="input-small" title="con_exceptional"/>
       </label>
-        <input id="constitutionMod" v-model.number="sheet.constitutionMod" class="input-small" />
+      <label>
+        <span class="label">HP</span>
+        <input id="con_hp" v-model.number="sheet.con_hp" class="input-small" />
+      </label>
+      <label>
+        <span class="label">SHOCK</span>
+        <input id="con_shock" v-model.number="sheet.con_shock" class="input-small" />
+      </label>
+      <label>
+        <span class="label">RES</span>
+        <input id="con_res" v-model.number="sheet.con_res" class="input-small" />
+      </label>
     </div>
     <div class="ability-row">
       <label>

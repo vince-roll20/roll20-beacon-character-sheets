@@ -160,7 +160,10 @@ const sheetStore = () => {
   const dex_armor = ref(0)
   const dex_surprise = ref(0)
 
-  const constitutionMod = ref(0)
+  const con_hp = ref(0)
+  const con_shock = ref(0)
+  const con_res = ref(0)
+
   const charismaMod = ref(0)
   const comelinessMod = ref(0)
 
@@ -210,7 +213,10 @@ const sheetStore = () => {
       dex_armor: dex_armor.value,
       dex_surprise: dex_surprise.value,
 
-      constitutionMod: constitutionMod.value,
+      con_hp: con_hp.value,
+      con_shock: con_shock.value,
+      con_res: con_res.value,
+
       charismaMod: charismaMod.value,
       comelinessMod: comelinessMod.value,
       abilities: arrayToObject(abilities.value)
@@ -260,7 +266,10 @@ const sheetStore = () => {
     dex_armor.value = hydrateStore.dex_armor ?? dex_armor.value
     dex_surprise.value = hydrateStore.dex_surprised ?? dex_surprise.value
 
-    constitutionMod.value = hydrateStore.constitutionMod ?? constitutionMod.value
+    con_hp.value = hydrateStore.con_hp ?? con_hp.value
+    con_shock.value = hydrateStore.con_shock ?? con_shock.value
+    con_res.value = hydrateStore.con_res ?? con_res.value
+
     charismaMod.value = hydrateStore.charismaMod ?? charismaMod.value
     comelinessMod.value = hydrateStore.comelinessMod ?? comelinessMod.value
 
@@ -309,7 +318,10 @@ const sheetStore = () => {
     dex_armor,
     dex_surprise,
 
-    constitutionMod,
+    con_hp,
+    con_shock,
+    con_res,
+
     charismaMod,
     comelinessMod,
 
