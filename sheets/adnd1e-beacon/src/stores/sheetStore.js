@@ -59,13 +59,22 @@ const sheetStore = () => {
   const hp_max = ref(0)
   const ac = ref(10)
   const class1 = ref('')
+
   const strength = ref(8)
-  const str_exceptional = ref(0)
   const intelligence = ref(8)
   const wisdom = ref(8)
   const dexterity = ref(8)
   const constitution = ref(8)
   const charisma = ref(8)
+  const comeliness = ref(8)
+
+  const str_exceptional = ref(0)
+  const int_exceptional = ref(0)
+  const wis_exceptional = ref(0)
+  const dex_exceptional = ref(0)
+  const con_exceptional = ref(0)
+  const cha_exceptional = ref(0)
+  const com_exceptional = ref(0)
 
   // Map strength to PHB table
   // str array [str_attack, str_damage, str_weight_adj, str_minor, str_minor_locked, str_major]
@@ -106,22 +115,6 @@ const sheetStore = () => {
   let strValues = ref(strToValues[strength.value])
 
   // Watch for changes to the strength and str_exceptional values
-  // watch(
-  //   [strength, str_exceptional],
-  //   ([newStrength, newExceptional]) => {
-  //     if (newStrength === 18 && newExceptional > 0) {
-  //       exceptionalStr(newExceptional) // Call to update exceptional strValues
-  //     } else {
-  //       if (Object.prototype.hasOwnProperty.call(strToValues, newStrength)) {
-  //         strValues.value = strToValues[newStrength]
-  //       } else {
-  //         console.warn(`Invalid strength value: ${newStrength}`)
-  //       }
-  //     }
-  //   }
-  // )
-  
-  // Watch for changes to the strength and str_exceptional values
   watch([strength, str_exceptional], ([newStrength, newExceptional]) => {
     if (newStrength === 18 && newExceptional > 0) {
       exceptionalStr(newExceptional) // Call to update exceptional strValues
@@ -153,11 +146,16 @@ const sheetStore = () => {
   const str_minor_locked = computed(() => (strValues.value ? strValues.value[4] : 0))
   const str_major = computed(() => (strValues.value ? strValues.value[5] : 0))
 
-  const intelligenceMod = ref(0)
+  const int_lang = ref(0)
+  const int_know_spells = ref(0)
+  const int_min_spells = ref(0)
+  const int_max_spells = ref(0)
+
   const wisdomMod = ref(0)
   const dexterityMod = ref(0)
   const constitutionMod = ref(0)
   const charismaMod = ref(0)
+  const comelinessMod = ref(0)
 
   const abilities = ref([])
   const abilitiesCount = computed(() => abilities.value?.length)
@@ -170,23 +168,37 @@ const sheetStore = () => {
       ac: ac.value,
       class1: class1.value,
       strength: strength.value,
-      str_exceptional: str_exceptional.value,
       intelligence: intelligence.value,
       wisdom: wisdom.value,
       dexterity: dexterity.value,
       constitution: constitution.value,
       charisma: charisma.value,
+
+      str_exceptional: str_exceptional.value,
+      int_exceptional: int_exceptional.value,
+      wis_exceptional: wis_exceptional.value,
+      dex_exceptional: dex_exceptional.value,
+      con_exceptional: con_exceptional.value,
+      cha_exceptional: cha_exceptional.value,
+      com_exceptional: com_exceptional.value,
+
       str_attack: str_attack.value,
       str_damage: str_damage.value,
       str_weight_adj: str_weight_adj.value,
       str_minor: str_minor.value,
       str_minor_locked: str_minor_locked.value,
       str_major: str_major.value,
-      intelligenceMod: intelligenceMod.value,
+
+      int_lang: int_lang.value,
+      int_know_spells: int_know_spells.value,
+      int_min_spells: int_min_spells.value,
+      int_max_spells: int_max_spells.value,
+
       wisdomMod: wisdomMod.value,
       dexterityMod: dexterityMod.value,
       constitutionMod: constitutionMod.value,
       charismaMod: charismaMod.value,
+      comelinessMod: comelinessMod.value,
       abilities: arrayToObject(abilities.value)
     }
   }
@@ -198,12 +210,20 @@ const sheetStore = () => {
     ac.value = hydrateStore.ac ?? ac.value
     class1.value = hydrateStore.class1 ?? class1.value
     strength.value = hydrateStore.strength ?? strength.value
-    str_exceptional.value = hydrateStore.str_exceptional ?? str_exceptional.value
     intelligence.value = hydrateStore.intelligence ?? intelligence.value
     wisdom.value = hydrateStore.wisdom ?? wisdom.value
     dexterity.value = hydrateStore.dexterity ?? dexterity.value
     constitution.value = hydrateStore.constitution ?? constitution.value
     charisma.value = hydrateStore.charisma ?? charisma.value
+    comeliness.value = hydrateStore.comeliness ?? comeliness.value
+
+    str_exceptional.value = hydrateStore.str_exceptional ?? str_exceptional.value
+    int_exceptional.value = hydrateStore.int_exceptional ?? int_exceptional.value
+    wis_exceptional.value = hydrateStore.wis_exceptional ?? wis_exceptional.value
+    dex_exceptional.value = hydrateStore.dex_exceptional ?? dex_exceptional.value
+    con_exceptional.value = hydrateStore.con_exceptional ?? con_exceptional.value
+    cha_exceptional.value = hydrateStore.cha_exceptional ?? cha_exceptional.value
+    con_exceptional.value = hydrateStore.con_exceptional ?? con_exceptional.value
 
     str_attack.value = hydrateStore.str_attack ?? str_attack.value
     str_damage.value = hydrateStore.str_damage ?? str_damage.value
@@ -212,11 +232,16 @@ const sheetStore = () => {
     str_minor_locked.value = hydrateStore.str_minor_locked ?? str_minor_locked.value
     str_major.value = hydrateStore.str_major ?? str_major.value
 
-    intelligenceMod.value = hydrateStore.intelligenceMod ?? intelligenceMod.value
+    int_lang.value = hydrateStore.int_lang ?? int_lang.value
+    int_know_spells.value = hydrateStore.int_know_spells ?? int_know_spells.value
+    int_min_spells.value = hydrateStore.int_min_spells ?? int_min_spells.value
+    int_max_spells.value = hydrateStore.int_max_spells ?? int_max_spells.value
+
     wisdomMod.value = hydrateStore.wisdomMod ?? wisdomMod.value
     dexterityMod.value = hydrateStore.dexterityMod ?? dexterityMod.value
     constitutionMod.value = hydrateStore.constitutionMod ?? constitutionMod.value
     charismaMod.value = hydrateStore.charismaMod ?? charismaMod.value
+    comelinessMod.value = hydrateStore.comelinessMod ?? comelinessMod.value
 
     abilities.value = objectToArray(hydrateStore.abilities) || abilities.value
   }
@@ -227,23 +252,39 @@ const sheetStore = () => {
     ac,
     class1,
     strength,
-    str_exceptional,
     intelligence,
     wisdom,
     dexterity,
     constitution,
     charisma,
+    comeliness,
+
+    str_exceptional,
+    int_exceptional,
+    wis_exceptional,
+    dex_exceptional,
+    con_exceptional,
+    cha_exceptional,
+    com_exceptional,
+
     str_attack,
     str_damage,
     str_weight_adj,
     str_minor,
     str_minor_locked,
     str_major,
-    intelligenceMod,
+
+    int_lang,
+    int_know_spells,
+    int_min_spells,
+    int_max_spells,
+
     wisdomMod,
     dexterityMod,
     constitutionMod,
     charismaMod,
+    comelinessMod,
+
     abilities,
     abilitiesCount,
     addAbility: () => addAbility(abilities),

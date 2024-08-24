@@ -211,36 +211,100 @@
       <label>
         <span>INT</span>
       </label>
+      <label>
+        <span class="label">&nbsp;</span>
         <input id="intelligence" v-model.number.lazy="sheet.intelligence" class="input-small" />
-        <input id="intelligenceMod" v-model.number="sheet.intelligenceMod" class="input-small" />
+      </label>
+      <label>
+        <span class="label">EXC</span>
+        <input id="int_exceptional" v-model.number.lazy="sheet.int_exceptional" class="input-small" title="int_exceptional"/>
+      </label>
+      <label>
+        <span class="label">LANG</span>
+        <input id="int_lang" v-model.number="sheet.int_lang" class="input-small" title="int_lang" readonly/>
+      </label>
+      <label>
+        <span class="label">KNOW</span>
+        <input id="int_know_spells" v-model.number="sheet.int_know_spells" class="input-small" title="int_know_spells" readonly/>
+      </label>
+      <label>
+        <span class="label">MIN</span>
+        <input id="int_min_spells" v-model.number="sheet.int_min_spells" class="input-small" title="int_min_spells" readonly/>
+      </label>
+      <label>
+        <span class="label">MAX</span>
+        <input id="int_max_spells" v-model.number="sheet.int_max_spells" class="input-small" title="int_max_spells" readonly/>
+      </label>
     </div>
     <div class="ability-row">
       <label>
         <span>WIS</span>
       </label>
+      <label>
+        <span class="label">&nbsp;</span>
         <input id="wisdom" v-model.number.lazy="sheet.wisdom" class="input-small" />
+      </label>
+      <label>
+        <span class="label">EXC</span>
+        <input id="wis_exceptional" v-model.number.lazy="sheet.wis_exceptional" class="input-small" title="wis_exceptional"/>
+      </label>
         <input id="wisdomMod" v-model.number="sheet.wisdomMod" class="input-small" />
     </div>
     <div class="ability-row">
       <label>
         <span>DEX</span>
       </label>
+      <label>
+        <span class="label">&nbsp;</span>
         <input id="dexterity" v-model.number.lazy="sheet.dexterity" class="input-small" />
+      </label>
+      <label>
+        <span class="label">EXC</span>
+        <input id="dex_exceptional" v-model.number.lazy="sheet.dex_exceptional" class="input-small" title="dex_exceptional"/>
+      </label>
         <input id="dexterityMod" v-model.number="sheet.dexterityMod" class="input-small" />
     </div>
     <div class="ability-row">
       <label>
         <span>CON</span>
       </label>
+      <label>
+        <span class="label">&nbsp;</span>
         <input id="constitution" v-model.number.lazy="sheet.constitution" class="input-small" />
+      </label>
+      <label>
+        <span class="label">EXC</span>
+        <input id="con_exceptional" v-model.number.lazy="sheet.con_exceptional" class="input-small" title="con_exceptional"/>
+      </label>
         <input id="constitutionMod" v-model.number="sheet.constitutionMod" class="input-small" />
     </div>
     <div class="ability-row">
       <label>
         <span>CHA</span>
       </label>
+      <label>
+        <span class="label">&nbsp;</span>
         <input id="charisma" v-model.number.lazy="sheet.charisma" class="input-small" />
+      </label>
+      <label>
+        <span class="label">EXC</span>
+        <input id="cha_exceptional" v-model.number.lazy="sheet.cha_exceptional" class="input-small" title="cha_exceptional"/>
+      </label>
         <input id="charismaMod" v-model.number="sheet.charismaMod" class="input-small" />
+    </div>
+    <div class="ability-row">
+      <label>
+        <span>COM</span>
+      </label>
+      <label>
+        <span class="label">&nbsp;</span>
+        <input id="comeliness" v-model.number.lazy="sheet.comeliness" class="input-small" />
+      </label>
+      <label>
+        <span class="label">EXC</span>
+        <input id="com_exceptional" v-model.number.lazy="sheet.com_exceptional" class="input-small" title="com_exceptional"/>
+      </label>
+        <input id="comelinessMod" v-model.number="sheet.comelinessMod" class="input-small" />
     </div>
   </div>
 </template>
