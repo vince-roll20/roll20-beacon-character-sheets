@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
 import { arrayToObject, objectToArray } from '@/utility/objectify'
 import { dispatchRef, initValues } from '@/relay/relay.js'
@@ -96,16 +96,52 @@ const sheetStore = () => {
   }
 
   const strToValuesExceptional = {
-    '01-50': [1, 3, 1000, 50, 0, 20],
-    '51-75': [2, 3, 1250, 70, 0, 25],
-    '76-90': [2, 4, 1500, 70, 0, 30],
-    '91-99': [2, 5, 2000, 70, 15, 35],
-    '00': [3, 6, 3000, 85, 30, 40]
+    50: [1, 3, 1000, 50, 0, 20],
+    75: [2, 3, 1250, 70, 0, 25],
+    90: [2, 4, 1500, 70, 0, 30],
+    99: [2, 5, 2000, 70, 15, 35],
+    100: [3, 6, 3000, 85, 30, 40]
   }
 
-  // Get the corresponding array based on strength
-  // str array [str_attack, str_damage, str_weight_adj, str_minor, str_minor_locked, str_major]
-  let strValues = computed(() => strToValues[strength.value])
+  let strValues = ref(strToValues[strength.value]) // Initial value
+
+  // Watch for changes to the strength and str_exceptional values
+  watch(
+    [strength, str_exceptional],
+    ([newStrength, newExceptional]) => {
+      console.log(
+        `Watcher triggered: strength=${newStrength} (${typeof newStrength}), exceptional=${newExceptional} (${typeof newExceptional})`
+      )
+      // Check if conditions are met
+      if (newStrength === 18 && newExceptional > 0) {
+        console.log('Condition met: calling exceptionalStr()')
+        exceptionalStr(newExceptional) // Call to update exceptional strValues
+      } else {
+        console.log('Condition not met: updating strValues from strToValues table')
+        if (Object.prototype.hasOwnProperty.call(strToValues, newStrength)) {
+          strValues.value = strToValues[newStrength]
+        } else {
+          console.warn(`Invalid strength value: ${newStrength}`)
+        }
+      }
+    }
+  )
+
+  // Function to handle exceptional strength
+  function exceptionalStr(exceptionalValue) {
+    console.log(`exceptionalValue: ${exceptionalValue}`)
+    if (exceptionalValue <= 50) {
+      strValues.value = strToValuesExceptional[50]
+    } else if (exceptionalValue <= 75) {
+      strValues.value = strToValuesExceptional[75]
+    } else if (exceptionalValue <= 90) {
+      strValues.value = strToValuesExceptional[90]
+    } else if (exceptionalValue <= 99) {
+      strValues.value = strToValuesExceptional[99]
+    } else {
+      strValues.value = strToValuesExceptional[100]
+    }
+  }
 
   const str_attack = computed(() => (strValues.value ? strValues.value[0] : 0))
   const str_damage = computed(() => (strValues.value ? strValues.value[1] : 0))

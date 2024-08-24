@@ -260,6 +260,11 @@
     }
   }
 
+  input[readonly] {
+    background-color: #c8c8c8;
+    cursor: default;
+  }
+
   .input-small {
     text-align: center;
     width: 2.5em;

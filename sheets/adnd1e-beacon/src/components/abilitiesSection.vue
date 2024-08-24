@@ -2,26 +2,6 @@
   import { useSheetStore } from '@/stores/sheetStore.js'
   // The sheet store is where you want to be to customize what data / fields are on your sheet.
   const sheet = useSheetStore()
-  // Map mods to PHB table
-  // str array [str_attack, str_damage, str_minor, str_major, str_weight_adjustment]
-  // const strToValues = {
-  //   3: [-3, -1, 15, 0, -350],
-  //   4: [-2, -1, 15, 0, -250],
-  //   5: [-2, -1, 15, 0, -250],
-  //   6: [-1, 0, 15, 0, -150],
-  //   7: [-1, 0, 15, 0, -150],
-  //   8: [0, 0, 30, 1, 0],
-  //   9: [0, 0, 15, 1, 0],
-  //   10: [0, 0, 30, 2, 0],
-  //   11: [0, 0, 30, 2, 0],
-  //   12: [0, 0, 30, 4, 100],
-  //   13: [0, 0, 30, 4, 100],
-  //   14: [0, 0, 30, 7, 200],
-  //   15: [0, 1, 50, 10, 200],
-  //   16: [1, 1, 50, 13, 350],
-  //   17: [1, 1, 50, 13, 500],
-  //   18: [1, 2, 50, 16, 750]
-  // };
   // str array [str_attack, str_damage, str_weight_adj, str_minor, str_minor_locked, str_major]
   const strToValues = {
     3: [-3, -1, -350, 15, 0, 0],
@@ -196,15 +176,15 @@
       </label>
       <label>
         <span class="label">&nbsp;</span>
-        <input id="strength" v-model="sheet.strength" class="input-small" title="strength"/>
+        <input id="strength" v-model.number.lazy="sheet.strength" class="input-small" title="strength"/>
       </label>
       <label>
         <span class="label">EXC</span>
-        <input id="str_exceptional" v-model="sheet.str_exceptional" class="input-small" title="str_exceptional"/>
+        <input id="str_exceptional" v-model.number.lazy="sheet.str_exceptional" class="input-small" title="str_exceptional"/>
       </label>
       <label>
         <span class="label">ATK</span>
-        <input id="str_attack" v-model="sheet.str_attack" class="input-small" title="str_attack"/>
+        <input id="str_attack" v-model="sheet.str_attack" class="input-small" title="str_attack" readonly/>
       </label>
       <label>
         <span class="label">DMG</span>
