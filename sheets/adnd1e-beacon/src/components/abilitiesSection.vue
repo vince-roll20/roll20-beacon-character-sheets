@@ -248,7 +248,18 @@
         <span class="label">EXC</span>
         <input id="wis_exceptional" v-model.number.lazy="sheet.wis_exceptional" class="input-small" title="wis_exceptional"/>
       </label>
-        <input id="wisdomMod" v-model.number="sheet.wisdomMod" class="input-small" />
+      <label>
+        <span class="label">SAVE</span>
+        <input id="wis_mental" v-model.number="sheet.wis_mental" class="input-small" title="wis_mental" />
+      </label>
+      <label class="span-two">
+        <span class="label">BONUS</span>
+        <input id="wis_spell_bonus" v-model="sheet.wis_spell_bonus" class="input-small" title="wis_spell_bonus" />
+      </label>
+      <label>
+        <span class="label">FAIL</span>
+        <input id="wis_spell_failure" v-model="sheet.wis_spell_failure" class="input-small" title="wis_spell_failure" />
+      </label>
     </div>
     <div class="ability-row">
       <label>

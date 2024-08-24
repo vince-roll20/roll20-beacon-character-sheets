@@ -308,6 +308,9 @@
     grid-column: 1/-1;
     display: flex;
   }
+  .span-two {
+    grid-column: span 2;
+  }
   .class-grid {
     display: grid;
     grid-template-columns: 1fr 3em;

@@ -151,7 +151,10 @@ const sheetStore = () => {
   const int_min_spells = ref(0)
   const int_max_spells = ref(0)
 
-  const wisdomMod = ref(0)
+  const wis_mental = ref(0)
+  const wis_spell_bonus = ref(0)
+  const wis_spell_failure = ref(0)
+
   const dexterityMod = ref(0)
   const constitutionMod = ref(0)
   const charismaMod = ref(0)
@@ -194,7 +197,10 @@ const sheetStore = () => {
       int_min_spells: int_min_spells.value,
       int_max_spells: int_max_spells.value,
 
-      wisdomMod: wisdomMod.value,
+      wis_mental: wis_mental.value,
+      wis_spell_bonus: wis_spell_bonus.value,
+      wis_spell_failure: wis_spell_failure.value,
+
       dexterityMod: dexterityMod.value,
       constitutionMod: constitutionMod.value,
       charismaMod: charismaMod.value,
@@ -237,7 +243,10 @@ const sheetStore = () => {
     int_min_spells.value = hydrateStore.int_min_spells ?? int_min_spells.value
     int_max_spells.value = hydrateStore.int_max_spells ?? int_max_spells.value
 
-    wisdomMod.value = hydrateStore.wisdomMod ?? wisdomMod.value
+    wis_mental.value = hydrateStore.wis_mental ?? wis_mental.value
+    wis_spell_bonus.value = hydrateStore.wis_spell_bonus ?? wis_spell_bonus.value
+    wis_spell_failure.value = hydrateStore.wis_spell_failure ?? wis_spell_failure.value
+
     dexterityMod.value = hydrateStore.dexterityMod ?? dexterityMod.value
     constitutionMod.value = hydrateStore.constitutionMod ?? constitutionMod.value
     charismaMod.value = hydrateStore.charismaMod ?? charismaMod.value
@@ -279,7 +288,10 @@ const sheetStore = () => {
     int_min_spells,
     int_max_spells,
 
-    wisdomMod,
+    wis_mental,
+    wis_spell_bonus,
+    wis_spell_failure,
+
     dexterityMod,
     constitutionMod,
     charismaMod,
