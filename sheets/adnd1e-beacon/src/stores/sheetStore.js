@@ -105,17 +105,166 @@ const sheetStore = () => {
     99: [2, 5, 2000, 70, 15, 35],
     100: [3, 6, 3000, 85, 30, 40]
   }
+  // int array [int_lang, int_know_spells, int_min_spells, int_max_spells]
+  const intToValues = {
+    8: [1, 0, 0, 0],
+    9: [1, 35, 4, 6],
+    10: [2, 45, 5, 7],
+    11: [2, 45, 5, 7],
+    12: [3, 45, 5, 7],
+    13: [3, 55, 6, 9],
+    14: [4, 55, 6, 9],
+    15: [4, 65, 7, 11],
+    16: [5, 65, 7, 11],
+    17: [6, 75, 8, 14],
+    18: [7, 85, 9, 18],
+    19: [8, 95, 10, 99],
+    20: [9, 96, 11, 99],
+    21: [10, 97, 12, 99],
+    22: [11, 98, 13, 99],
+    23: [12, 99, 14, 99],
+    24: [13, 100, 15, 99],
+    25: [14, 100, 16, 99]
+  }
+  // wis array [wis_mental, wis_spell_bonus, wis_spell_failure]
+  const wisToValues = {
+    3: ['-3', 'None', 20],
+    4: ['-2', 'None', 20],
+    5: ['-1', 'None', 20],
+    6: ['-1', 'None', 20],
+    7: ['-1', 'None', 20],
+    8: ['0', 'None', 20],
+    9: ['0', 'None', 20],
+    10: ['0', 'None', 15],
+    11: ['0', 'None', 10],
+    12: ['0', 'None', 5],
+    13: ['0', '1/0/0/0/0/0/0', 0],
+    14: ['0', '2/0/0/0/0/0/0', 0],
+    15: ['1', '2/1/0/0/0/0/0', 0],
+    16: ['2', '2/2/0/0/0/0/0', 0],
+    17: ['3', '2/2/1/0/0/0/0', 0],
+    18: ['4', '2/2/1/1/0/0/0', 0],
+    19: ['4', '3/2/1/2/0/0/0', 0],
+    20: ['4', '3/3/1/3/0/0/0', 0],
+    21: ['4', '3/3/2/3/1/0/0', 0],
+    22: ['4', '3/3/2/4/2/0/0', 0],
+    23: ['4', '3/3/2/4/4/0/0', 0],
+    24: ['4', '3/3/2/4/4/2/1', 0],
+    25: ['4', '3/3/2/4/4/3/1', 0]
+  }
+  // dex array [dex_reaction, dex_ranged, dex_armor, dex_surprise]
+  const dexToValues = {
+    3: [3, -3, 4],
+    4: [2, -2, 3],
+    5: [1, -1, 2],
+    6: [0, 0, 1],
+    7: [0, 0, 0],
+    8: [0, 0, 0],
+    9: [0, 0, 0],
+    10: [0, 0, 0],
+    11: [0, 0, 0],
+    12: [0, 0, 0],
+    13: [0, 0, 0],
+    14: [0, 0, 0],
+    15: [0, 0, -1],
+    16: [-1, 1, -2],
+    17: [-2, 2, -3],
+    18: [-3, 3, -4],
+    19: [-3, 3, -4],
+    20: [-3, 3, -4],
+    21: [-4, 4, -5],
+    22: [-4, 4, -5],
+    23: [-4, 4, -5],
+    24: [-5, 5, -6],
+    25: [-5, 5, -6]
+  }
+  // con array [con_hp, con_shock, con_res]
+  const conToValues = {
+    3: ['-2', 35, 40],
+    4: ['-1', 40, 45],
+    5: ['-1', 45, 50],
+    6: ['0', 50, 55],
+    7: ['0', 55, 60],
+    8: ['0', 60, 65],
+    9: ['0', 65, 70],
+    10: ['0', 70, 75],
+    11: ['0', 75, 80],
+    12: ['0', 80, 85],
+    13: ['0', 85, 90],
+    14: ['0', 88, 92],
+    15: ['1', 91, 94],
+    16: ['2', 95, 96],
+    // *cap @ +2 unless fighter type
+    // 17 +3*
+    // 18 +4*
+    17: ['3', 97, 98],
+    18: ['4', 99, 100],
+    19: ['5', 99, 100],
+    20: ['5', 99, 100],
+    21: ['6', 99, 100],
+    22: ['6', 99, 100],
+    23: ['6', 99, 100],
+    24: ['7', 99, 100],
+    25: ['7', 99, 100]
+  }
+  // cha array [cha_max_henchmen, cha_loyalty, cha_reaction, cha_morale]
+  const chaToValues = {
+    3: [1, -30, -25, -5],
+    4: [1, -25, -20, -3],
+    5: [2, -20, -15, -3],
+    6: [2, -15, -10, -1],
+    7: [3, -10, -5, -1],
+    8: [3, -5, 0, -1],
+    9: [4, 0, 0, 0],
+    10: [4, 0, 0, 0],
+    11: [4, 0, 0, 0],
+    12: [5, 0, 0, 0],
+    13: [5, 0, 5, 1],
+    14: [6, 5, 10, 1],
+    15: [7, 15, 15, 1],
+    16: [8, 20, 25, 2],
+    17: [10, 30, 30, 2],
+    18: [15, 40, 35, 3],
+    19: [20, 50, 40, 5],
+    20: [25, 60, 45, 5],
+    21: [30, 70, 50, 5],
+    22: [35, 80, 55, 5],
+    23: [40, 90, 60, 5],
+    24: [45, 100, 65, 5],
+    25: [50, 100, 70, 5]
+  }
 
   let strValues = ref(strToValues[strength.value])
+  let intValues = ref(intToValues[intelligence.value])
+  let wisValues = ref(wisToValues[wisdom.value])
+  let dexValues = ref(dexToValues[dexterity.value])
+  let conValues = ref(conToValues[constitution.value])
+  let chaValues = ref(chaToValues[charisma.value])
 
-  // Watch for changes to the strength and str_exceptional values
-  watch([strength, str_exceptional], ([newStrength, newExceptional]) => {
-    if (newStrength === 18 && newExceptional > 0) {
-      exceptionalStr(newExceptional) // Call to update exceptional strValues
-    } else {
-      strValues.value = strToValues[newStrength] // Update directly
+  // Watch for changes in the ability values
+  watch(
+    [strength, str_exceptional, intelligence, wisdom, dexterity, constitution, charisma],
+    ([
+      newStrength,
+      newExceptional,
+      newIntelligence,
+      newWisdom,
+      newDexterity,
+      newConstitution,
+      newCharisma
+    ]) => {
+      if (newStrength === 18 && newExceptional > 0) {
+        exceptionalStr(newExceptional) // Call to update exceptional strValues
+      } else {
+        strValues.value = strToValues[newStrength] // Update directly
+      }
+      intValues.value = intToValues[newIntelligence]
+      wisValues.value = wisToValues[newWisdom]
+      dexValues.value = dexToValues[newDexterity]
+      conValues.value = conToValues[newConstitution]
+      chaValues.value = chaToValues[newCharisma]
     }
-  })
+  )
 
   // Function to handle exceptional strength
   function exceptionalStr(exceptionalValue) {
@@ -139,32 +288,32 @@ const sheetStore = () => {
   const str_minor_locked = computed(() => (strValues.value ? strValues.value[4] : 0))
   const str_major = computed(() => (strValues.value ? strValues.value[5] : 0))
 
-  const int_lang = ref(0)
-  const int_know_spells = ref(0)
-  const int_min_spells = ref(0)
-  const int_max_spells = ref(0)
+  const int_lang = computed(() => (intValues.value ? intValues.value[0] : 0))
+  const int_know_spells = computed(() => (intValues.value ? intValues.value[1] : 0))
+  const int_min_spells = computed(() => (intValues.value ? intValues.value[2] : 0))
+  const int_max_spells = computed(() => (intValues.value ? intValues.value[3] : 0))
 
-  const wis_mental = ref(0)
-  const wis_spell_bonus = ref(0)
-  const wis_spell_failure = ref(0)
+  const wis_mental = computed(() => (wisValues.value ? wisValues.value[0] : 0))
+  const wis_spell_bonus = computed(() => (wisValues.value ? wisValues.value[1] : 0))
+  const wis_spell_failure = computed(() => (wisValues.value ? wisValues.value[2] : 0))
 
-  const dex_reaction = ref(0)
-  const dex_ranged = ref(0)
-  const dex_armor = ref(0)
-  const dex_surprise = ref(0)
+  const dex_reaction = computed(() => (dexValues.value ? dexValues.value[0] : 0))
+  const dex_ranged = computed(() => (dexValues.value ? dexValues.value[1] : 0))
+  const dex_armor = computed(() => (dexValues.value ? dexValues.value[2] : 0))
+  const dex_surprise = computed(() => (dexValues.value ? dexValues.value[3] : 0))
 
-  const con_hp = ref(0)
-  const con_shock = ref(0)
-  const con_res = ref(0)
+  const con_hp = computed(() => (conValues.value ? conValues.value[0] : 0))
+  const con_shock = computed(() => (conValues.value ? conValues.value[1] : 0))
+  const con_res = computed(() => (conValues.value ? conValues.value[2] : 0))
 
-  const cha_max_henchmen = ref(0)
-  const cha_loyalty = ref(0)
-  const cha_reaction = ref(0)
-  const cha_morale = ref(0)
+  const cha_max_henchmen = computed(() => (chaValues.value ? chaValues.value[0] : 0))
+  const cha_loyalty = computed(() => (chaValues.value ? chaValues.value[1] : 0))
+  const cha_reaction = computed(() => (chaValues.value ? chaValues.value[2] : 0))
+  const cha_morale = computed(() => (chaValues.value ? chaValues.value[3] : 0))
 
-  const con_base = ref(0)
-  const con_cha_adj = ref(0)
-  const con_racial_adj = ref(0)
+  const com_base = ref(0)
+  const com_cha_adj = ref(0)
+  const com_racial_adj = ref(0)
 
   const abilities = ref([])
   const abilitiesCount = computed(() => abilities.value?.length)
@@ -221,9 +370,9 @@ const sheetStore = () => {
       cha_reaction: cha_reaction.value,
       cha_morale: cha_morale.value,
 
-      con_base: con_base.value,
-      con_cha_adj: con_cha_adj.value,
-      con_racial_adj: con_racial_adj.value,
+      com_base: com_base.value,
+      com_cha_adj: com_cha_adj.value,
+      com_racial_adj: com_racial_adj.value,
 
       abilities: arrayToObject(abilities.value)
     }
@@ -281,9 +430,9 @@ const sheetStore = () => {
     cha_reaction.value = hydrateStore.cha_reaction ?? cha_reaction.value
     cha_morale.value = hydrateStore.cha_morale ?? cha_morale.value
 
-    con_base.value = hydrateStore.con_base ?? con_base.value
-    con_cha_adj.value = hydrateStore.con_cha_adj ?? con_cha_adj.value
-    con_racial_adj.value = hydrateStore.con_racial_adj ?? con_racial_adj.value
+    com_base.value = hydrateStore.com_base ?? com_base.value
+    com_cha_adj.value = hydrateStore.com_cha_adj ?? com_cha_adj.value
+    com_racial_adj.value = hydrateStore.com_racial_adj ?? com_racial_adj.value
 
     abilities.value = objectToArray(hydrateStore.abilities) || abilities.value
   }
@@ -339,9 +488,9 @@ const sheetStore = () => {
     cha_reaction,
     cha_morale,
 
-    con_base,
-    con_cha_adj,
-    con_racial_adj,
+    com_base,
+    com_cha_adj,
+    com_racial_adj,
 
     abilities,
     abilitiesCount,
