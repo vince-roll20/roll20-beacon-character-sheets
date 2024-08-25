@@ -270,6 +270,12 @@
     width: 2.5em;
   }
 
+  .input-select {
+    border-radius: 5px;
+    height: 1.75em;
+    width: 8em;
+  }
+
   .hp-grid {
     align-self: center;
     display: grid;

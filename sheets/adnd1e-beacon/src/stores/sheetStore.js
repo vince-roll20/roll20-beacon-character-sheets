@@ -61,7 +61,6 @@ const sheetStore = () => {
   const dexterity = ref(8)
   const constitution = ref(8)
   const charisma = ref(8)
-  const comeliness = ref(8)
 
   const str_exceptional = ref(0)
   const int_exceptional = ref(0)
@@ -71,7 +70,7 @@ const sheetStore = () => {
   const cha_exceptional = ref(0)
   const com_exceptional = ref(0)
 
-  // Map strength to PHB table
+  // Map Abilities to PHB table
   // str array [str_attack, str_damage, str_weight_adj, str_minor, str_minor_locked, str_major]
   const strToValues = {
     3: [-3, -1, -350, 15, 0, 0],
@@ -207,7 +206,7 @@ const sheetStore = () => {
     24: ['7', 99, 100],
     25: ['7', 99, 100]
   }
-  // cha array [cha_max_henchmen, cha_loyalty, cha_reaction, cha_morale]
+  // cha array [cha_max_henchmen, cha_loyalty, cha_reaction, cha_comeliness_adj]
   const chaToValues = {
     3: [1, -30, -25, -5],
     4: [1, -25, -20, -3],
@@ -309,11 +308,14 @@ const sheetStore = () => {
   const cha_max_henchmen = computed(() => (chaValues.value ? chaValues.value[0] : 0))
   const cha_loyalty = computed(() => (chaValues.value ? chaValues.value[1] : 0))
   const cha_reaction = computed(() => (chaValues.value ? chaValues.value[2] : 0))
-  const cha_morale = computed(() => (chaValues.value ? chaValues.value[3] : 0))
+  const cha_morale = ref(50)
+  const cha_comeliness_adj = computed(() => (chaValues.value ? chaValues.value[3] : 0))
 
-  const com_base = ref(0)
-  const com_cha_adj = ref(0)
+  const com_base = ref(8)
   const com_racial_adj = ref(0)
+  const comeliness = computed(
+    () => com_base.value + cha_comeliness_adj.value + com_racial_adj.value
+  )
 
   const abilities = ref([])
   const abilitiesCount = computed(() => abilities.value?.length)
@@ -368,10 +370,10 @@ const sheetStore = () => {
       cha_max_henchmen: cha_max_henchmen.value,
       cha_loyal: cha_loyalty.value,
       cha_reaction: cha_reaction.value,
+      cha_comeliness_adj: cha_comeliness_adj.value,
       cha_morale: cha_morale.value,
 
       com_base: com_base.value,
-      com_cha_adj: com_cha_adj.value,
       com_racial_adj: com_racial_adj.value,
 
       abilities: arrayToObject(abilities.value)
@@ -428,10 +430,10 @@ const sheetStore = () => {
     cha_max_henchmen.value = hydrateStore.cha_max_henchmen ?? cha_max_henchmen.value
     cha_loyalty.value = hydrateStore.cha_loyalty ?? cha_loyalty.value
     cha_reaction.value = hydrateStore.cha_reaction ?? cha_reaction.value
+    cha_comeliness_adj.value = hydrateStore.cha_comeliness_adj ?? cha_comeliness_adj.value
     cha_morale.value = hydrateStore.cha_morale ?? cha_morale.value
 
     com_base.value = hydrateStore.com_base ?? com_base.value
-    com_cha_adj.value = hydrateStore.com_cha_adj ?? com_cha_adj.value
     com_racial_adj.value = hydrateStore.com_racial_adj ?? com_racial_adj.value
 
     abilities.value = objectToArray(hydrateStore.abilities) || abilities.value
@@ -486,10 +488,10 @@ const sheetStore = () => {
     cha_max_henchmen,
     cha_loyalty,
     cha_reaction,
+    cha_comeliness_adj,
     cha_morale,
 
     com_base,
-    com_cha_adj,
     com_racial_adj,
 
     abilities,

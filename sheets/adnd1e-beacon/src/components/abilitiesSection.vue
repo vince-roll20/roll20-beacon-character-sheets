@@ -85,19 +85,19 @@
       </label>
       <label>
         <span class="label">EXC</span>
-        <input id="wis_exceptional" v-model.number.lazy="sheet.wis_exceptional" class="input-small" title="wis_exceptional"/>
+        <input id="wis_exceptional" v-model.number.lazy="sheet.wis_exceptional" class="input-small" title="wis_exceptional" />
       </label>
       <label>
         <span class="label">SAVE</span>
-        <input id="wis_mental" v-model.number="sheet.wis_mental" class="input-small" title="wis_mental" />
+        <input id="wis_mental" v-model.number="sheet.wis_mental" class="input-small" title="wis_mental" readonly />
       </label>
       <label class="span-two">
         <span class="label">BONUS</span>
-        <input id="wis_spell_bonus" v-model="sheet.wis_spell_bonus" class="input-small" title="wis_spell_bonus" />
+        <input id="wis_spell_bonus" v-model="sheet.wis_spell_bonus" class="input-small" title="wis_spell_bonus" readonly />
       </label>
       <label>
         <span class="label">FAIL</span>
-        <input id="wis_spell_failure" v-model="sheet.wis_spell_failure" class="input-small" title="wis_spell_failure" />
+        <input id="wis_spell_failure" v-model="sheet.wis_spell_failure" class="input-small" title="wis_spell_failure" readonly />
       </label>
     </div>
     <div class="ability-row">
@@ -114,19 +114,19 @@
       </label>
       <label>
         <span class="label">REAC</span>
-        <input id="dex_reaction" v-model.number="sheet.dex_reaction" class="input-small" title="dex_reaction" />
+        <input id="dex_reaction" v-model.number="sheet.dex_reaction" class="input-small" title="dex_reaction" readonly />
       </label>
       <label>
         <span class="label">RANGE</span>
-        <input id="dex_ranged" v-model.number="sheet.dex_ranged" class="input-small" title="dex_ranged" />
+        <input id="dex_ranged" v-model.number="sheet.dex_ranged" class="input-small" title="dex_ranged" readonly />
       </label>
       <label>
         <span class="label">ARMOR</span>
-        <input id="dex_armor" v-model.number="sheet.dex_armor" class="input-small" title="dex_armor" />
+        <input id="dex_armor" v-model.number="sheet.dex_armor" class="input-small" title="dex_armor" readonly />
       </label>
       <label>
         <span class="label">SURP</span>
-        <input id="dex_surprise" v-model.number="sheet.dex_surprise" class="input-small" title="dex_surprise" />
+        <input id="dex_surprise" v-model.number="sheet.dex_surprise" class="input-small" title="dex_surprise" readonly />
       </label>
     </div>
     <div class="ability-row">
@@ -143,15 +143,15 @@
       </label>
       <label>
         <span class="label">HP</span>
-        <input id="con_hp" v-model.number="sheet.con_hp" class="input-small" title="con_hp" />
+        <input id="con_hp" v-model.number="sheet.con_hp" class="input-small" title="con_hp" readonly />
       </label>
       <label>
         <span class="label">SHOCK</span>
-        <input id="con_shock" v-model.number="sheet.con_shock" class="input-small" title="con_shock" />
+        <input id="con_shock" v-model.number="sheet.con_shock" class="input-small" title="con_shock" readonly />
       </label>
       <label>
         <span class="label">RES</span>
-        <input id="con_res" v-model.number="sheet.con_res" class="input-small" title="con_res" />
+        <input id="con_res" v-model.number="sheet.con_res" class="input-small" title="con_res" readonly />
       </label>
     </div>
     <div class="ability-row">
@@ -168,15 +168,15 @@
       </label>
       <label>
         <span class="label">MAX</span>
-        <input id="cha_max_henchmen" v-model.number="sheet.cha_max_henchmen" class="input-small" title="cha_max_henchmen" />
+        <input id="cha_max_henchmen" v-model.number="sheet.cha_max_henchmen" class="input-small" title="cha_max_henchmen" readonly />
       </label>
       <label>
         <span class="label">LOYAL</span>
-        <input id="cha_loyalty" v-model.number="sheet.cha_loyalty" class="input-small" title="cha_loyalty" />
+        <input id="cha_loyalty" v-model.number="sheet.cha_loyalty" class="input-small" title="cha_loyalty" readonly />
       </label>
       <label>
         <span class="label">REAC</span>
-        <input id="cha_reaction" v-model.number="sheet.cha_reaction" class="input-small" title="cha_reaction" />
+        <input id="cha_reaction" v-model.number="sheet.cha_reaction" class="input-small" title="cha_reaction" readonly />
       </label>
       <label>
         <span class="label">MORALE</span>
@@ -189,7 +189,7 @@
       </label>
       <label>
         <span class="label">&nbsp;</span>
-        <input id="comeliness" v-model.number.lazy="sheet.comeliness" class="input-small" />
+        <input id="comeliness" v-model.number.lazy="sheet.comeliness" class="input-small" readonly />
       </label>
       <label>
         <span class="label">EXC</span>
@@ -201,16 +201,16 @@
       </label>
       <label>
         <span class="label">CHA</span>
-        <input id="com_cha_adj" v-model.number="sheet.com_cha_adj" class="input-small" title="com_cha_adj" />
+        <input id="cha_comeliness_adj" v-model.number="sheet.cha_comeliness_adj" class="input-small" title="cha_comeliness_adj" readonly />
       </label>
       <label>
         <span class="label">RACE</span>
-        <select id="com_racial_adj" v-model.number="sheet.com_racial_adj" title="com_racial_adj | Bonus/Penalty adjustment as perceived by other races.">
-          <option value="-3">Half-Orcs</option>
-          <option value="-1">Dwarves, Gnomes</option>
-          <option value="0" selected>Halflings, Humans</option>
-          <option value="1">Half-Elves, Sylvan Elves</option>
-          <option value="2">Gray Elves, High Elves</option>
+        <select id="com_racial_adj" v-model.number="sheet.com_racial_adj" class="input-select" title="com_racial_adj | Bonus/Penalty adjustment as perceived by other races.">
+          <option value="-3">Half-Orcs (-3)</option>
+          <option value="-1">Dwarves, Gnomes (-1)</option>
+          <option value="0" selected>Halflings, Humans (0)</option>
+          <option value="1">Half-Elves, Sylvan Elves (1)</option>
+          <option value="2">Gray Elves, High Elves (2)</option>
         </select>
       </label>
     </div>
