@@ -47,15 +47,30 @@
       <div class="hp-grid">
         <label for="hp">
             <span class="label">HP</span>
-            <input id="hp" v-model="sheet.hp" title="hp" />
+            <input id="hp" v-model="sheet.hp" class="input-small" title="hp" />
         </label>
-        <label for="hp_max">
+        <label for="hp_max" class="left">
             <span class="label">/</span>
-            <input id="hp_max" v-model="sheet.hp_max" title="hp_max" />
+            <input id="hp_max" v-model="sheet.hp_max" class="input-small" title="hp_max" />
         </label>
         <label for="ac">
             <span class="label">AC</span>
-            <input id="ac" v-model="sheet.ac" title="ac" />
+            <input id="ac" v-model="sheet.ac" class="input-small" title="ac" />
+        </label>
+        <span></span>
+        <label for="ac_shieldless" class="span-two">
+            <span class="label">Shieldless</span>
+            <input id="ac_shieldless" v-model="sheet.ac_shieldless" class="input-small" title="ac_shieldless" />
+        </label>
+        <span></span>
+        <label for="ac_rear" class="span-two">
+            <span class="label">Rear</span>
+            <input id="ac_rear" v-model="sheet.ac_rear" class="input-small" title="ac_rear" />
+        </label>
+        <span></span>
+        <label for="ar" class="span-two">
+            <span class="label">AR</span>
+            <input id="ar" v-model="sheet.ar" class="input-small" title="ar" />
         </label>
       </div>
       <span class="avatar">
@@ -89,6 +104,11 @@
 </template>
 
 <style lang="scss">
+  @import url('https://fonts.googleapis.com/css2?family=Material+Icons&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Caladea:wght@400;700&display=swap');
+
   #app {
     font-family: 'Montserrat', 'Verdana', sans-serif;
     margin: auto;
@@ -108,6 +128,7 @@
     min-width: 660px;
     position: relative;
   }
+  
   .top-header {
     display: grid;
     justify-content: center;
@@ -116,9 +137,7 @@
     gap: 0.5rem;
     margin-top: -7em;
   }
-    /*
-  Avatar positioning and default styles
-  */
+
   .avatar {
     display: flex;
     padding: .5rem;
@@ -131,9 +150,7 @@
       min-height: 162px;
     }
   }
-  /*
-  Sheet Logo positioning and default styles
-  */
+
   .logo {
     justify-self: center;
     background-image: url("/src/assets/logo.png");
@@ -143,12 +160,9 @@
     height: 100px;
     width: 300px;
     position: relative;
-    bottom: -4em;
+    bottom: -3.5em;
   }
 
-  /*
-  The quickstart header. Replace this with a logo, your sheet title, or remove this.
-  */
   .header {
     display: grid;
     justify-content: center;
@@ -170,10 +184,6 @@
     line-height: 3rem;
   }
 
-  /*
-  This is a boilerplate layout that uses grid to help you get started on your sheet.
-  Customize this layout by modifying the template columns and rows you will need for each section.
-  */
   .sheet {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -191,9 +201,6 @@
     }
   }
 
-  /*
-  Header for each card in your grid layout
-  */
   .subheader {
     align-items: flex-start;
     display: flex;
@@ -202,6 +209,7 @@
   }
   .subtitle {
     display: flex;
+    font-family: 'Caladea';
     font-size: 1.25rem;
     justify-content: center;
     line-height: 1.25rem;
@@ -210,9 +218,6 @@
     position: relative;
   }
 
-  /*
-  Styling for buttons
-  */
   .button {
     background: #b719be;
     border: none;
@@ -231,21 +236,17 @@
     }
   }
 
-  /*
-  Styling for form labels
-  */
   .label {
     font-size: 0.75rem;
     margin-inline: 2px;
     text-transform: uppercase;
+    font-family: 'Poppins';
   }
   label:has(span) {
     display: flex;
     align-items: center;
   }
-  /*
-  Styling for form inputs, currently this quickstart is only using default inputs that handle text.
-  */
+
   input {
     background-color: #e8e8e8;
     border-radius: 0.25rem;
@@ -280,13 +281,8 @@
     align-self: center;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-  }
-
-  #hp,
-  #hp_max,
-  #ac {
-    text-align: center;
-    width: 3em;
+    row-gap: 2px;
+    justify-items: right;
   }
 
   label:has(#hp) {
@@ -321,6 +317,14 @@
     display: grid;
     grid-template-columns: 1fr 3em;
     grid-gap: 2px;
+  }
+  .left {
+    margin: auto;
+    margin-left: 0;
+  }
+  .right {
+    margin: auto;
+    margin-right: 0;
   }
   .center {
     text-align: center;

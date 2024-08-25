@@ -241,7 +241,8 @@
     }
   }
   .ability-row > label:first-child {
-    margin-top: 1rem;
+    font-family: 'Caladea';
     font-size: 1.2rem;
+    margin-top: 1rem;
   }
 </style>

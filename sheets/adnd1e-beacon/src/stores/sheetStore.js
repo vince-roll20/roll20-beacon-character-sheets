@@ -53,6 +53,9 @@ const sheetStore = () => {
   const hp = ref(0)
   const hp_max = ref(0)
   const ac = ref(10)
+  const ac_shieldless = ref(10)
+  const ac_rear = ref(10)
+  const ar = ref(10)
   const class1 = ref('')
 
   const strength = ref(8)
@@ -326,6 +329,9 @@ const sheetStore = () => {
       hp: hp.value,
       hp_max: hp_max.value,
       ac: ac.value,
+      ac_shieldless: ac_shieldless.value,
+      ac_rear: ac_rear.value,
+      ar: ar.value,
       class1: class1.value,
       strength: strength.value,
       intelligence: intelligence.value,
@@ -385,6 +391,9 @@ const sheetStore = () => {
     hp.value = hydrateStore.hp ?? hp.value
     hp_max.value = hydrateStore.hp_max ?? hp_max.value
     ac.value = hydrateStore.ac ?? ac.value
+    ac_shieldless.value = hydrateStore.ac_shieldless ?? ac_shieldless.value
+    ac_rear.value = hydrateStore.ac_rear ?? ac_rear.value
+    ar.value = hydrateStore.ar ?? ar.value
     class1.value = hydrateStore.class1 ?? class1.value
     strength.value = hydrateStore.strength ?? strength.value
     intelligence.value = hydrateStore.intelligence ?? intelligence.value
@@ -443,6 +452,9 @@ const sheetStore = () => {
     hp,
     hp_max,
     ac,
+    ac_shieldless,
+    ac_rear,
+    ar,
     class1,
     strength,
     intelligence,
