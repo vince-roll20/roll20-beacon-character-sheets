@@ -19,9 +19,7 @@ const sendAbilityToChat = ({ ability }) => {
   })
 }
 
-/*
-Adds a new row
- */
+// Adds a new row
 const addAbility = (abilities) => {
   const ability = {
     _id: uuidv4(),
@@ -31,9 +29,7 @@ const addAbility = (abilities) => {
   abilities.value.push(ability)
 }
 
-/*
-Removes a row
- */
+// Removes a row
 const removeAbility = (abilities, abilityId) => {
   const indexToRemove = abilities.value.findIndex((ability) => ability._id === abilityId)
   if (indexToRemove >= 0) abilities.value.splice(indexToRemove, 1)
@@ -51,7 +47,6 @@ const postAbilityToChat = (ability) => {
 /*
 This is a custom data store, that will house everything you need for data specific to your sheet.
 Here you can define all attributes, as well as sheet functions.
-
 This is a great starting place to customize what data you need for your sheet.
  */
 const sheetStore = () => {
@@ -103,7 +98,6 @@ const sheetStore = () => {
     24: [6, 12, 12000, 95, 87, 100],
     25: [7, 14, 15000, 95, 90, 100]
   }
-
   const strToValuesExceptional = {
     50: [1, 3, 1000, 50, 0, 20],
     75: [2, 3, 1250, 70, 0, 25],
@@ -125,7 +119,6 @@ const sheetStore = () => {
 
   // Function to handle exceptional strength
   function exceptionalStr(exceptionalValue) {
-    console.log(`exceptionalValue: ${exceptionalValue}`)
     if (exceptionalValue <= 50) {
       strValues.value = strToValuesExceptional[50]
     } else if (exceptionalValue <= 75) {
@@ -172,7 +165,6 @@ const sheetStore = () => {
   const con_base = ref(0)
   const con_cha_adj = ref(0)
   const con_racial_adj = ref(0)
-
 
   const abilities = ref([])
   const abilitiesCount = computed(() => abilities.value?.length)
