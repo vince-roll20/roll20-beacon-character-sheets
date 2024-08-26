@@ -91,7 +91,7 @@
         <span class="label">SAVE</span>
         <input id="wis_mental" v-model.number="sheet.wis_mental" class="input-small" title="wis_mental" readonly />
       </label>
-      <label class="span-two">
+      <label class="span-two left">
         <span class="label">BONUS</span>
         <input id="wis_spell_bonus" v-model="sheet.wis_spell_bonus" class="input-small" title="wis_spell_bonus" readonly />
       </label>
@@ -126,7 +126,7 @@
       </label>
       <label>
         <span class="label">SURP</span>
-        <input id="dex_surprise" v-model.number="sheet.dex_surprise" class="input-small" title="dex_surprise" readonly />
+        <input id="dex_surprise" v-model.number="sheet.dex_surprise" class="input-small" title="dex_surprise" />
       </label>
     </div>
     <div class="ability-row">

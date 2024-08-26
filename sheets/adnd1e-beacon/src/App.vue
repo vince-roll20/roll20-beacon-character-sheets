@@ -110,11 +110,9 @@
   @import url('https://fonts.googleapis.com/css2?family=Caladea:wght@400;700&display=swap');
 
   #app {
-    font-family: 'Montserrat', 'Verdana', sans-serif;
+    font-family: "Montserrat", "Verdana", sans-serif;
     margin: auto;
     display: flex;
-    justify-content: center;
-    min-width: 680px;
   }
 
   .wrapper {
@@ -125,7 +123,7 @@
     justify-content: space-around;
     margin: 0 7px 0 7px;
     max-width: 910px;
-    min-width: 660px;
+    min-width: 760px;
     position: relative;
   }
 

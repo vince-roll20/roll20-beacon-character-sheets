@@ -161,7 +161,7 @@ const sheetStore = () => {
     24: ['4', '3/3/2/4/4/2/1', 0],
     25: ['4', '3/3/2/4/4/3/1', 0]
   }
-  // dex array [dex_reaction, dex_ranged, dex_armor, dex_surprise]
+  // dex array [dex_reaction, dex_ranged, dex_armor]
   const dexToValues = {
     3: [3, -3, 4],
     4: [2, -2, 3],
@@ -309,7 +309,7 @@ const sheetStore = () => {
   const dex_reaction = computed(() => (dexValues.value ? dexValues.value[0] : 0))
   const dex_ranged = computed(() => (dexValues.value ? dexValues.value[1] : 0))
   const dex_armor = computed(() => (dexValues.value ? dexValues.value[2] : 0))
-  const dex_surprise = computed(() => (dexValues.value ? dexValues.value[3] : 0))
+  const dex_surprise = ref(2)
 
   const con_hp = computed(() => (conValues.value ? conValues.value[0] : 0))
   const con_shock = computed(() => (conValues.value ? conValues.value[1] : 0))
