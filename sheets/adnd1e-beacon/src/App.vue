@@ -81,7 +81,21 @@
       <span></span>
     </div>
     <div class="sheet">
+      <!-- abilities -->
       <abilitiesSection />
+      <!-- saves -->
+      <div class="card">
+        <div class="subheader">
+          <span class="subtitle">Saving Throws</span>
+        </div>
+      </div>
+      <!-- attacks -->
+      <div class="card">
+        <div class="subheader">
+          <span class="subtitle">Attacks</span>
+        </div>
+      </div>
+      <!-- special abilities -->
       <div class="card">
         <div class="subheader">
           <span class="subtitle">Special Abilities - {{ sheet.abilitiesCount }}</span>
@@ -94,6 +108,18 @@
             <button class="button" @click="sheet.postAbilityToChat(ability)" title="Send to chat">Post</button>
             <button class="button" @click="sheet.removeAbility(ability._id)" title="Remove Ability">-</button>
           </div>
+        </div>
+      </div>
+      <!-- equipment -->
+      <div class="card">
+        <div class="subheader">
+          <span class="subtitle">Equipment</span>
+        </div>
+      </div>
+      <!-- spells -->
+      <div class="card">
+        <div class="subheader">
+          <span class="subtitle">Spells</span>
         </div>
       </div>
     </div>
@@ -183,7 +209,7 @@
     justify-content: space-between;
     margin-inline: .35rem;
   }
-  
+
   .subtitle {
     display: flex;
     font-family: 'Caladea';
