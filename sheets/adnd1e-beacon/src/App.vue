@@ -34,8 +34,8 @@
             <input id="alignment" v-model="sheet.alignment" title="alignment" />
         </label>
         <span class="span-all grid-2">
-          <label class="label center">Class</label>
-          <label class="label center">Lvl</label>
+          <label class="label-over center">Class</label>
+          <label class="label-over center">Lvl</label>
           <input id="class1" v-model="sheet.class1" placeholder="class" title="class1" />
           <input id="class1_level" v-model="sheet.class1_level" class="input-small" placeholder="-" title="class1_level" />
           <input id="class2" v-model="sheet.class2" placeholder="class" title="class2" />
@@ -128,7 +128,7 @@
     min-width: 660px;
     position: relative;
   }
-  
+
   .top-header {
     display: grid;
     justify-content: center;
@@ -236,12 +236,18 @@
     }
   }
 
-  .label {
+  .label,
+  .label-over {
     font-size: 0.75rem;
     margin-inline: 2px;
     text-transform: uppercase;
     font-family: 'Poppins';
   }
+
+ label.label-over {
+  margin-bottom: -5px;
+ }
+
   label:has(span) {
     display: flex;
     align-items: center;
@@ -285,20 +291,11 @@
     justify-items: right;
   }
 
-  label:has(#hp) {
-    justify-self: end;
-  }
-
-  /*
-  Styling for the scrollable abilities list.
-  */
   .special-abilities {
     height: 15rem;
     padding: 0.25rem;
   }
-  /*
-  Styling for each ability row, that uses a grid.
-  */
+
   .special-ability-item {
     align-items: center;
     column-gap: 0.25rem;

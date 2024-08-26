@@ -56,7 +56,14 @@ const sheetStore = () => {
   const ac_shieldless = ref(10)
   const ac_rear = ref(10)
   const ar = ref(10)
-  const class1 = ref('')
+  const class1 = ref('-')
+  const class2 = ref('-')
+  const class3 = ref('-')
+  const class1_level = ref(0)
+  const class2_level = ref(0)
+  const class3_level = ref(0)
+  const alignment = ref('-')
+  const race = ref('-')
 
   const strength = ref(8)
   const intelligence = ref(8)
@@ -333,6 +340,13 @@ const sheetStore = () => {
       ac_rear: ac_rear.value,
       ar: ar.value,
       class1: class1.value,
+      class2: class2.value,
+      class3: class3.value,
+      class1_level: class1_level.value,
+      class2_level: class2_level.value,
+      class3_level: class3_level.value,
+      race: race.value,
+      alignment: alignment.value,
       strength: strength.value,
       intelligence: intelligence.value,
       wisdom: wisdom.value,
@@ -395,6 +409,13 @@ const sheetStore = () => {
     ac_rear.value = hydrateStore.ac_rear ?? ac_rear.value
     ar.value = hydrateStore.ar ?? ar.value
     class1.value = hydrateStore.class1 ?? class1.value
+    class2.value = hydrateStore.class2 ?? class2.value
+    class3.value = hydrateStore.class3 ?? class3.value
+    class1_level.value = hydrateStore.class1_level ?? class1_level.value
+    class2_level.value = hydrateStore.class2_level ?? class2_level.value
+    class3_level.value = hydrateStore.class3_level ?? class3_level.value
+    race.value = hydrateStore.race ?? race.value
+    alignment.value = hydrateStore.alignment ?? alignment.value
     strength.value = hydrateStore.strength ?? strength.value
     intelligence.value = hydrateStore.intelligence ?? intelligence.value
     wisdom.value = hydrateStore.wisdom ?? wisdom.value
@@ -456,6 +477,13 @@ const sheetStore = () => {
     ac_rear,
     ar,
     class1,
+    class2,
+    class3,
+    class1_level,
+    class2_level,
+    class3_level,
+    race,
+    alignment,
     strength,
     intelligence,
     wisdom,

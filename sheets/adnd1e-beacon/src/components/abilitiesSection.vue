@@ -18,7 +18,7 @@
         <input id="strength" v-model.number.lazy="sheet.strength" class="input-small" title="strength"/>
       </label>
       <label>
-        <span class="label">EXC</span>
+        <span class="label">&nbsp;</span>
         <input id="str_exceptional" v-model.number.lazy="sheet.str_exceptional" class="input-small" title="str_exceptional"/>
       </label>
       <label>
@@ -55,7 +55,7 @@
         <input id="intelligence" v-model.number.lazy="sheet.intelligence" class="input-small" />
       </label>
       <label>
-        <span class="label">EXC</span>
+        <span class="label">&nbsp;</span>
         <input id="int_exceptional" v-model.number.lazy="sheet.int_exceptional" class="input-small" title="int_exceptional"/>
       </label>
       <label>
@@ -84,7 +84,7 @@
         <input id="wisdom" v-model.number.lazy="sheet.wisdom" class="input-small" />
       </label>
       <label>
-        <span class="label">EXC</span>
+        <span class="label">&nbsp;</span>
         <input id="wis_exceptional" v-model.number.lazy="sheet.wis_exceptional" class="input-small" title="wis_exceptional" />
       </label>
       <label>
@@ -109,7 +109,7 @@
         <input id="dexterity" v-model.number.lazy="sheet.dexterity" class="input-small" />
       </label>
       <label>
-        <span class="label">EXC</span>
+        <span class="label">&nbsp;</span>
         <input id="dex_exceptional" v-model.number.lazy="sheet.dex_exceptional" class="input-small" title="dex_exceptional"/>
       </label>
       <label>
@@ -138,7 +138,7 @@
         <input id="constitution" v-model.number.lazy="sheet.constitution" class="input-small" />
       </label>
       <label>
-        <span class="label">EXC</span>
+        <span class="label">&nbsp;</span>
         <input id="con_exceptional" v-model.number.lazy="sheet.con_exceptional" class="input-small" title="con_exceptional"/>
       </label>
       <label>
@@ -163,7 +163,7 @@
         <input id="charisma" v-model.number.lazy="sheet.charisma" class="input-small" />
       </label>
       <label>
-        <span class="label">EXC</span>
+        <span class="label">&nbsp;</span>
         <input id="cha_exceptional" v-model.number.lazy="sheet.cha_exceptional" class="input-small" title="cha_exceptional"/>
       </label>
       <label>
@@ -192,7 +192,7 @@
         <input id="comeliness" v-model.number.lazy="sheet.comeliness" class="input-small" readonly />
       </label>
       <label>
-        <span class="label">EXC</span>
+        <span class="label">&nbsp;</span>
         <input id="com_exceptional" v-model.number.lazy="sheet.com_exceptional" class="input-small" title="com_exceptional"/>
       </label>
       <label>
@@ -231,18 +231,24 @@
       flex-direction: column;
       justify-content: space-between;
 
-  span {
-        margin-inline: auto;
-      }
       input {
         margin-inline: auto;
         width: 2em;
       }
     }
   }
-  .ability-row > label:first-child {
-    font-family: 'Caladea';
-    font-size: 1.2rem;
-    margin-top: 1rem;
-  }
+  /* ability name column */
+.ability-row > label:first-child {
+  background-color: #000;
+  border-radius: 10px;
+  border-bottom-right-radius: 0;
+  border-top-left-radius: 0;
+  color: #fff;
+  font-family: "Caladea";
+  font-size: 1.2rem;
+  height: 1.3em;
+  justify-content: center;
+  margin-top: 1rem;
+  padding-block: 2px;
+}
 </style>
