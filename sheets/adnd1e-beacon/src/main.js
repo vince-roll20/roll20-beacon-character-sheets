@@ -1,7 +1,7 @@
 import './assets/main.css'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import { createRelay } from './relay/relay'
+import { createRelay } from './relay'
 import App from './App.vue'
 
 /*

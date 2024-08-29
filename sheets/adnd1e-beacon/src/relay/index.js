@@ -1,6 +1,5 @@
 import { initRelay } from '@roll20-official/beacon-sdk'
 import { debounce } from 'lodash'
-
 import {
   onInit,
   onChange,
@@ -13,10 +12,10 @@ import { reactive, ref, watch, nextTick, shallowRef } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
 
 /*
-This is the configuration for the relay. It defines the handlers and actions that the sheet will use.
-The handlers are functions that are called by the relay when certain events occur.
-The actions are custom functions that can be called by the sheet to perform specific actions.
-the computed properties are exposed by the sheet to be used in macros, inline rolls and tokens.
+This is the configuration for the relay. It defines the Handlers and Actions that the sheet will use.
+The Handlers are functions that are called by the relay when certain events occur.
+The Actions are custom functions that can be called by the sheet to perform specific actions.
+The Computed properties are exposed by the sheet to be used in macros, inline rolls and tokens.
 */
 const relayConfig = {
   handlers: {

@@ -1,4 +1,4 @@
-import { initValues, beaconPulse } from '../relay'
+import { initValues, beaconPulse } from '..'
 
 // onInit is called when the Relay is first loaded. It is used to set up the initial values of the sheet.
 export const onInit = ({ character, settings, compendiumDropData }) => {
