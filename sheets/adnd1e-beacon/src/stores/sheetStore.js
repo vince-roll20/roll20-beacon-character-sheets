@@ -1,9 +1,10 @@
 import {defineStore} from 'pinia';
 import {ref, computed, watch} from 'vue';
 import {v4 as uuidv4} from 'uuid';
-import {arrayToObject, objectToArray} from '@/utility/index.js';
+import {arrayToObject, getRollResults, objectToArray, rollToChat} from '@/utility';
 import {dispatchRef, initValues} from '@/relay/index.js';
 import {createRollTemplate} from '@/rollTemplates/index.js';
+import {useMetaStore} from './metaStore';
 
 /*
 This function will leverage the beacon SDK to render a roll template to the chat log.
@@ -320,6 +321,19 @@ const sheetStore = () => {
   const abilities = ref([]);
   const abilitiesCount = computed(() => abilities.value?.length);
 
+  // rolls
+  const metaStore = useMetaStore();
+
+  const rollAbility = (name) => {
+    const rollObj = {
+      title: name,
+      subtitle: 'Ability Check',
+      characterName: metaStore.name,
+      components: [{label: '1d20', count: 4, sides: 6, alwaysShowInBreakdown: true}]
+    };
+    rollToChat({rollObj});
+  };
+
   // Handles retrieving these values from the store
   const dehydrate = () => {
     return {
@@ -524,6 +538,7 @@ const sheetStore = () => {
     com_base,
     com_racial_adj,
 
+    rollAbility,
     abilities,
     abilitiesCount,
     addAbility: () => addAbility(abilities),

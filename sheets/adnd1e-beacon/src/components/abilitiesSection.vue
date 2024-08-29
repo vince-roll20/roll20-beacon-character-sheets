@@ -11,7 +11,7 @@ const sheet = useSheetStore();
     </div>
     <div class="ability-row">
       <label>
-        <span>STR</span>
+        <button @click="sheet.rollAbility(STR)" class="capitalize bold"><span>STR</span></button>
       </label>
       <label>
         <span class="label">&nbsp;</span>
