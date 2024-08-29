@@ -26,10 +26,10 @@ export default async (components, customDispatch) => {
     }
 
     /*
-				This utilizes the Beacon results to split the formula into it's individual
-				parts so that we don't need to write the formula parsing ourselves because
-				it's a complicated thing that Beacon already has to do as it is lol
-				*/
+    This utilizes the Beacon results to split the formula into it's individual
+    parts so that we don't need to write the formula parsing ourselves because
+    it's a complicated thing that Beacon already has to do as it is lol
+		*/
     if (component.rollFormula) {
       const rollParts = [];
       const overallSum = component.value;
@@ -52,11 +52,9 @@ export default async (components, customDispatch) => {
           value: overallSum - diceSum
         });
       }
-
       components.splice(rollIndex, 1, ...rollParts);
     }
   }
-
   const total = components.reduce((accum, next) => accum + (next?.value || 0), 0);
   return {total, components};
 };
