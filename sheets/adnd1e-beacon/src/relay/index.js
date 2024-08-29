@@ -7,7 +7,7 @@ import {
   onSharedSettingsChange,
   onTranslationsRequest,
   onDragOver
-} from './handlers/handlers'
+} from './handlers'
 import { reactive, ref, watch, nextTick, shallowRef } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
 
