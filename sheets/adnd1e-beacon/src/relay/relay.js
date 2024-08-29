@@ -10,7 +10,7 @@ import {
   onDragOver
 } from './handlers/handlers'
 import { reactive, ref, watch, nextTick, shallowRef } from 'vue'
-import {v4 as uuidv4} from 'uuid'
+import { v4 as uuidv4 } from 'uuid'
 
 /*
 This is the configuration for the relay. It defines the handlers and actions that the sheet will use.
