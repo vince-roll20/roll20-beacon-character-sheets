@@ -329,7 +329,7 @@ const sheetStore = () => {
       title: name,
       subtitle: 'Ability Check',
       characterName: metaStore.name,
-      components: [{label: '1d20', count: 4, sides: 6, alwaysShowInBreakdown: true}]
+      components: [{label: '4d6', count: 4, sides: 6, alwaysShowInBreakdown: true}]
     };
     rollToChat({rollObj});
   };
