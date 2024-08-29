@@ -1,5 +1,6 @@
 import { initRelay } from '@roll20-official/beacon-sdk'
 import { debounce } from 'lodash'
+
 import {
   onInit,
   onChange,
@@ -62,6 +63,7 @@ const doUpdate = (dispatch, update, logMode = false) => {
       ...update
     }
   }
+  console.log(`dispatching character =>`, character)
   character.character.attributes.updateId = sheetId.value
   dispatch.updateCharacter(character)
 }
@@ -90,7 +92,9 @@ We use a watcher of beaconPulse value to trigger a re-render of the sheet when t
 This is just one way to trigger a re-render, you can implement your own logic to trigger a re-render.
 */
 export const createRelay = async ({ devMode = false, primaryStore = 'app', logMode = false }) => {
+  console.log('devMode', devMode)
   const dispatch = await (devMode ? devRelay() : initRelay(relayConfig))
+  console.log('dispatch', dispatch)
   const relayPinia = (context) => {
     if (context.store.$id !== primaryStore) return
     const store = context.store
