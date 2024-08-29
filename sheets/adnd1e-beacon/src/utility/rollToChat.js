@@ -24,6 +24,5 @@ export default async ({rollObj, customDispatch, rollType = 'base'}) => {
       secret: undefined
     }
   });
-
   return total;
 };
