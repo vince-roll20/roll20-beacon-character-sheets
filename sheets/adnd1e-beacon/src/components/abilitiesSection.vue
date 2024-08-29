@@ -1,7 +1,7 @@
 <script setup>
-  import { useSheetStore } from '@/stores/sheetStore.js'
-  // The sheet store is where you want to be to customize what data / fields are on your sheet.
-  const sheet = useSheetStore()
+import {useSheetStore} from '@/stores/sheetStore.js';
+// The sheet store is where you want to be to customize what data / fields are on your sheet.
+const sheet = useSheetStore();
 </script>
 
 <template>
@@ -15,35 +15,35 @@
       </label>
       <label>
         <span class="label">&nbsp;</span>
-        <input id="strength" v-model.number.lazy="sheet.strength" class="input-small" title="strength"/>
+        <input id="strength" v-model.number.lazy="sheet.strength" class="input-small" title="strength" />
       </label>
       <label>
         <span class="label">&nbsp;</span>
-        <input id="str_exceptional" v-model.number.lazy="sheet.str_exceptional" class="input-small" title="str_exceptional"/>
+        <input id="str_exceptional" v-model.number.lazy="sheet.str_exceptional" class="input-small" title="str_exceptional" />
       </label>
       <label>
         <span class="label">ATK</span>
-        <input id="str_attack" v-model.number="sheet.str_attack" class="input-small" title="str_attack" readonly/>
+        <input id="str_attack" v-model.number="sheet.str_attack" class="input-small" title="str_attack" readonly />
       </label>
       <label>
         <span class="label">DMG</span>
-        <input id="str_damage" v-model.number="sheet.str_damage" class="input-small" title="str_damage" readonly/>
+        <input id="str_damage" v-model.number="sheet.str_damage" class="input-small" title="str_damage" readonly />
       </label>
       <label>
         <span class="label">WT</span>
-        <input id="str_weight_adj" v-model.number="sheet.str_weight_adj" class="input-small" title="str_weight_adj" readonly/>
+        <input id="str_weight_adj" v-model.number="sheet.str_weight_adj" class="input-small" title="str_weight_adj" readonly />
       </label>
       <label>
         <span class="label">MIN</span>
-        <input id="str_minor" v-model.number="sheet.str_minor" class="input-small" title="str_minor" readonly/>
+        <input id="str_minor" v-model.number="sheet.str_minor" class="input-small" title="str_minor" readonly />
       </label>
       <label>
         <span class="label">LOCK</span>
-        <input id="str_minor_locked" v-model.number="sheet.str_minor_locked" class="input-small" title="str_minor_locked" readonly/>
+        <input id="str_minor_locked" v-model.number="sheet.str_minor_locked" class="input-small" title="str_minor_locked" readonly />
       </label>
       <label>
         <span class="label">MAJ</span>
-        <input id="str_major" v-model.number="sheet.str_major" class="input-small" title="str_major" readonly/>
+        <input id="str_major" v-model.number="sheet.str_major" class="input-small" title="str_major" readonly />
       </label>
     </div>
     <div class="ability-row">
@@ -56,23 +56,23 @@
       </label>
       <label>
         <span class="label">&nbsp;</span>
-        <input id="int_exceptional" v-model.number.lazy="sheet.int_exceptional" class="input-small" title="int_exceptional"/>
+        <input id="int_exceptional" v-model.number.lazy="sheet.int_exceptional" class="input-small" title="int_exceptional" />
       </label>
       <label>
         <span class="label">LANG</span>
-        <input id="int_lang" v-model.number="sheet.int_lang" class="input-small" title="int_lang" readonly/>
+        <input id="int_lang" v-model.number="sheet.int_lang" class="input-small" title="int_lang" readonly />
       </label>
       <label>
         <span class="label">KNOW</span>
-        <input id="int_know_spells" v-model.number="sheet.int_know_spells" class="input-small" title="int_know_spells" readonly/>
+        <input id="int_know_spells" v-model.number="sheet.int_know_spells" class="input-small" title="int_know_spells" readonly />
       </label>
       <label>
         <span class="label">MIN</span>
-        <input id="int_min_spells" v-model.number="sheet.int_min_spells" class="input-small" title="int_min_spells" readonly/>
+        <input id="int_min_spells" v-model.number="sheet.int_min_spells" class="input-small" title="int_min_spells" readonly />
       </label>
       <label>
         <span class="label">MAX</span>
-        <input id="int_max_spells" v-model.number="sheet.int_max_spells" class="input-small" title="int_max_spells" readonly/>
+        <input id="int_max_spells" v-model.number="sheet.int_max_spells" class="input-small" title="int_max_spells" readonly />
       </label>
     </div>
     <div class="ability-row">
@@ -110,7 +110,7 @@
       </label>
       <label>
         <span class="label">&nbsp;</span>
-        <input id="dex_exceptional" v-model.number.lazy="sheet.dex_exceptional" class="input-small" title="dex_exceptional"/>
+        <input id="dex_exceptional" v-model.number.lazy="sheet.dex_exceptional" class="input-small" title="dex_exceptional" />
       </label>
       <label>
         <span class="label">REAC</span>
@@ -139,7 +139,7 @@
       </label>
       <label>
         <span class="label">&nbsp;</span>
-        <input id="con_exceptional" v-model.number.lazy="sheet.con_exceptional" class="input-small" title="con_exceptional"/>
+        <input id="con_exceptional" v-model.number.lazy="sheet.con_exceptional" class="input-small" title="con_exceptional" />
       </label>
       <label>
         <span class="label">HP</span>
@@ -164,7 +164,7 @@
       </label>
       <label>
         <span class="label">&nbsp;</span>
-        <input id="cha_exceptional" v-model.number.lazy="sheet.cha_exceptional" class="input-small" title="cha_exceptional"/>
+        <input id="cha_exceptional" v-model.number.lazy="sheet.cha_exceptional" class="input-small" title="cha_exceptional" />
       </label>
       <label>
         <span class="label">MAX</span>
@@ -193,7 +193,7 @@
       </label>
       <label>
         <span class="label">&nbsp;</span>
-        <input id="com_exceptional" v-model.number.lazy="sheet.com_exceptional" class="input-small" title="com_exceptional"/>
+        <input id="com_exceptional" v-model.number.lazy="sheet.com_exceptional" class="input-small" title="com_exceptional" />
       </label>
       <label>
         <span class="label">BASE</span>
@@ -218,33 +218,33 @@
 </template>
 
 <style scope lang="scss">
-  .ability-row {
-    align-items: center;
-    display: grid;
-    gap: 5px;
-    grid-template-columns: 3em 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    text-align: center;
+.ability-row {
+  align-items: center;
+  display: grid;
+  gap: 5px;
+  grid-template-columns: 3em 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  text-align: center;
 
   label {
-      align-items: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
-      input {
-        margin-inline: auto;
-        width: 2em;
-      }
+    input {
+      margin-inline: auto;
+      width: 2em;
     }
   }
-  /* ability name column */
+}
+/* ability name column */
 .ability-row > label:first-child {
   background-color: #000;
   border-radius: 10px;
   border-bottom-right-radius: 0;
   border-top-left-radius: 0;
   color: #fff;
-  font-family: "Caladea";
+  font-family: 'Caladea';
   font-size: 1.2rem;
   height: 1.3em;
   justify-content: center;

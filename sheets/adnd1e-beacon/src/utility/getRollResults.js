@@ -1,9 +1,6 @@
-import { dispatchRef } from '@/relay';
+import {dispatchRef} from '@/relay';
 
-export default async (
-  components,
-  customDispatch,
-) => {
+export default async (components, customDispatch) => {
   const dispatch = customDispatch || dispatchRef.value; // Need a different Relay instance when handling sheet-actions
 
   const rolls = {};
@@ -13,11 +10,11 @@ export default async (
       const sides = component.sides;
       const dieCount = component.count ?? 1;
       rolls[`dice-${i}`] = `${dieCount}d${sides} with text`;
-    }else if(component.formula){
+    } else if (component.formula) {
       rolls[`dice-${i}`] = component.formula;
     }
   }
-  const rollResult = await dispatch.roll({ rolls });
+  const rollResult = await dispatch.roll({rolls});
 
   for (const rollTerm in rollResult.results) {
     const result = rollResult.results[rollTerm];
@@ -46,13 +43,13 @@ export default async (
             sides: subcomponent.sides,
             count: subcomponent.dice,
             value: sum,
-            label: component.label ? `${component.label} [${sublabel}]` : sublabel,
+            label: component.label ? `${component.label} [${sublabel}]` : sublabel
           });
         }
 
         rollParts.push({
           label: `Manual Bonus`,
-          value: overallSum - diceSum,
+          value: overallSum - diceSum
         });
       }
 
@@ -61,5 +58,5 @@ export default async (
   }
 
   const total = components.reduce((accum, next) => accum + (next?.value || 0), 0);
-  return { total, components };
+  return {total, components};
 };
