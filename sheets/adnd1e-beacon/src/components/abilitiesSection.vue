@@ -11,7 +11,7 @@ const sheet = useSheetStore();
     </div>
     <div class="ability-row">
       <label>
-        <button @click="sheet.rollAbility(STR)"><span>STR</span></button>
+        <button @click="sheet.rollAbility('STR')"><span>STR</span></button>
       </label>
       <label>
         <span class="label">&nbsp;</span>
@@ -48,7 +48,7 @@ const sheet = useSheetStore();
     </div>
     <div class="ability-row">
       <label>
-        <span>INT</span>
+        <button @click="sheet.rollAbility('INT')"><span>INT</span></button>
       </label>
       <label>
         <span class="label">&nbsp;</span>
@@ -77,7 +77,7 @@ const sheet = useSheetStore();
     </div>
     <div class="ability-row">
       <label>
-        <span>WIS</span>
+        <button @click="sheet.rollAbility('WIS')"><span>WIS</span></button>
       </label>
       <label>
         <span class="label">&nbsp;</span>
@@ -102,7 +102,7 @@ const sheet = useSheetStore();
     </div>
     <div class="ability-row">
       <label>
-        <span>DEX</span>
+        <button @click="sheet.rollAbility('DEX')"><span>DEX</span></button>
       </label>
       <label>
         <span class="label">&nbsp;</span>
@@ -131,7 +131,7 @@ const sheet = useSheetStore();
     </div>
     <div class="ability-row">
       <label>
-        <span>CON</span>
+        <button @click="sheet.rollAbility('CON')"><span>CON</span></button>
       </label>
       <label>
         <span class="label">&nbsp;</span>
@@ -156,7 +156,7 @@ const sheet = useSheetStore();
     </div>
     <div class="ability-row">
       <label>
-        <span>CHA</span>
+        <button @click="sheet.rollAbility('CHA')"><span>CHA</span></button>
       </label>
       <label>
         <span class="label">&nbsp;</span>
@@ -185,7 +185,7 @@ const sheet = useSheetStore();
     </div>
     <div class="ability-row">
       <label>
-        <span>COM</span>
+        <button @click="sheet.rollAbility('COM')"><span>COM</span></button>
       </label>
       <label>
         <span class="label">&nbsp;</span>
@@ -238,17 +238,18 @@ const sheet = useSheetStore();
   }
 }
 /* ability name column */
-.ability-row > label:first-child {
+.ability-row > label:first-child button {
   background-color: #000;
   border-radius: 10px;
   border-bottom-right-radius: 0;
   border-top-left-radius: 0;
   color: #fff;
   font-family: 'Caladea';
-  font-size: 1.2rem;
+  font-size: 1.125rem;
   height: 1.3em;
-  justify-content: center;
   margin-top: 1rem;
-  padding-block: 2px;
+  padding-block: 0;
+  font-weight: normal;
+  border-color: transparent;
 }
 </style>

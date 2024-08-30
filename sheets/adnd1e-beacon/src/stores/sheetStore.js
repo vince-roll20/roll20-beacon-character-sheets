@@ -326,8 +326,8 @@ const sheetStore = () => {
 
   const rollAbility = (name) => {
     const rollObj = {
-      title: name,
-      subtitle: 'Ability Check',
+      title: `${name} Check`,
+      subtitle: '',
       characterName: metaStore.name,
       components: [{label: '4d6', count: 4, sides: 6, alwaysShowInBreakdown: true}]
     };

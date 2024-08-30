@@ -1,15 +1,12 @@
 import handlebars from 'handlebars';
-
 import baseTemplate from './templates/newRoll.hbs?raw';
 import complexTemplate from './templates/complex.hbs?raw';
-
 import header from './partials/header.hbs?raw';
 import keyValues from './partials/keyValues.hbs?raw';
 import textContent from './partials/textContent.hbs?raw';
 import rollComponents from './partials/rollComponents.hbs?raw';
 import rollTotal from './partials/rollTotal.hbs?raw';
 import wrapper from './partials/wrapper.hbs?raw';
-
 import {isGreater, isEqual, sumComponents, getDice, isArray, capitalize} from './expressions';
 
 // Partials
