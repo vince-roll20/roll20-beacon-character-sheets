@@ -10,7 +10,7 @@ import rollComponents from './partials/rollComponents.hbs?raw';
 import rollTotal from './partials/rollTotal.hbs?raw';
 import wrapper from './partials/wrapper.hbs?raw';
 
-import { isGreater, isEqual, sumComponents, getDice, isArray, capitalize } from './expressions';
+import {isGreater, isEqual, sumComponents, getDice, isArray, capitalize} from './expressions';
 
 // Partials
 handlebars.registerPartial('header', header);
@@ -44,6 +44,6 @@ handlebars.registerHelper('and', (a, b) => a && b);
 const rollTemplates = {
   base: handlebars.compile(baseTemplate),
   complex: handlebars.compile(complexTemplate)
-}
+};
 
-export const createRollTemplate = ({type,parameters}) => rollTemplates[type](parameters);
+export const createRollTemplate = ({type, parameters}) => rollTemplates[type](parameters);
