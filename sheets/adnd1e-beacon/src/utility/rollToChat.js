@@ -1,4 +1,4 @@
-import {createRollTemplate} from '@/rollTemplates';
+import {createRollTemplate} from '@/rollTemplates/index.js';
 import {dispatchRef, initValues} from '@/relay';
 import getRollResult from './getRollResults.js';
 
