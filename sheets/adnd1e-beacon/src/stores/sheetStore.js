@@ -324,12 +324,12 @@ const sheetStore = () => {
   // rolls
   const metaStore = useMetaStore();
 
-  const rollAbility = (name) => {
+  const rollAbility = (name, ability) => {
     const rollObj = {
       title: `${name} Check`,
       subtitle: '',
       characterName: metaStore.name,
-      components: [{label: '4d6', count: 4, sides: 6, alwaysShowInBreakdown: true}]
+      components: [{label: `4d6 vs ${ability}`, count: 4, sides: 6, target: ability, alwaysShowInBreakdown: true}]
     };
     rollToChat({rollObj});
   };
