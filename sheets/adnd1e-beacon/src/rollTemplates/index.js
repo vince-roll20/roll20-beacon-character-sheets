@@ -7,7 +7,7 @@ import textContent from './partials/textContent.hbs?raw';
 import rollComponents from './partials/rollComponents.hbs?raw';
 import rollTotal from './partials/rollTotal.hbs?raw';
 import wrapper from './partials/wrapper.hbs?raw';
-import {isGreater, isEqual, sumComponents, getDice, isArray, capitalize} from './expressions';
+import {isGreater, isLess, isEqual, sumComponents, getDice, isArray, capitalize} from './expressions';
 
 // Partials
 handlebars.registerPartial('header', header);
@@ -21,6 +21,7 @@ handlebars.registerPartial('rollComponents', rollComponents);
 handlebars.registerHelper('sumComponents', sumComponents);
 handlebars.registerHelper('getDice', getDice);
 handlebars.registerHelper('isGreater', isGreater);
+handlebars.registerHelper('isLess', isLess);
 handlebars.registerHelper('isEqual', isEqual);
 handlebars.registerHelper('isArray', isArray);
 handlebars.registerHelper('capitalize', capitalize);
