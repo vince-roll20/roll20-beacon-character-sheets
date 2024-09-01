@@ -1,4 +1,5 @@
 import {dispatchRef} from '@/relay';
+import {isLess} from "@/rollTemplates/expressions";
 
 export default async (components, customDispatch) => {
   const dispatch = customDispatch || dispatchRef.value; // Need a different Relay instance when handling sheet-actions
@@ -31,6 +32,8 @@ export default async (components, customDispatch) => {
     it's a complicated thing that Beacon already has to do as it is lol
 		*/
     if (component.rollFormula) {
+      console.log(`component.rollFormula: ${component.rollFormula}`);
+
       const rollParts = [];
       const overallSum = component.value;
       let diceSum = 0;
@@ -45,6 +48,14 @@ export default async (components, customDispatch) => {
             value: sum,
             label: component.label ? `${component.label} [${sublabel}]` : sublabel
           });
+          if (component.rollFormula === 'isLess()') {
+            const test = isLess(sum, component.target);
+            console.log(`
+              component.rollFormula After the Roll
+              sum: ${sum}
+              ability: ${component.target}
+              test: ${test}`);
+          }
         }
 
         rollParts.push({

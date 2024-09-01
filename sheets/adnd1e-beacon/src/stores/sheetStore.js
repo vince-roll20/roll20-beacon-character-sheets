@@ -5,6 +5,7 @@ import {arrayToObject, getRollResults, objectToArray, rollToChat} from '@/utilit
 import {dispatchRef, initValues} from '@/relay/index.js';
 import {createRollTemplate} from '@/rollTemplates/index.js';
 import {useMetaStore} from './metaStore';
+import {isLess} from "@/rollTemplates/expressions";
 
 /*
 This function will leverage the beacon SDK to render a roll template to the chat log.
@@ -329,8 +330,17 @@ const sheetStore = () => {
       title: `${name} Check`,
       subtitle: '',
       characterName: metaStore.name,
-      components: [{label: `4d6 vs ${ability}`, count: 4, sides: 6, target: ability, alwaysShowInBreakdown: true}]
-    };
+      components: [
+        {
+          label: `4d6 vs ${ability}`,
+          count: 4,
+          sides: 6,
+          target: ability,
+          alwaysShowInBreakdown: true,
+          rollFormula: `isLess()`
+        }
+      ]
+    }
     rollToChat({rollObj});
   };
 
