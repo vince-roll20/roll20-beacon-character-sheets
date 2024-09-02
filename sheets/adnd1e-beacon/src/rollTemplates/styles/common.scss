@@ -24,11 +24,33 @@ rolltemplate.add1e-template {
       font-size: 1rem;
     }
   }
+
   .body {
     padding: 0.5rem;
 
     hr {
       margin: 0.5rem 0;
+    }
+
+    details {
+      &:hover {
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      &[open] {
+        cursor: default;
+        font-weight: normal;
+        outline: 1px solid #666;
+        padding: 2px;
+        border-radius: 4px;
+
+        summary {
+          position: relative;
+          margin-top: -8px;
+          margin-bottom: -3px;
+        }
+      }
     }
   }
 
