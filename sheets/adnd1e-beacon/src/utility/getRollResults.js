@@ -3,7 +3,7 @@ import {isLess} from '@/rollTemplates/expressions';
 
 export default async (components, customDispatch) => {
   const dispatch = customDispatch || dispatchRef.value; // Need a different Relay instance when handling sheet-actions
-
+  let outcome = '';
   const rolls = {};
   for (const i in components) {
     const component = components[i];
@@ -41,8 +41,10 @@ export default async (components, customDispatch) => {
           const sum = subcomponent.results.reduce((sum, result) => sum + result, 0);
           diceSum += sum;
           const sublabel = `${subcomponent.dice}d${subcomponent.sides}`;
+          // check for any defined roll expressions and proceed
           if (component.rollFormula === 'isLess()') {
             const test = isLess(sum, component.target) === true ? 'Success' : 'Failure';
+            outcome = test;
             rollParts.push({
               sides: subcomponent.sides,
               count: subcomponent.dice,
@@ -69,5 +71,5 @@ export default async (components, customDispatch) => {
     }
   }
   const total = components.reduce((accum, next) => accum + (next?.value || 0), 0);
-  return {total, components};
+  return {total, components, outcome};
 };
