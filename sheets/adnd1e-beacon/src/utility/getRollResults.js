@@ -1,5 +1,5 @@
 import {dispatchRef} from '@/relay';
-import {isLess} from "@/rollTemplates/expressions";
+import {isLess} from '@/rollTemplates/expressions';
 
 export default async (components, customDispatch) => {
   const dispatch = customDispatch || dispatchRef.value; // Need a different Relay instance when handling sheet-actions
@@ -33,7 +33,6 @@ export default async (components, customDispatch) => {
 		*/
     if (component.rollFormula) {
       console.log(`component.rollFormula: ${component.rollFormula}`);
-
       const rollParts = [];
       const overallSum = component.value;
       let diceSum = 0;
@@ -42,19 +41,22 @@ export default async (components, customDispatch) => {
           const sum = subcomponent.results.reduce((sum, result) => sum + result, 0);
           diceSum += sum;
           const sublabel = `${subcomponent.dice}d${subcomponent.sides}`;
-          rollParts.push({
-            sides: subcomponent.sides,
-            count: subcomponent.dice,
-            value: sum,
-            label: component.label ? `${component.label} [${sublabel}]` : sublabel
-          });
           if (component.rollFormula === 'isLess()') {
-            const test = isLess(sum, component.target);
-            console.log(`
-              component.rollFormula After the Roll
-              sum: ${sum}
-              ability: ${component.target}
-              test: ${test}`);
+            const test = isLess(sum, component.target) === true ? 'Success' : 'Failure';
+            rollParts.push({
+              sides: subcomponent.sides,
+              count: subcomponent.dice,
+              value: sum,
+              label: component.label ? `${test}: ${component.label} ${component.target} vs ` : sublabel
+            });
+          } else if (!component.rollFormula) {
+            console.log(`No rollFormula detected`);
+            rollParts.push({
+              sides: subcomponent.sides,
+              count: subcomponent.dice,
+              value: sum,
+              label: component.label ? `${component.label} [${sublabel}]` : sublabel
+            });
           }
         }
 
