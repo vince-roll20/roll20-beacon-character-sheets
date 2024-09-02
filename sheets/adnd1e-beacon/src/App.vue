@@ -1,15 +1,15 @@
 <script setup>
-import {useAppStore} from '@/stores/index.js';
-import {useMetaStore} from '@/stores/metaStore.js';
-import {useSheetStore} from '@/stores/sheetStore.js';
-import abilitiesSection from './components/abilitiesSection.vue';
+import { useAppStore } from '@/stores/index.js'
+import { useMetaStore } from '@/stores/metaStore.js'
+import { useSheetStore } from '@/stores/sheetStore.js'
+import abilitiesSection from './components/abilitiesSection.vue'
 
 // These stores should drive how to access the data in your sheet, and how to trigger actionable events.
-const appStore = useAppStore();
+const appStore = useAppStore()
 // The meta store has generic character info for every sheet.
-const meta = useMetaStore();
+const meta = useMetaStore()
 // The sheet store is where you want to be to customize what data / fields are on your sheet.
-const sheet = useSheetStore();
+const sheet = useSheetStore()
 </script>
 
 <template>

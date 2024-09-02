@@ -1,14 +1,7 @@
 import { initRelay } from '@roll20-official/beacon-sdk'
 import { debounce } from 'lodash'
 
-import {
-  onInit,
-  onChange,
-  onSettingsChange,
-  onSharedSettingsChange,
-  onTranslationsRequest,
-  onDragOver
-} from './handlers'
+import { onInit, onChange, onSettingsChange, onSharedSettingsChange, onTranslationsRequest, onDragOver } from './handlers'
 import { reactive, ref, watch, nextTick, shallowRef } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
 

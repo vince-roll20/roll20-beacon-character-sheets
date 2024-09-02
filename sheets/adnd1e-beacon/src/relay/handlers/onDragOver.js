@@ -1,1 +1,1 @@
-export const onDragOver = () => {};
+export const onDragOver = () => {}

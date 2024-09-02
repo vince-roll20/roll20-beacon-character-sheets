@@ -1,16 +1,16 @@
-import {defineStore} from 'pinia';
-import {ref} from 'vue';
-import jp from 'jsonpath';
-import {useMetaStore} from '@/stores/metaStore.js';
-import {useSheetStore} from '@/stores/sheetStore.js';
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
+import jp from 'jsonpath'
+import { useMetaStore } from '@/stores/metaStore.js'
+import { useSheetStore } from '@/stores/sheetStore.js'
 
 // Here you can set all default values for your sheet.
 // This is your blank slate, new character setup.
 // the 'Reset' button is currently setup to restore these Defaults
-export const DEFAULT_CHARACTER_NAME = 'Red Shirt';
+export const DEFAULT_CHARACTER_NAME = 'Red Shirt'
 export const DEFAULT_AVATAR_URL =
   // lets use roll20's new default image
-  'https://app.roll20.net/images/character.png';
+  'https://app.roll20.net/images/character.png'
 
 /*
  * This is the master store for the entire character sheet.
@@ -24,76 +24,76 @@ export const useAppStore = defineStore('app', () => {
   const stores = {
     meta: useMetaStore(),
     sheet: useSheetStore()
-  };
-  const storeRegistry = Object.keys(stores);
+  }
+  const storeRegistry = Object.keys(stores)
 
-  const pageLoading = ref(false);
+  const pageLoading = ref(false)
 
   const getValue = (path) => {
-    return jp.value(stores, path);
-  };
+    return jp.value(stores, path)
+  }
   const setValue = (path, newValue) => {
-    return jp.value(stores, path, newValue);
-  };
+    return jp.value(stores, path, newValue)
+  }
   const doAction = (path, payload) => {
-    const func = jp.value(stores, path);
-    if (typeof func === 'function') func(payload, stores);
-  };
+    const func = jp.value(stores, path)
+    if (typeof func === 'function') func(payload, stores)
+  }
 
   // Loops through all the stores and runs their Dehydrate.
   // Meta store has unique behavior which shouldn't be modified.
   // This is invoked any time Firebase data changes.
   const dehydrateStore = () => {
-    const character = {};
-    character.attributes = {};
-    const storeKeys = Object.keys(stores);
+    const character = {}
+    character.attributes = {}
+    const storeKeys = Object.keys(stores)
 
     storeKeys.forEach((key) => {
       if (key === 'meta') {
-        const {name, bio, gmNotes, avatar} = stores.meta.dehydrate();
+        const { name, bio, gmNotes, avatar } = stores.meta.dehydrate()
 
-        character.name = name;
-        character.bio = bio;
-        character.gmNotes = gmNotes;
-        character.avatar = avatar;
+        character.name = name
+        character.bio = bio
+        character.gmNotes = gmNotes
+        character.avatar = avatar
       } else {
-        character.attributes[key] = stores[key].dehydrate();
+        character.attributes[key] = stores[key].dehydrate()
       }
-    });
+    })
 
-    return character;
-  };
+    return character
+  }
 
   // Loops through all stores and runs Hydrate. Invoked every time anything in this sheet is updated.
   const hydrateStore = (partial, meta) => {
     if (partial) {
       storeRegistry.forEach((store) => {
-        if (!partial[store]) return;
-        stores[store].hydrate(partial[store]);
-      });
+        if (!partial[store]) return
+        stores[store].hydrate(partial[store])
+      })
     }
     if (meta) {
-      stores.meta.hydrate(meta);
+      stores.meta.hydrate(meta)
     }
-  };
+  }
 
   const setPermissions = (owned, gm) => {
-    stores.meta.permissions.isOwner = owned;
-    stores.meta.permissions.isGM = gm;
-  };
+    stores.meta.permissions.isOwner = owned
+    stores.meta.permissions.isGM = gm
+  }
   const setCampaignId = (campaignId) => {
-    stores.meta.campaignId = campaignId;
-  };
+    stores.meta.campaignId = campaignId
+  }
 
   /*
   DEV METHOD used to fill the sheet with a lot of data without affecting how the stores are initialized.
   * Can invoke it from a button in the Settings tab. see the ie 'Reset' button
   */
   const loadExampleData = () => {
-    stores.meta.name = DEFAULT_CHARACTER_NAME;
-    stores.meta.avatar = DEFAULT_AVATAR_URL;
-    stores.sheet.abilities = [];
-  };
+    stores.meta.name = DEFAULT_CHARACTER_NAME
+    stores.meta.avatar = DEFAULT_AVATAR_URL
+    stores.sheet.abilities = []
+  }
 
   return {
     ...stores,
@@ -107,5 +107,5 @@ export const useAppStore = defineStore('app', () => {
     setCampaignId,
     pageLoading,
     loadExampleData
-  };
-});
+  }
+})

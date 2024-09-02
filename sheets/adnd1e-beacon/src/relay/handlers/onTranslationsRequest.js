@@ -1,1 +1,1 @@
-export const onTranslationsRequest = () => ({});
+export const onTranslationsRequest = () => ({})

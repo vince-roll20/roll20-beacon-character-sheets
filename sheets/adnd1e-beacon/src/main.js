@@ -1,8 +1,8 @@
-import './assets/main.css';
-import {createApp} from 'vue';
-import {createPinia} from 'pinia';
-import {createRelay} from './relay';
-import App from './App.vue';
+import './assets/main.css'
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+import { createRelay } from './relay'
+import App from './App.vue'
 
 /*
 Welcome! If you are new to vue, this is the file that will render the vue app. This vue app is a quickstart guide,
@@ -19,21 +19,21 @@ This quickstart also features an example of how to render a roll template with t
  */
 
 // Determines if the offline mode dev relay should be used
-const env = import.meta.env.MODE || '';
-const isDevEnvironment = ['development', 'test'].includes(env);
+const env = import.meta.env.MODE || ''
+const isDevEnvironment = ['development', 'test'].includes(env)
 
 // This sets up the pinia data store
-const pinia = createPinia();
+const pinia = createPinia()
 // This initializes the vue app
-const app = createApp(App);
+const app = createApp(App)
 // This creates the beacon relay, that manages saving and reading changes from firebase for you!
-const {relayPinia, relayVue} = await createRelay({
+const { relayPinia, relayVue } = await createRelay({
   devMode: isDevEnvironment
-});
+})
 
-app.use(pinia);
-app.use(relayVue);
-pinia.use(relayPinia);
+app.use(pinia)
+app.use(relayVue)
+pinia.use(relayPinia)
 
 // Mounts the vue app to this div in the DOM
-app.mount('#app');
+app.mount('#app')

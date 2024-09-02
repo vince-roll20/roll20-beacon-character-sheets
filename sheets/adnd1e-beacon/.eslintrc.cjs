@@ -1,5 +1,5 @@
 /* eslint-env node */
-require('@rushstack/eslint-patch/modern-module-resolution');
+require('@rushstack/eslint-patch/modern-module-resolution')
 
 module.exports = {
   root: true,
@@ -48,10 +48,10 @@ module.exports = {
         useTabs: false,
         tabWidth: 2,
         endOfLine: 'lf',
-        semi: true,
+        semi: false,
         printWidth: 180,
-        bracketSpacing: false
+        bracketSpacing: true
       }
     ]
   }
-};
+}

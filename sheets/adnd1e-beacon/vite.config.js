@@ -1,11 +1,11 @@
-import {fileURLToPath, URL} from 'node:url';
-import {defineConfig} from 'vite';
-import vue from '@vitejs/plugin-vue';
-import vueJsx from '@vitejs/plugin-vue-jsx';
-import VueDevTools from 'vite-plugin-vue-devtools';
+import { fileURLToPath, URL } from 'node:url'
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import vueJsx from '@vitejs/plugin-vue-jsx'
+import VueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vitejs.dev/config/
-export default defineConfig(({mode}) => ({
+export default defineConfig(({ mode }) => ({
   plugins: [vue(), vueJsx(), VueDevTools()],
   base: mode === 'production' ? `https://storage.googleapis.com/beacon-community-sheets/example-sheet/` : '/',
   build: {
@@ -20,8 +20,8 @@ export default defineConfig(({mode}) => ({
         dir: 'dist',
         compact: false,
         assetFileNames: (assetInfo) => {
-          if (assetInfo.name === 'style.css') return 'sheet.css';
-          return 'assets/[name][extname]';
+          if (assetInfo.name === 'style.css') return 'sheet.css'
+          return 'assets/[name][extname]'
         },
         entryFileNames: 'sheet.js',
         minifyInternalExports: false
@@ -44,4 +44,4 @@ export default defineConfig(({mode}) => ({
   server: {
     cors: false
   }
-}));
+}))

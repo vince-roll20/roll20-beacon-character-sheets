@@ -1,1 +1,1 @@
-export const onSharedSettingsChange = () => {};
+export const onSharedSettingsChange = () => {}

@@ -1,29 +1,29 @@
-import {dispatchRef} from '@/relay';
-import {isLess} from '@/rollTemplates/expressions';
+import { dispatchRef } from '@/relay'
+import { isLess } from '@/rollTemplates/expressions'
 
 export default async (components, customDispatch) => {
-  const dispatch = customDispatch || dispatchRef.value; // Need a different Relay instance when handling sheet-actions
-  let subtitle;
-  const rolls = {};
+  const dispatch = customDispatch || dispatchRef.value // Need a different Relay instance when handling sheet-actions
+  let subtitle
+  const rolls = {}
   for (const i in components) {
-    const component = components[i];
+    const component = components[i]
     if (component.sides) {
-      const sides = component.sides;
-      const dieCount = component.count ?? 1;
-      rolls[`dice-${i}`] = `${dieCount}d${sides} with text`;
+      const sides = component.sides
+      const dieCount = component.count ?? 1
+      rolls[`dice-${i}`] = `${dieCount}d${sides} with text`
     } else if (component.formula) {
-      rolls[`dice-${i}`] = component.formula;
+      rolls[`dice-${i}`] = component.formula
     }
   }
-  const rollResult = await dispatch.roll({rolls});
+  const rollResult = await dispatch.roll({ rolls })
 
   for (const rollTerm in rollResult.results) {
-    const result = rollResult.results[rollTerm];
-    const rollIndex = parseInt(rollTerm.split(`-`)[1]);
-    const component = components[rollIndex];
-    component.value = result.results.result;
+    const result = rollResult.results[rollTerm]
+    const rollIndex = parseInt(rollTerm.split(`-`)[1])
+    const component = components[rollIndex]
+    component.value = result.results.result
     if (!component.label) {
-      component.label = result.results.expression;
+      component.label = result.results.expression
     }
 
     /*
@@ -32,44 +32,44 @@ export default async (components, customDispatch) => {
     it's a complicated thing that Beacon already has to do as it is lol
 		*/
     if (component.rollFormula) {
-      console.log(`component.rollFormula: ${component.rollFormula}`);
-      const rollParts = [];
-      const overallSum = component.value;
-      let diceSum = 0;
+      console.log(`component.rollFormula: ${component.rollFormula}`)
+      const rollParts = []
+      const overallSum = component.value
+      let diceSum = 0
       if (result.results.rolls) {
         for (const subcomponent of result.results.rolls) {
-          const sum = subcomponent.results.reduce((sum, result) => sum + result, 0);
-          diceSum += sum;
-          const sublabel = `${subcomponent.dice}d${subcomponent.sides}`;
+          const sum = subcomponent.results.reduce((sum, result) => sum + result, 0)
+          diceSum += sum
+          const sublabel = `${subcomponent.dice}d${subcomponent.sides}`
           // check for any defined roll expressions and proceed
           if (component.rollFormula === 'isLess()') {
-            const test = isLess(sum, component.target) === true ? 'Success' : 'Failure';
-            subtitle = test;
+            const test = isLess(sum, component.target) === true ? 'Success' : 'Failure'
+            subtitle = test
             rollParts.push({
               sides: subcomponent.sides,
               count: subcomponent.dice,
               value: sum,
               label: component.label ? `${test}: ${component.label} ${component.target} vs ` : sublabel
-            });
+            })
           } else if (!component.rollFormula) {
-            console.log(`No rollFormula detected`);
+            console.log(`No rollFormula detected`)
             rollParts.push({
               sides: subcomponent.sides,
               count: subcomponent.dice,
               value: sum,
               label: component.label ? `${component.label} [${sublabel}]` : sublabel
-            });
+            })
           }
         }
 
         rollParts.push({
           label: `Manual Bonus`,
           value: overallSum - diceSum
-        });
+        })
       }
-      components.splice(rollIndex, 1, ...rollParts);
+      components.splice(rollIndex, 1, ...rollParts)
     }
   }
-  const total = components.reduce((accum, next) => accum + (next?.value || 0), 0);
-  return {total, components, subtitle};
-};
+  const total = components.reduce((accum, next) => accum + (next?.value || 0), 0)
+  return { total, components, subtitle }
+}

@@ -1,7 +1,7 @@
 <script setup>
-import {useSheetStore} from '@/stores/sheetStore.js';
+import { useSheetStore } from '@/stores/sheetStore.js'
 // The sheet store is where you want to be to customize what data / fields are on your sheet.
-const sheet = useSheetStore();
+const sheet = useSheetStore()
 </script>
 
 <template>

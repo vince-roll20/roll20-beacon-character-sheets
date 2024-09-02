@@ -1,1 +1,1 @@
-export const getDice = (components) => components.filter((prop) => prop.sides || prop.rollFormula);
+export const getDice = (components) => components.filter((prop) => prop.sides || prop.rollFormula)

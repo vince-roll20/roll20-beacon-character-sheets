@@ -1,1 +1,1 @@
-export const isArray = (arg1) => Array.isArray(arg1);
+export const isArray = (arg1) => Array.isArray(arg1)
