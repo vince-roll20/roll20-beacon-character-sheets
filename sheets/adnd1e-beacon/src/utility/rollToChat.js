@@ -6,15 +6,16 @@ import getRollResult from './getRollResults.js'
 export default async ({ rollObj, customDispatch, rollType = 'base' }) => {
   const dispatch = customDispatch || dispatchRef.value // Need a different Relay instance when handling sheet-actions
   // Use Beacon to make the rolls and calculations. We end up with a Roll Result.
-  // components are used to make up the roll and provide the details of the roll
-  // total is the summation of the roll
-  // subtitle passes success or failure to subtitle for isLess, isGreater rolls
+  // components: are used to make up the roll and provide the details of the roll
+  // total: is the summation of the roll
+  // subtitle: passes success or failure to subtitle for isLess, isGreater, etc.
   const { components, total, subtitle } = await getRollResult(rollObj.components, dispatch)
+  // Set the subtitle explicitly
+  rollObj.subtitle = subtitle
   // Pass in the roll result to Handlebars and get HTML to render the roll template
   const rollTemplate = createRollTemplate({
     type: rollType, // We have 2 roll templates, "roll" and "chat". We will use "roll" for this.
     parameters: {
-      ...(rollObj.subtitle = subtitle),
       ...rollObj,
       components
     }

@@ -5,7 +5,6 @@ import { arrayToObject, getRollResults, objectToArray, rollToChat } from '@/util
 import { dispatchRef, initValues } from '@/relay/index.js'
 import { createRollTemplate } from '@/rollTemplates/index.js'
 import { useMetaStore } from './metaStore'
-import { isLess } from '@/rollTemplates/expressions'
 
 /*
 This function will leverage the beacon SDK to render a roll template to the chat log.
