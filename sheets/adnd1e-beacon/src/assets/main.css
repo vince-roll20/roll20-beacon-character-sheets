@@ -43,6 +43,13 @@ input[readonly] {
   width: 8em;
 }
 
+.wrapper div label:hover button {
+  background-color: #FFF;
+  box-shadow: 2px 2px 2px #333;
+  color: #000;
+  cursor: pointer;
+}
+
 .span-all {
   grid-column: 1/-1;
   display: flex;
