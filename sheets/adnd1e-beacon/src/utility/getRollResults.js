@@ -67,9 +67,11 @@ export default async (components, customDispatch) => {
           value: overallSum - diceSum
         })
       }
+
       components.splice(rollIndex, 1, ...rollParts)
     }
   }
+
   const total = components.reduce((accum, next) => accum + (next?.value || 0), 0)
   return { total, components, subtitle }
 }
