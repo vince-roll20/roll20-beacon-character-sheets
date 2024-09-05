@@ -1,6 +1,7 @@
 import { createRollTemplate } from '@/rollTemplates/index.js'
 import { dispatchRef, initValues } from '@/relay'
 import getRollResult from './getRollResults.js'
+import { query } from 'jsonpath'
 
 /* Example function for Rolling a basic check and showing the roll template. */
 export default async ({ rollObj, customDispatch, rollType = 'base' }) => {

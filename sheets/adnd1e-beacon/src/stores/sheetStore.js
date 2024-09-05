@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed, watch } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
-import { arrayToObject, getRollResults, objectToArray, rollToChat } from '@/utility'
+import { arrayToObject, objectToArray, rollToChat } from '@/utility'
 import { dispatchRef, initValues } from '@/relay/index.js'
 import { createRollTemplate } from '@/rollTemplates/index.js'
 import { useMetaStore } from './metaStore'
