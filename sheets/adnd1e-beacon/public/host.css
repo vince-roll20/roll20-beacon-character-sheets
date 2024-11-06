@@ -1,0 +1,69 @@
+.add1e-template .header {
+  border-radius: 10px 10px 0 0;
+}
+
+rolltemplate.add1e-template {
+  outline: 2px solid #000;
+  display: block;
+  max-width: 100%;
+  border-radius: 0.5rem;
+}
+rolltemplate.add1e-template .header {
+  text-align: center;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem 0.5rem 0 0;
+  background-color: #000;
+  color: #fff;
+}
+rolltemplate.add1e-template .header__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+rolltemplate.add1e-template .header__subtitle {
+  font-size: 1rem;
+}
+rolltemplate.add1e-template .body {
+  padding: 0.5rem;
+}
+rolltemplate.add1e-template .body hr {
+  margin: 0.5rem 0;
+}
+rolltemplate.add1e-template .body details:hover {
+  cursor: pointer;
+  font-weight: bold;
+}
+rolltemplate.add1e-template .body details[open] {
+  cursor: default;
+  font-weight: normal;
+  outline: 1px solid #666;
+  padding: 2px;
+  border-radius: 4px;
+}
+rolltemplate.add1e-template .body details[open] summary {
+  cursor: pointer;
+  position: relative;
+  margin-top: -8px;
+  margin-bottom: -3px;
+}
+rolltemplate.add1e-template .key-values__pair {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.25rem 0;
+  gap: 0.5rem;
+}
+rolltemplate.add1e-template .key-values__key {
+  font-weight: 600;
+}
+rolltemplate.add1e-template .roll__total {
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 0.5rem 0;
+}
+rolltemplate.add1e-template .roll__components {
+  display: flex;
+  gap: 0.5rem;
+}
+rolltemplate.add1e-template .roll__components .component__value {
+  font-weight: 600;
+}

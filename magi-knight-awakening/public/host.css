@@ -1,0 +1,110 @@
+.magiknight-template .header {
+  border-radius: 10px 10px 0 0;
+  color: var(--masterBack);
+}
+
+rolltemplate.magiknight-template {
+  --lm-masterBack: white;
+  --dm-masterBack: #1f1f1f;
+  --masterBack: var(--lm-masterBack);
+  --lm-backColor:transparent;
+  --dm-backColor:blue;
+  --backColor: var(--lm-backColor);
+  --lm-color:black;
+  --dm-color:#ede9da;
+  --color: var(--lm-color);
+  --lm-borderColor: black;
+  --dm-borderColor: #4087e5;
+  --borderColor: var(--lm-borderColor);
+  --lm-header-blue: #153859;
+  --dm-header-blue: #3337f3;
+  --header-blue: var(--lm-header-blue);
+  --error-red: #dc0508;
+  /* spacing */
+  --gap: 1em;
+  --half-gap: calc(var(--gap) / 2);
+  --tiny-gap: calc(var(--half-gap) / 2);
+  --big-gap: calc(var(--gap) * 2);
+  /* images */
+  --crownImage: url("./crown.png");
+  --swordImage: url("./sword.png");
+  --abilityImage: url("./ability-circle.png");
+  --moon1Image:url("./moon1.png");
+  --moon2Image:url("./moon2.png");
+  --moon3Image:url("./moon3.png");
+  --moon4Image:url("./moon4.png");
+  --moon5Image:url("./moon5.png");
+  --moon6Image:url("./moon6.png");
+  --moon7Image:url("./moon7.png");
+  --moon8Image:url("./moon8.png");
+  --eclipseBorder: url("./eclipse-border.png");
+  display: block;
+  max-width: 100%;
+  border-radius: 0.5rem;
+  background: white;
+  color: black;
+}
+rolltemplate.magiknight-template .header {
+  background-color: var(--header-blue);
+  text-align: center;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem 0.5rem 0 0;
+  color: white;
+}
+rolltemplate.magiknight-template .header__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+rolltemplate.magiknight-template .header__subtitle {
+  font-size: 1rem;
+}
+rolltemplate.magiknight-template .body {
+  padding: 0.5rem;
+}
+rolltemplate.magiknight-template .body hr {
+  margin: 0.5rem 0;
+}
+rolltemplate.magiknight-template .body .trait-list {
+  display: flex;
+  gap: 0.5rem;
+}
+rolltemplate.magiknight-template .body .trait-list .trait {
+  font-style: italic;
+}
+rolltemplate.magiknight-template .key-values__pair {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.25rem 0;
+  gap: 0.5rem;
+}
+rolltemplate.magiknight-template .key-values__key {
+  font-weight: 600;
+}
+rolltemplate.magiknight-template .roll__total {
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 0.5rem 0;
+}
+rolltemplate.magiknight-template .roll__components {
+  display: flex;
+  gap: 0.5rem;
+}
+rolltemplate.magiknight-template .roll__components .component__value {
+  font-weight: 600;
+}
+rolltemplate.magiknight-template .hero-die {
+  text-align: center;
+}
+rolltemplate.magiknight-template .hero-die__button {
+  display: inline-block;
+  padding: 0.25rem;
+  transition: background-color 0.2s ease-in-out;
+  border-radius: 0.25rem;
+  background-color: var(--examplesheet-primary);
+  color: white;
+}
+rolltemplate.magiknight-template .hero-die__button:hover {
+  background-color: var(--examplesheet-secondary);
+  color: black;
+}
