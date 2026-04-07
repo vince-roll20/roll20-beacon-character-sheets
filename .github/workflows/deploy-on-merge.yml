@@ -61,7 +61,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: ${{ steps.detect.outputs.detected_folder }}
-        run: npm ci
+        run: npm i
 
       - name: Build application
         working-directory: ${{ steps.detect.outputs.detected_folder }}
