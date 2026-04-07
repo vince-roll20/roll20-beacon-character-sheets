@@ -189,7 +189,7 @@ const visibleFulfillments = computed(() => {
 
 <style lang="scss" scoped>
   .card {
-    width: 184px;
+    width: var(--card-width);
     height: var(--card-height);
     --color-textinput-line: var(--color-herocard-line);
     --color-section-title-background: var(--color-herocard-line);

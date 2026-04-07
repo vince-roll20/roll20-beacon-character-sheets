@@ -73,7 +73,7 @@ const isTag = computed(() => {
   display: inline-block;
   border: 2px solid rgba(0, 0, 0, 0.0);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  min-width: 184px;
+  min-width: var(--card-width);
   border: 2px solid #a4b5a6;
   box-sizing: border-box;
   &__label {
