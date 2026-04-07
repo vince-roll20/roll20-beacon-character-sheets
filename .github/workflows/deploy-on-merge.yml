@@ -65,6 +65,9 @@ jobs:
 
       - name: Build application
         working-directory: ${{ steps.detect.outputs.detected_folder }}
+        env:
+          VITE_SHEET_PATH: https://cdn.roll20.net/${{ secrets.GCS_BUCKET_NAME }}
+          VITE_SHEET_SHORT_NAME: ${{ steps.detect.outputs.target_folder }}
         run: npm run build
 
       - name: Deploy to Google Cloud Storage
