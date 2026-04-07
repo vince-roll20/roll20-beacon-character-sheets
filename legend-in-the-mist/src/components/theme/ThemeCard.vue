@@ -197,7 +197,7 @@ const showScrollbar = computed(() => {
     --color-themecard-line: #e6e6ea;
   }
   .card {
-    width: 184px;
+    width: var(--card-width);
     height: var(--card-height);
     --color-textinput-line: var(--color-themecard-line);
     --color-section-title-background: var(--color-themecard-line);
