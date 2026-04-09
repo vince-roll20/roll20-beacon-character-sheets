@@ -1,5 +1,5 @@
-#!/usr/bin/env zsh
-set -euo pipefail
+#!/usr/bin/env sh
+set -eu
 
 REPO_ROOT="$(git rev-parse --show-toplevel)"
 APPROVED_FILE="$REPO_ROOT/approved.yaml"
@@ -10,28 +10,32 @@ if [ ! -f "$APPROVED_FILE" ]; then
 fi
 
 # Read folder names from approved.yaml
-FOLDERS=("${(@f)$(yq e '.folders | keys | .[]' "$APPROVED_FILE")}")
+FOLDERS=$(yq e '.folders | keys | .[]' "$APPROVED_FILE")
 
-if [ ${#FOLDERS[@]} -eq 0 ]; then
+if [ -z "$FOLDERS" ]; then
   echo "Error: No folders found in approved.yaml" >&2
   exit 1
 fi
 
+COUNT=0
 echo "Select a sheet to deploy:"
 echo ""
-for i in {1..${#FOLDERS[@]}}; do
-  printf "  %d) %s\n" "$i" "${FOLDERS[$i]}"
+echo "$FOLDERS" | while IFS= read -r folder; do
+  COUNT=$((COUNT + 1))
+  printf "  %d) %s\n" "$COUNT" "$folder"
 done
+COUNT=$(echo "$FOLDERS" | wc -l | tr -d ' ')
 echo ""
 
-read -r "CHOICE?Enter number (1-${#FOLDERS[@]}): "
+printf "Enter number (1-%s): " "$COUNT"
+read -r CHOICE
 
-if ! [[ "$CHOICE" =~ ^[0-9]+$ ]] || [ "$CHOICE" -lt 1 ] || [ "$CHOICE" -gt ${#FOLDERS[@]} ]; then
+if ! echo "$CHOICE" | grep -qE '^[0-9]+$' || [ "$CHOICE" -lt 1 ] || [ "$CHOICE" -gt "$COUNT" ]; then
   echo "Error: Invalid selection" >&2
   exit 1
 fi
 
-SELECTED="${FOLDERS[$CHOICE]}"
+SELECTED=$(echo "$FOLDERS" | sed -n "${CHOICE}p")
 echo ""
 echo "Deploying: $SELECTED"
 gh workflow run "Deploy on PR Merge" -f "folder=$SELECTED"
