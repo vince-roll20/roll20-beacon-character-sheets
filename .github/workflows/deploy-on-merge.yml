@@ -135,7 +135,7 @@ jobs:
       - name: Build application
         env:
           VITE_SHEET_PATH: https://cdn.roll20.net/${{ secrets.GCS_BUCKET_NAME }}
-          VITE_SHEET_SHORT_NAME: ${{ steps.detect.outputs.target_folder }}
+          VITE_SHEET_SHORT_NAME: ${{ needs.detect.outputs.target_folder }}
         working-directory: ${{ needs.detect.outputs.detected_folder }}
         run: npm run build
 
