@@ -130,7 +130,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: ${{ needs.detect.outputs.detected_folder }}
-        run: npm ci
+        run: npm i
 
       - name: Build application
         env:
