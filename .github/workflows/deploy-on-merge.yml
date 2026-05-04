@@ -132,9 +132,20 @@ jobs:
         working-directory: ${{ needs.detect.outputs.detected_folder }}
         run: npm i
 
+      - name: Compute CDN path
+        id: cdn_path
+        env:
+          GCS_BUCKET_NAME: ${{ secrets.GCS_BUCKET_NAME }}
+        run: |
+          # Strip the leading bucket segment from GCS_BUCKET_NAME so the public
+          # URL on cdn.roll20.net (which already maps to that bucket at its
+          # root) doesn't end up with a duplicated bucket prefix.
+          CDN_PATH="${GCS_BUCKET_NAME#*/}"
+          echo "cdn_path=$CDN_PATH" >> "$GITHUB_OUTPUT"
+
       - name: Build application
         env:
-          VITE_SHEET_PATH: https://cdn.roll20.net/${{ secrets.GCS_BUCKET_NAME }}
+          VITE_SHEET_PATH: https://cdn.roll20.net/${{ steps.cdn_path.outputs.cdn_path }}
           VITE_SHEET_SHORT_NAME: ${{ needs.detect.outputs.target_folder }}
         working-directory: ${{ needs.detect.outputs.detected_folder }}
         run: npm run build
