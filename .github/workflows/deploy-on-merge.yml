@@ -158,13 +158,17 @@ jobs:
 
           echo "Deploying $DETECTED_FOLDER to gs://$BUCKET_NAME/$TARGET_FOLDER/"
 
-          gsutil -m rsync -r -d "$DETECTED_FOLDER/dist" "gs://$BUCKET_NAME/$TARGET_FOLDER/"
+          # Sheet entry filenames (sheet.js, sheet.css, assets/[name][extname])
+          # are unhashed, so we tell the CDN/browser not to cache them.
+          CACHE_CONTROL="no-cache, max-age=0, must-revalidate"
+
+          gsutil -m -h "Cache-Control:$CACHE_CONTROL" rsync -r -d "$DETECTED_FOLDER/dist" "gs://$BUCKET_NAME/$TARGET_FOLDER/"
 
           # Upload preview.png and sheet.json from the sheet root if they exist
           for FILE in preview.png sheet.json; do
             if [ -f "$DETECTED_FOLDER/$FILE" ]; then
               echo "Uploading $FILE"
-              gsutil cp "$DETECTED_FOLDER/$FILE" "gs://$BUCKET_NAME/$TARGET_FOLDER/$FILE"
+              gsutil -h "Cache-Control:$CACHE_CONTROL" cp "$DETECTED_FOLDER/$FILE" "gs://$BUCKET_NAME/$TARGET_FOLDER/$FILE"
             else
               echo "::warning::$FILE not found in $DETECTED_FOLDER"
             fi
