@@ -9,6 +9,7 @@ import { useSettingsStore } from '@/sheet/stores/settings/settingsStore';
 import { useMetaStore } from '@/sheet/stores/meta/metaStore';
 import { useAbilityScoreStore } from '../abilityScores/abilityScoresStore';
 import { useCharacterStore } from '../character/characterStore';
+import { powerFatiguePenalty } from '@/utility/arcanaPower';
 
 // See "inventoryStore.ts" for an explanation of how to use list/repeating sections
 interface Spell {
@@ -19,6 +20,7 @@ interface Spell {
   shortDescription: string;
   description: string;
   ability:string;
+  abilityFocus?:string;
   spellType:string;
   spellTypeBonus:number;
   mpCost:number;
@@ -28,6 +30,8 @@ interface Spell {
   extendable:boolean;
   damageHit:string;
   damageMiss:string;
+  fatigue?:number;
+  resistance?:string;
 }
 
 export type SpellsHydrate = {
@@ -41,8 +45,7 @@ export const useSpellStore = defineStore('spells', () => {
   const spellsCount: ComputedRef<number> = computed(() => spells.value.length);
   let selectedSpell = {}
   const addSpell = (spell?:any) => {
-    // debugger
-    spells.value.push({
+    const newSpell = {
       _id: uuidv4(),
       name: spell ? spell?.name : '',
       arcanaType: spell ? spell?.arcanaType : '',
@@ -50,44 +53,68 @@ export const useSpellStore = defineStore('spells', () => {
       shortDescription: spell ? spell?.shortDescription : '',
       description: spell ? spell?.description : '',
       ability:spell ? spell?.ability : '',
+      abilityFocus:spell ? spell?.abilityFocus : '',
       spellType:spell ? spell?.spellType : '',
       spellTypeBonus:spell ? spell?.spellTypeBonus : 0,
       mpCost:spell ? spell?.mpCost : 0,
       castingTime:spell ? spell?.castingTime : '',
       targetNumber:spell ? spell?.targetNumber : 0,
       spellTest:spell ? spell?.spellTest : '',
+      spellResistance:spell ? spell?.spellResistance : '',
       extendable:spell ? spell?.extendable : false,
       damageHit:spell ? spell?.damageHit : '',
       damageMiss:spell ? spell?.damageMiss : '',
-    });
+    }
+    if(spell.fatigue){
+      Object.assign(newSpell, { fatigue: spell.fatigue });
+    }
+    spells.value.push(newSpell);
   }
   const removeSpell = (_id: string) => {
     const indexToRemove = spells.value.findIndex((spells) => spells._id === _id);
     if (indexToRemove >= 0) spells.value.splice(indexToRemove, 1);
   };
 
-  const printSpell = async (_id: string, bonus?:number) => {
+  const printSpell = async (_id: string, bonus?:number, familiarity:number = 0) => {
+    const settings = useSettingsStore();
     const spell = spells.value.find((item) => item._id === _id);
     if (!spell) return;
+    const modifier = ref(0);
+
     const components:any[] = [
       { label: `Base Roll`, sides: 6, count:3, alwaysShowInBreakdown: true },
+      { label: spell.ability, value: Number(bonus) },
     ];
     const aim = useSettingsStore().aim
     if(useSettingsStore().aim){
-
       components.push(
         { label: 'Aim', value: useSettingsStore().aimValue  }
       )  
     }
-    spendMP(spell.mpCost);
+    if( powerFatiguePenalty.value > 0 && settings.userPowerFatigue){
+      components.push({ label: 'Power Fatigue', value: powerFatiguePenalty.value * -1 });
+    }
+    // if (familiarity) {
+    //   components.push(
+    //     { label: 'Familiarity', value: familiarity },
+    //   );
+    // }
+    // components.push(      
+    //   { label: 'Modifier', value: modifier.value },
+    // );
+    if (settings.gameSystem !== 'blue rose') {
+      spendMP(spell.mpCost);
+    }
     const ability = useAbilityScoreStore();
+    const spellResistance = settings.gameSystem === 'blue rose' ? spell.spellTest : 'Spellpower ('+ (10 + Number(ability.WillpowerBase))+')';
+    const spellTest = settings.gameSystem === 'blue rose' ? spell.ability + ` (${spell.abilityFocus}) <br /> vs. ${spellResistance}` : '';
+    
     await rollToChat({
       title: spell.name,
       subtitle: spell.spellType,
       characterName: useMetaStore().name,
-      allowHeroDie: false,
-      textContent:spell.spellTest ? spell.spellTest + '<br /> vs. Spellpower ('+ (10 + Number(ability.WillpowerBase))+')' : '',
-      targetNumber:spell.targetNumber,
+      textContent: spellTest,
+      targetNumber:spell.targetNumber + familiarity,
       components
     });
   };
@@ -104,8 +131,7 @@ export const useSpellStore = defineStore('spells', () => {
     const missNumberOfDice = parseInt(miss![1]);
     const missSidesOfDice = parseInt(miss![2])
     const missModifier = miss![3] ? parseInt(miss![3]) : 0;
-    console.log([ { label: `Miss Roll`, sides: missNumberOfDice, count:missSidesOfDice, alwaysShowInBreakdown: true },
-      { label: 'Modifier', value: missModifier },])
+
     const components = [
       { label: `Base Roll`, sides: sidesOfDice, count:numberOfDice, alwaysShowInBreakdown: true },
       { label: 'Modifier', value: modifier },
@@ -117,12 +143,18 @@ export const useSpellStore = defineStore('spells', () => {
     await rollToChat({
       characterName: useMetaStore().name,
       title: spell.name,
-      allowHeroDie: false,
-      rollType:'spellDamage',
-      components,
-      secondaryComponents
+      rollType: 'damage',
+      components
     });
   }
+  const printSpellDetails = async (spell: any, arcanaLabel: string) => {
+      await sendToChat({
+        title: spell.name,
+        subtitle: spell.arcanaType,
+        traits: [ arcanaLabel + ' Type: ' + spell.arcanaType],
+        description: spell.description,
+      });
+    }
   const setCurrentSpell = (_id: string) => {
     const spell = spells.value.find((item) => item._id === _id);
     if (!spell) return;
@@ -161,6 +193,7 @@ export const useSpellStore = defineStore('spells', () => {
     removeSpell,
     printSpell,
     printSpellDamage,
+    printSpellDetails,
     setCurrentSpell,
 
     dehydrate,

@@ -51,8 +51,8 @@
           </div>     
         </div>
         </div>
-        <CurrencyView v-if="settings.gameSystem === 'fage2e'" />
-        <ResourcesView v-if="settings.gameSystem === 'mage' || settings.gameSystem === 'cthulhu' || settings.gameSystem === 'expanse'" />
+        <CurrencyView v-if="settings.incomeMode === 'currency'" />
+        <ResourcesView v-if="settings.incomeMode === 'recources'" />
       </div>
     </div>
   </div>
@@ -104,8 +104,6 @@ const filteredItems = computed(() => {
     // Only include items where every word in searchQuery matches part of the name
     // return queryWords.every(word => (itemName.includes(word) && word.type === itemType));
     const matchesQuery = queryWords.every(word => itemName.includes(word));
-    // console.log(debouncedItemType.value)
-    // console.log(item.type)
     const matchesType = !debouncedItemType.value || item.type.toLowerCase() === debouncedItemType.value;
 
     return matchesQuery && matchesType;
@@ -118,7 +116,9 @@ const itemNew = ref({
   slots: '',
   name: '',
   description: '',
-  quantity: 1
+  quantity: 1,
+  qualities: '',
+  flaws: '',
 })
 function resetItem(){
   itemNew.value = {
@@ -127,9 +127,12 @@ function resetItem(){
     slots: '',
     name: '',
     description: '',
-    quantity: 1
+    quantity: 1,
+	qualities: '',
+	flaws: '',
   }
 }
+
 </script>
 
 <style scoped lang="scss">

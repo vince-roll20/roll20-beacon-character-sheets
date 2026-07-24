@@ -8,6 +8,7 @@ import rollToChat from '@/utility/rollToChat';
 import { useSettingsStore } from '@/sheet/stores/settings/settingsStore';
 import { useCharacterStore } from '@/sheet/stores/character/characterStore';
 import { useMetaStore } from '@/sheet/stores/meta/metaStore';
+import { powerFatiguePenalty } from '@/utility/arcanaPower';
 // See "inventoryStore.ts" for an explanation of how to use list/repeating sections
 interface Attack {
   weaponType: string;
@@ -16,6 +17,8 @@ interface Attack {
   description: string;
   ability:string;
   damage:string;
+  damageQualities?: string;
+  damageFlaws?: string;
   weaponGroup:string;
   weaponGroupAbility:string;
   shortRange:number | null;
@@ -113,6 +116,7 @@ export const useAttackStore = defineStore('attacks', () => {
 
   const printAttack = async (weapon: any, bonus?:number,focus?:any) => {
     if (!weapon) return;
+    const settings = useSettingsStore();
     const components = [
       { label: `Base Roll`, sides: 6, count:3, alwaysShowInBreakdown: true },
       { label: weapon.weaponGroupAbility, value: Number(bonus) },
@@ -120,17 +124,21 @@ export const useAttackStore = defineStore('attacks', () => {
     ];
     const aim = useSettingsStore().aim
     if(useSettingsStore().aim){
-
       components.push(
         { label: 'Aim', value: useSettingsStore().aimValue  }
       )  
     }
-    
+    if( powerFatiguePenalty.value > 0 && settings.userPowerFatigue){
+      components.push({ label: 'Power Fatigue', value: powerFatiguePenalty.value * -1 });
+    }
     await rollToChat({
       characterName: useMetaStore().name,
       title: weapon.name,
-      allowHeroDie: false,
-      rollType:'attack',
+      rollType: 'attack',
+      keyValues: {
+        'Damage Qualities': weapon.damageQualities || '',
+        'Damage Flaws': weapon.damageFlaws || '',
+      },
       components
     });
   };
@@ -139,7 +147,12 @@ export const useAttackStore = defineStore('attacks', () => {
     await sendToChat({
       title: weapon.name,
       subtitle: weapon.weaponType,
-      traits: ['Weapon Type: ' + weapon.weaponType, 'Weapon Group: ' + weapon.weaponGroup],
+      traits: [
+  'Weapon Type: ' + weapon.weaponType,
+  weapon.weaponGroup ? 'Weapon Group: ' + weapon.weaponGroup : '',
+  weapon.damageQualities ? 'Damage Qualities: ' + weapon.damageQualities : '',
+  weapon.damageFlaws ? 'Damage Flaws: ' + weapon.damageFlaws : '',
+].filter(Boolean),
       description: weapon.description,
     });
   }
@@ -158,9 +171,6 @@ export const useAttackStore = defineStore('attacks', () => {
     } else {
       modifier.value = parseInt(attackDamageOptions[1]);
     }
-    console.log(baseDamage.value)
-    console.log(secondaryDamage.value)
-    console.log(modifier.value) 
 
     const diceRegex: RegExp = /^(\d+)d(\d+)$/;
     const parseDice = (diceString: string): string[] | null => {
@@ -172,8 +182,6 @@ export const useAttackStore = defineStore('attacks', () => {
     // const baseNumberOfDice = parseInt(parseDice(baseDamage.value ? baseDamage.value[0]: 0));
     // const baseSidesOfDice = baseDamage.value
     // const match = baseDamage.value.match(diceRegex);
-    // console.log(parseDice(baseDamage.value))
-    // console.log(parseDice(secondaryDamage.value))
 
     // const modifier = match![3] ? parseInt(match![3]) : 0;
 
@@ -181,30 +189,35 @@ export const useAttackStore = defineStore('attacks', () => {
     const sidesOfDice = parseDice(baseDamage.value)?.[1];
     
     const components:any = [
-      { label: `Base Roll`, sides: sidesOfDice, count:numberOfDice, alwaysShowInBreakdown: true },
+      { label: `Base Roll`, sides: sidesOfDice, count:numberOfDice, alwaysShowInBreakdown: true, trained: attack.trained },
     ];
+
     if(secondaryDamage.value){
       components.push(      
         { label: `Bonus Roll`, sides: parseDice(secondaryDamage.value)?.[1], count:parseDice(secondaryDamage.value)?.[0], alwaysShowInBreakdown: true },
       );
     }
     components.push(      
-      { label: 'Modifier', value: modifier.value },
+      { label: 'Modifier', value: isNaN(modifier.value) ? 0 : modifier.value }, // Ensure modifier is a number
     );
-
     await rollToChat({
       characterName: useMetaStore().name,
       title: attack.name,
-      allowHeroDie: false,
-      rollType:'damage',
+      rollType: 'damage',
+      keyValues: {
+        'Damage Qualities': attack.damageQualities || '',
+        'Damage Flaws': attack.damageFlaws || '',
+      },
       components
     });
-  }
+  };
   const setCurrentAttack = (_id: string) => {
     const attack = attacks.value.find((item) => item._id === _id);
     if (!attack) return;
     selectedAttack = attack;
   };
+
+  
   /*
    * Firebase is not able to store Arrays, so the items array must be stored as an object indexed by the _id
    * */

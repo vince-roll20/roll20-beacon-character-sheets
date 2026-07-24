@@ -1,8 +1,7 @@
 <template>
-    <div style="    display: grid;
-    gap: 10px;
-    grid-template-columns: 1fr 1fr 1fr 50px;">
-    <div>
+    <div style="display: grid;gap: 10px;grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));width: 100%;">
+    <!-- <div style="display: flex;gap: 10px;width: 100%;flex-wrap: wrap;"> -->
+    <div >
         <input type="text"  class="form-control" placeholder="Attack Name"  v-model="mod.name" />
     </div>
     <div>
@@ -14,7 +13,7 @@
                 <option v-for="abl in abilities" :key="abl" :value="abl">{{ abl }}</option>
         </select>
     </div>
-    <div>
+    <div >
         <select class="age-atk-select form-select"
                 data-testid="test-spell-weaponType-input"
                 v-model="mod.weaponType"
@@ -22,12 +21,34 @@
                 <option v-for="wt in weaponTypes" :key="wt" :value="wt">{{ wt }}</option>
         </select>
     </div>
+    <div v-if="mod.weaponType === 'Spell Ranged' || mod.weaponType === 'Ranged'">
+        <input type="number"  class="form-control" placeholder="Short Range"  v-model="mod.shortRange" />
+    </div>
+    <div v-if="mod.weaponType === 'Spell Ranged' || mod.weaponType === 'Ranged'">
+        <input type="number"  class="form-control" placeholder="Long Range"  v-model="mod.longRange" />
+    </div>
     <div>
         <input type="text"  class="form-control" placeholder="1d6"  v-model="mod.damage" />
-
     </div>
+	<div>
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Qualities"
+    v-model="mod.damageQualities"
+  />
+</div>
+<div>
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Flaws"
+    v-model="mod.damageFlaws"
+  />
+</div>
                       
     </div>
+   
 </template>
 <script setup>
 import { ref } from 'vue';

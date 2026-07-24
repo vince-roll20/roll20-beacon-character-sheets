@@ -7,6 +7,7 @@
             <button type="button" class="btn-close" @click="$emit('close')" aria-label="Close"></button>
 
             </div>
+            
             <div class="modal-body" style="display: flex;max-width: fit-content;">
               <div style="flex:1;min-width: 300px;">
                 <div class="row" style="margin:0">
@@ -44,14 +45,43 @@
                     </div>
                   </div>
                 </div>
-                <div class="row" style="margin:0">
-                  <div class="mb-3 col">
-                    <span class="age-input-label" id="basic-addon1">Cost</span>
-                    <div>
-                      <input type="text" class="form-control" aria-label="Quantity" v-model="item.cost"  aria-describedby="basic-addon1">
-                    </div>
-                  </div>
-                </div>
+                                 <div class="row" style="margin:0">
+  <div class="mb-3 col">
+    <span class="age-input-label" id="basic-addon1">Cost</span>
+    <div>
+      <input
+        type="text"
+        class="form-control"
+        aria-label="Cost"
+        v-model="item.cost"
+        aria-describedby="basic-addon1"
+      >
+    </div>
+  </div>
+</div>
+
+
+            <div class="row" style="margin: 0">
+  <div class="mb-3 col">
+    <span class="age-input-label" id="basic-addon1">Item Qualities</span>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Qualities"
+      v-model="item.qualities"
+    />
+  </div>
+  <div class="mb-3 col">
+    <span class="age-input-label" id="basic-addon1">Item Flaws</span>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Flaws"
+      v-model="item.flaws"
+    />
+  </div>
+</div>
+
                 <div class="row" style="margin:0" v-if="isArmor || isShield">
 
                   <div class="mb-3 col" v-if="isArmor">
@@ -123,18 +153,42 @@
                 </div>
                 <div class="row" style="margin:0">
 
-                <div class="mb-3 col" >
+                  <div class="mb-3 col" v-if="settings.gameSystem === 'fage2e' || settings.gameSystem === 'blue rose'" >
                     <span class="age-input-label" id="basic-addon1">Weapon Group</span>
-                        <select
-                         class="age-atk-select form-select"
-                            data-testid="test-attack-weaponGroup-input"
-                            v-model="item.weaponGroup"  
-                            @change="setWeaponGroupAbility"
-
-                        >
+                      <select
+                        class="age-atk-select form-select"
+                          data-testid="test-attack-weaponGroup-input"
+                          v-model="item.weaponGroup"  
+                          @change="setWeaponGroupAbility">
                           <option v-for="wg in weaponGroups" :key="wg" :value="wg">{{ wg }}</option>
-                        </select>
-                </div>
+                      </select>
+                  </div>
+                  <div class="mb-3 col" v-else>
+                    <span class="age-input-label" id="basic-addon1">Weapon Ability</span>
+                      <select
+                        class="age-atk-select form-select"
+                          data-testid="test-attack-weaponGroup-input"
+                          v-model="item.weaponGroupAbility">
+                          <option value="Accuracy">Accuracy</option>
+                          <option value="Communication">Communication</option>
+                          <option value="Constitution">Constitution</option>
+                          <option value="Dexterity">Dexterity</option>
+                          <option value="Fighting">Fighting</option>
+                          <option value="Intelligence">Intelligence</option>
+                          <option value="Perception">Perception</option>
+                          <option value="Strength">Strength</option>
+                          <option value="Willpower">Willpower</option>
+                      </select>
+                  </div>
+                  <div class="mb-3 col" v-if="settings.gameSystem !== 'fage2e' && settings.gameSystem !== 'blue rose'" >
+                    <span class="age-input-label" id="basic-addon1">Weapon Focus</span>
+                      <select
+                        class="age-atk-select form-select"
+                          data-testid="test-attack-weaponGroup-input"
+                          v-model="item.weaponGroup" >
+                          <option v-for="wg in weaponGroups" :key="wg" :value="wg">{{ wg }}</option>
+                      </select>
+                  </div>
                 </div>
                 <div class="row" style="margin:0">
                   <div class="mb-3 col">
@@ -150,8 +204,33 @@
                         aria-describedby="basic-addon1" v-model="item.damage">
                   </div>
                 </div>
+				     <div class="row" style="margin:0">
+                  <div class="mb-3 col">
+                    <span class="age-input-label" id="basic-addon1">Damage Qualities</span>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Qualities"
+                      aria-label="Damage Qualities"
+                      v-model="item.damageQualities"
+                      aria-describedby="basic-addon1"
+                    />
+                  </div>
+
+                  <div class="mb-3 col">
+                    <span class="age-input-label" id="basic-addon1">Damage Flaws</span>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Flaws"
+                      aria-label="Damage Flaws"
+                      v-model="item.damageFlaws"
+                      aria-describedby="basic-addon1"
+                    />
+                  </div>
+                </div>
                 <div class="row" style="margin:0">
-                  <div class="mb-3 col" v-if="settings.gameSystem === 'mage'">
+                  <div class="mb-3 col" v-if="settings.gameSystem === 'mage' || settings.gameSystem === 'expanse'">
                     <span class="age-input-label" id="basic-addon1">Damage Source</span>
                         <select
                          class="age-atk-select form-select"
@@ -164,7 +243,7 @@
                           <option value="B">Ballistic</option>
                         </select>
                   </div>
-                  <div class="mb-3 col" v-if="settings.gameSystem === 'mage'">
+                  <div class="mb-3 col" v-if="settings.gameSystem === 'mage' || settings.gameSystem === 'expanse'">
                     <span class="age-input-label" id="basic-addon1">Damage Type</span>
                         <select
                          class="age-atk-select form-select"
@@ -206,6 +285,20 @@
                         </select>
                     </div>                        
                 </div>
+                </div>
+                <div class="row" style="margin:0">
+                  <div class="mb-3 col" v-if="item.weaponType === 'Ranged' && (settings.gameSystem === 'mage' || settings.gameSystem === 'expanse')">
+                        <span class="age-input-label" id="basic-addon1">Capacity</span>
+                        <div>
+                          <input type="number" class="form-control" aria-label="Character Name" v-model="item.capacity" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    <div class="mb-3 col" v-if="item.weaponType === 'Ranged' && (settings.gameSystem === 'mage' || settings.gameSystem === 'expanse')">
+                    <span class="age-input-label" id="basic-addon1">Rate of Fire</span>
+                    <div>
+                          <input type="text" class="form-control" aria-label="Character Name" v-model="item.rateOfFire" aria-describedby="basic-addon1">
+                    </div>                           
+                    </div>
                 </div>
                 <div v-if="item.weaponType === 'Spell Ranged'">
                     <div class="input-group mb-3">
@@ -257,8 +350,8 @@
 <script setup>
   import { useInventoryStore } from '@/sheet/stores/inventory/inventoryStore';
   import { computed, ref } from 'vue';
-  import { fage2eWG,mageWG } from '../attack/weaponGroups';
-  import { useSettingsStore } from '@/sheet/stores/settings/settingsStore'
+  import { fage2eWG,mageWG, blueRoseWG, expanseWG } from '../attack/weaponGroups';
+  import { useSettingsStore } from '@/sheet/stores/settings/settingsStore';
 
   const props = defineProps({
     show: Boolean,
@@ -271,6 +364,12 @@
   switch(settings.gameSystem){
     case 'mage':
       weaponGroups.value = mageWG;
+    break;
+    case 'blue rose':
+      weaponGroups.value = blueRoseWG;  
+    break;
+    case 'expanse':
+      weaponGroups.value = expanseWG;
     break;
     default:
       weaponGroups.value = fage2eWG;
@@ -291,11 +390,20 @@
       // ACCURACY
       case('Black Powder'):
       case('Bows'):
-      case('Brawling'):
       case('Dueling'):
-      case('Light Blades'):
       case('Slings'):
       case('Staves'):
+      case('Unarmed'):
+      case('Assault Rifles'):
+      case('Flexible'):
+      case('Grenades'):
+      case('Long Hafted'):
+      case('Longarms'):
+      case('Pistols'):
+      case('SMGs'):
+      case('Short Hafted'):
+      case('Shotguns'):
+      case('Thrown'):
         props.item.weaponGroupAbility = 'Accuracy';
       break;
       // FIGHTING
@@ -304,8 +412,12 @@
       case('Heavy Blades'):
       case('Lances'):
       case('Polearms'):
-      case('Spears'):
+      case('Spears'):      
         props.item.weaponGroupAbility = 'Fighting';
+      break;
+      case('Brawling'):
+      case('Light Blades'):
+        props.item.weaponGroupAbility = settings.gameSystem === 'fage2e' || settings.gameSystem === 'blue rose' ? 'Accuracy' : 'Fighting';
       break;
       default:
         props.item.weaponGroupAbility = ''
@@ -317,7 +429,13 @@
       props.item.configurable = true;
     }
   }
-const weaponTypes = ['Melee','Natural','Ranged','Spell Melee','Spell Ranged']
+  const weaponTypes = computed(() => {
+    if(settings.showArcana){
+      return ['Melee','Ranged','Spell Melee','Spell Ranged','Natural']
+    } else {
+      return ['Melee','Ranged','Natural']
+    }
+  });
 
   </script>
   <style>

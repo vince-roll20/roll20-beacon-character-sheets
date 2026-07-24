@@ -4,7 +4,7 @@
             <div class="label" data-testid="test-spell-header" style="flex:1;">{{ spell.name }}<br />({{ spell.requirements }})</div>     
         </div>
         <div>
-            <img v-if="spell.arcanaType" :src="'/src/assets/arcana/' + spell.arcanaType.toLowerCase() + '.png'" class="age-arcana-logo" v-tippy="{ content: '<span>'+spell.arcanaType+' Arcana</span>'}" />
+            <img v-if="spell.arcanaType && settings.gameSystem !== 'blue rose'" :src="'/src/assets/arcana/' + spell.arcanaType.toLowerCase() + '.png'" class="age-arcana-logo" v-tippy="{ content: '<span>'+spell.arcanaType+' '+ magicLabel+'</span>'}" />
         </div>   
         <!-- <div class="age-cost-tn-number" v-tippy="{ content: 'Magic Point Cost'}">
             <span>{{ spell.mpCost }}</span>
@@ -18,10 +18,10 @@
                 data-bs-target="#spellDetailsModal" 
                 data-bs-dismiss="showModal = false" 
                 data-bs-backdrop="static" 
-                v-tippy="{ content: 'Cast Arcana (' + spell.mpCost + 'MP)' }"
+                v-tippy="{ content: settings.gameSystem === 'blue rose' ? 'Cast '+magicLabel : 'Cast '+magicLabel+' (' + spell.mpCost + ''+magicPoints+')' }"
                 @click="handlePrint"
-                :disabled="(char.magic < spell.mpCost)"
-                :class="{ 'spell-btn-disabled':(char.magic < spell.mpCost)}">
+                :disabled="(settings.userPowerFatigue ? false : char.magic < spell.mpCost)"
+                :class="{ 'spell-btn-disabled':(settings.userPowerFatigue ? false : char.magic < spell.mpCost)}">
             <div class="age-spell-cast"></div>
         </button>
         <div>
@@ -32,7 +32,7 @@
                 data-bs-target="#spellDetailsModal" 
                 data-bs-dismiss="showModal = false" 
                 data-bs-backdrop="static" 
-                v-tippy="{ content: 'Arcana Damage' }"
+                v-tippy="{ content: magicLabel+ ' Damage' }"
                 @click="handleDamagePrint"
                 :disabled="(char.magic < spell.mpCost)"
                 :class="{ 'spell-btn-disabled':(char.magic < spell.mpCost)}">
@@ -40,10 +40,10 @@
         </button>
         </div>
         
-        <button type="button" class="config-btn age-icon-btn" @click="handlePrint" v-tippy="{ content: 'Share Arcana in chat'}">
+        <button type="button" class="config-btn age-icon-btn" @click="handleSpellDetails" v-tippy="{ content: 'Share '+magicLabel+' in chat'}">
           <font-awesome-icon :icon="['fa', 'comment']" />
         </button> 
-        <button type="button" class="config-btn age-icon-btn" @click="showModal = true" v-tippy="{ content: 'Edit Arcana'}">
+        <button type="button" class="config-btn age-icon-btn" @click="showModal = true" v-tippy="{ content: 'Edit '+magicLabel}">
             <font-awesome-icon :icon="['fa', 'gear']" />
         </button> 
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" :data-bs-target="'#collapse' + index"  aria-expanded="true" aria-controls="collapseOne"></button>
@@ -64,7 +64,7 @@
                 <span>{{ spell.spellType }}</span>
               <span class="age-spell-details__label">Casting Time</span>
                 <span>{{ spell.castingTime + ' Action' }}</span>
-              <span class="age-spell-details__label">MP Cost</span>
+              <span class="age-spell-details__label">{{ magicPoints }} </span>
                 <span>{{ spell.mpCost }}</span>
               <span class="age-spell-details__label">Target Number</span>
                 <span>{{ spell.targetNumber }}</span>
@@ -85,21 +85,34 @@
       </template>
     </SpellModal>
   </Teleport>
+  <Teleport to="body">
+    <SpellFamiliarityModal :show="showFamiliarityModal" @close="showFamiliarityModal = false;" :spell="spell"
+      :index="index" :magicLabel="magicLabel" :magicPoints="magicPoints" @delete="handleDelete()">
+      <template #header>
+        <h3 class="age-spell-details-header">Familiarity</h3>
+      </template>
+    </SpellFamiliarityModal>
+  </Teleport>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useSpellStore } from '@/sheet/stores/magic/magicStore';
 import { useAbilityScoreStore } from '@/sheet/stores/abilityScores/abilityScoresStore'
 import SpellModal from './SpellModal.vue';
 import { useBioStore } from '@/sheet/stores/bio/bioStore';
 import { useCharacterStore } from '@/sheet/stores/character/characterStore';
 import { useSettingsStore } from '@/sheet/stores/settings/settingsStore';
+import { useAbilityFocusesStore } from '@/sheet/stores/abilityScores/abilityFocusStore';
+import SpellFamiliarityModal from './SpellFamiliarityModal.vue';
+import { useItemStore } from '@/sheet/stores/character/characterQualitiesStore';
 
 const bio = useBioStore();
 const char = useCharacterStore();
 const settings = useSettingsStore();
-const showModal = ref(false)
+const qualitiesStore = useItemStore();
+const showModal = ref(false);
+const showFamiliarityModal = ref(false);
 const open = ref(false)
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
@@ -112,32 +125,77 @@ const props = defineProps({
 
 const expanded = ref(false);
 
-const magicLabel = ref('Arcana');
-switch(settings.gameSystem){
-  case 'mage':
-    magicLabel.value = 'Power';
-  break;
-  default:
-    magicLabel.value = 'Arcana';
-  break;
-}
+
+
+const familiarity = ref(0);
+const familiarityOptions = ref([
+  { value: 0, label: 'Present' },
+  { value: 2, label: 'Very Familiar' },
+  { value: 4, label: 'Familiar' },
+  { value: 6, label: 'Somewhat Familiar' },
+  { value: 8, label: 'Casually Familiar' },
+  { value: 10, label: 'Slightly Familiar' }
+]);
+const magicLabel = computed(() =>
+  settings.gameSystem === 'mage' ? 'Power' : 'Arcana'
+);
+
+const magicPoints = computed(() => {
+  if (settings.gameSystem !== 'mage') return 'MP';
+
+  return settings.userPowerFatigue ? ' Power Cost' : 'PP';
+});
 const toggleExpand = () => {
   expanded.value = !expanded.value;
 };
 const modalClosed = () => {
   showModal.value = false;
 };
+let toAttackRoll = 0
+
+const setAttackRoll = () => {
+  if(useAbilityScoreStore().abilityScores[props.spell.ability]){
+    toAttackRoll = useAbilityScoreStore().abilityScores[props.spell.ability].base;
+  }
+}
+setAttackRoll();
+
+function focusBonus(){
+  const focusArray = qualitiesStore.items.filter(item => item.type === 'Ability Focus');
+  const obj = focusArray.find(obj => {
+    return (obj.name.toLowerCase() === props.spell.arcanaType.toLowerCase());
+  });
+  if (!obj) {
+    return 0; // Return 0 if no matching focus is found
+  }
+  if (obj.doubleFocus) {
+      return 4; // Return 4 if doubleFocus is true
+    } else if (obj.focus) {
+      return 2; // Return 2 if only focus is true
+    } else {
+      return 0;
+    }
+}
 const handleDelete = () => {
   const spellStore = useSpellStore();
   spellStore.removeSpell(props.spell._id);
 };
 const handlePrint = () => {
   const spellStore = useSpellStore();
-  spellStore.printSpell(props.spell._id);
+  if(settings.gameSystem === 'blue rose'){
+    showFamiliarityModal.value = true;
+  } else {
+    spellStore.printSpell(props.spell._id,parseInt(toAttackRoll) + focusBonus());
+  }
 };
 const handleDamagePrint = () => {
   const spellStore = useSpellStore();
   spellStore.printSpellDamage(props.spell);
+};
+
+const handleSpellDetails = () => {
+  const spellStore = useSpellStore();
+  spellStore.printSpellDetails(props.spell, magicLabel.value);
 };
 const selectedAttack = () => {
   const spellStore = useSpellStore();
